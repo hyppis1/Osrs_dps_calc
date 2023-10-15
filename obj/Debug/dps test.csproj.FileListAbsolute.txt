@@ -1,0 +1,45 @@
+C:\Users\jesse\source\repos\dps test\bin\Debug\Osrs dps calculator.exe.config
+C:\Users\jesse\source\repos\dps test\bin\Debug\Osrs dps calculator.exe
+C:\Users\jesse\source\repos\dps test\bin\Debug\Osrs dps calculator.pdb
+C:\Users\jesse\source\repos\dps test\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\jesse\source\repos\dps test\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\jesse\source\repos\dps test\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\jesse\source\repos\dps test\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\jesse\source\repos\dps test\obj\Debug\MainWindow.g.cs
+C:\Users\jesse\source\repos\dps test\obj\Debug\Window1.g.cs
+C:\Users\jesse\source\repos\dps test\obj\Debug\App.g.cs
+C:\Users\jesse\source\repos\dps test\obj\Debug\Osrs dps calculator_MarkupCompile.cache
+C:\Users\jesse\source\repos\dps test\obj\Debug\Osrs dps calculator_MarkupCompile.lref
+C:\Users\jesse\source\repos\dps test\obj\Debug\App.baml
+C:\Users\jesse\source\repos\dps test\obj\Debug\MainWindow.baml
+C:\Users\jesse\source\repos\dps test\obj\Debug\Window1.baml
+C:\Users\jesse\source\repos\dps test\obj\Debug\Osrs dps calculator.g.resources
+C:\Users\jesse\source\repos\dps test\obj\Debug\Osrs_dps_calculator.Properties.Resources.resources
+C:\Users\jesse\source\repos\dps test\obj\Debug\dps test.csproj.GenerateResource.cache
+C:\Users\jesse\source\repos\dps test\obj\Debug\dps test.csproj.CoreCompileInputs.cache
+C:\Users\jesse\source\repos\dps test\obj\Debug\dps test.csproj.CopyComplete
+C:\Users\jesse\source\repos\dps test\obj\Debug\Osrs dps calculator.exe
+C:\Users\jesse\source\repos\dps test\obj\Debug\Osrs dps calculator.pdb
+C:\Users\jesse\source\repos\dps test\obj\Debug\dps test.csprojAssemblyReference.cache
+C:\Users\jesse\source\repos\dps test - backup\bin\Debug\Osrs dps calculator.exe.config
+C:\Users\jesse\source\repos\dps test - backup\bin\Debug\Osrs dps calculator.exe
+C:\Users\jesse\source\repos\dps test - backup\bin\Debug\Osrs dps calculator.pdb
+C:\Users\jesse\source\repos\dps test - backup\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\jesse\source\repos\dps test - backup\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\jesse\source\repos\dps test - backup\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\jesse\source\repos\dps test - backup\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\MainWindow.g.cs
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\Window1.g.cs
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\App.g.cs
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\Osrs dps calculator_MarkupCompile.cache
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\Osrs dps calculator_MarkupCompile.lref
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\App.baml
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\MainWindow.baml
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\Window1.baml
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\Osrs dps calculator.g.resources
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\Osrs_dps_calculator.Properties.Resources.resources
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\dps test.csproj.GenerateResource.cache
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\dps test.csproj.CoreCompileInputs.cache
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\dps test.csproj.CopyComplete
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\Osrs dps calculator.exe
+C:\Users\jesse\source\repos\dps test - backup\obj\Debug\Osrs dps calculator.pdb

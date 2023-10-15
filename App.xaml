@@ -1,0 +1,79 @@
+﻿<Application x:Class="dps_test.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:dps_test"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--Slots-->
+            <BitmapImage x:Key="ammo slot" UriSource="images\Ammo_slot.png"></BitmapImage>
+            <BitmapImage x:Key="body slot" UriSource="images\Body_slot.png"></BitmapImage>
+            <BitmapImage x:Key="cape slot" UriSource="images\Cape_slot.png"></BitmapImage>
+            <BitmapImage x:Key="boots slot" UriSource="images\Feet_slot.png"></BitmapImage>
+            <BitmapImage x:Key="gloves slot" UriSource="images\Hands_slot.png"></BitmapImage>
+            <BitmapImage x:Key="helmet slot" UriSource="images\Head_slot.png"></BitmapImage>
+            <BitmapImage x:Key="legs slot" UriSource="images\Legs_slot.png"></BitmapImage>
+            <BitmapImage x:Key="amulet slot" UriSource="images\Neck_slot.png"></BitmapImage>
+            <BitmapImage x:Key="ring slot" UriSource="images\Ring_slot.png"></BitmapImage>
+            <BitmapImage x:Key="off hand slot" UriSource="images\Shield_slot.png"></BitmapImage>
+            <BitmapImage x:Key="weapon slot" UriSource="images\Weapon_slot.png"></BitmapImage>
+            <BitmapImage x:Key="spell slot" UriSource="images\spell_slot.png"></BitmapImage>
+            <BitmapImage x:Key="special" UriSource="images\Special_attack_orb.png"></BitmapImage>
+
+            <!--Icons-->
+            <BitmapImage x:Key="attack icon" UriSource="images\Attack_icon.png"></BitmapImage>
+            <BitmapImage x:Key="defence icon" UriSource="images\Defence_icon.png"></BitmapImage>
+            <BitmapImage x:Key="hitpoints icon" UriSource="images\Hitpoints_icon.png"></BitmapImage>
+            <BitmapImage x:Key="magic dmg icon" UriSource="images\Magic_Damage_icon.png"></BitmapImage>
+            <BitmapImage x:Key="magic icon" UriSource="images\Magic_icon.png"></BitmapImage>
+            <BitmapImage x:Key="ranged icon" UriSource="images\Ranged_icon.png"></BitmapImage>
+            <BitmapImage x:Key="strength icon" UriSource="images\Strength_icon.png"></BitmapImage>
+            <BitmapImage x:Key="ranged strength" UriSource="images\Ranged_Strength_icon.png"></BitmapImage>
+            <BitmapImage x:Key="stab icon" UriSource="images\Stab_icon.png"></BitmapImage>
+            <BitmapImage x:Key="slash icon" UriSource="images\Slash_icon.png"></BitmapImage>
+            <BitmapImage x:Key="crush icon" UriSource="images\Crush_icon.png"></BitmapImage>
+            <BitmapImage x:Key="attack speed icon" UriSource="images\Attack_speed_icon.png"></BitmapImage>
+            <BitmapImage x:Key="prayer icon" UriSource="images\Prayer_icon.png"></BitmapImage>
+            <BitmapImage x:Key="super combat potion icon" UriSource="images\Scp_icon.png"></BitmapImage>
+            <BitmapImage x:Key="stats icon" UriSource="images\Stats_icon.png"></BitmapImage>
+            <BitmapImage x:Key="slayer icon" UriSource="images\Slayer_icon.png"></BitmapImage>
+            <BitmapImage x:Key="vulnerability icon" UriSource="images\Vulnerability_icon.png"></BitmapImage>
+            <BitmapImage x:Key="stun icon" UriSource="images\stun_icon.png"></BitmapImage>
+            <BitmapImage x:Key="enfeeble icon" UriSource="images\enfeeble_icon.png"></BitmapImage>
+            <BitmapImage x:Key="tome of water icon" UriSource="images\Tome_of_water.png"></BitmapImage>
+            <BitmapImage x:Key="arclight icon" UriSource="images\Arclight_icon.png"></BitmapImage>
+            <BitmapImage x:Key="dwh icon" UriSource="images\Dwh_icon.png"></BitmapImage>
+            <BitmapImage x:Key="bgs icon" UriSource="images\Bgs_icon.png"></BitmapImage>
+            <BitmapImage x:Key="stab defence icon" UriSource="images\Stab_defence_icon.png"></BitmapImage>
+            <BitmapImage x:Key="slash defence icon" UriSource="images\Slash_defence_icon.png"></BitmapImage>
+            <BitmapImage x:Key="crush defence icon" UriSource="images\Crush_defence_icon.png"></BitmapImage>
+            <BitmapImage x:Key="mage defence icon" UriSource="images\Mage_defence_icon.png"></BitmapImage>
+            <BitmapImage x:Key="range defence icon" UriSource="images\Range_defence_icon.png"></BitmapImage>
+            <BitmapImage x:Key="team size icon" UriSource="images\Team_icon.png"></BitmapImage>
+            <BitmapImage x:Key="raid lvl icon" UriSource="images\Raid_lvl_icon.png"></BitmapImage>
+            <BitmapImage x:Key="path lvl icon" UriSource="images\Path_icon.png"></BitmapImage>
+            <BitmapImage x:Key="cm cox icon" UriSource="images\cm_cox_icon.png"></BitmapImage>
+            <BitmapImage x:Key="mining icon" UriSource="images\mining_icon.png"></BitmapImage>
+            <BitmapImage x:Key="hitsplat icon" UriSource="images\hitsplat_icon.png"></BitmapImage>
+            <BitmapImage x:Key="accursed sceptre icon" UriSource="images\accursed_spectre_icon.png"></BitmapImage>
+            <BitmapImage x:Key="red keris spec icon" UriSource="images\red_keris_spec_icon.png"></BitmapImage>
+            <BitmapImage x:Key="thrall mage icon" UriSource="images\mage_thrall_icon.png"></BitmapImage>
+            <BitmapImage x:Key="diary icon" UriSource="images\diary_icon.png"></BitmapImage>
+            <BitmapImage x:Key="venator bow icon" UriSource="images\venator_bow_icon.png"></BitmapImage>
+            <BitmapImage x:Key="chinchompa icon" UriSource="images\chinchompa_icon.png"></BitmapImage>
+            <BitmapImage x:Key="soulreaper axe icon" UriSource="images\soulreaper_axe_icon.png"></BitmapImage>
+            <BitmapImage x:Key="mage prot icon" UriSource="images\mage_prot_prayer.png"></BitmapImage>
+            <BitmapImage x:Key="melee prot icon" UriSource="images\melee_prot_prayer.png"></BitmapImage>
+            <BitmapImage x:Key="range prot icon" UriSource="images\range_prot_prayer.png"></BitmapImage>
+
+
+
+            <!--Interface mainly-->
+            <BitmapImage x:Key="background" UriSource="images\Background.png"></BitmapImage>
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+    
+    
+</Application>
