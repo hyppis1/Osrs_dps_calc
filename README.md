@@ -12,6 +12,8 @@ If you have feedback about the program, id gladly take it. Mainly looking for th
 
 If there are any bugs, with the program itself doing something unexpected, or if the output values for dps calc are clearly wrong. Please inform me about it.  
 
+If you are reading trough the code i have written, i hope you are hungy as there is quite a lot of spaghetti for now. Plan is to rewrite the main dps code some day.
+
 You can send message to me via discord or ingame.  
 Discord: hyppis.  
 OSRS IGN: Student tort
