@@ -193,6 +193,7 @@ namespace Osrs_dps_calculator
         List<string> temp_dps_overkill_textbox_list = new List<string>();
         List<string> temp_avg_hits_to_kill_textbox_list = new List<string>();
         List<string> temp_avg_time_to_kill_textbox_list = new List<string>();
+        List<string> temp_extra_info_textbox_list = new List<string>();
 
         double[] mining_lvl_req_array = new double[2];
 
@@ -219,8 +220,7 @@ namespace Osrs_dps_calculator
 
         double dragon_claw_spec_min_hit;
 
-        double[] dwh_atleast_1_dmg_chance_array = new double[8];
-        double dwh_atleast_1_dmg_chance;
+        double[] dwh_avg_def_reduction_list = new double[8];
 
         double[] spec_min_hit_array = new double[8];
         double spec_min_hit;
@@ -575,6 +575,11 @@ namespace Osrs_dps_calculator
             // weapons
             List<string> items = new List<string>
             {
+                "Bandos godsword",
+                "Zamorak godsword",
+                "Saradomin godsword",
+                "Ancient godsword",
+                "Armadyl godsword",
                 "Abyssal bludgeon",
                 "Abyssal dagger",
                 "Abyssal tentacle",
@@ -582,12 +587,9 @@ namespace Osrs_dps_calculator
                 "Accursed sceptre",
                 "Adamant darts",
                 "Amethyst darts",
-                "Ancient godsword",
                 "Ancient sceptre",
                 "Arclight",
                 "Armadyl crossbow",
-                "Armadyl godsword",
-                "Armadyl godsword",
                 "Black chinchompa",
                 "Black darts",
                 "Blade of saeldor",
@@ -632,7 +634,6 @@ namespace Osrs_dps_calculator
                 "Rune Pickaxe",
                 "Rune crossbow",
                 "Sanguinesti staff",
-                "Saradomin godsword",
                 "Saradomin sword",
                 "Saradomin's blessed sword",
                 "Scythe of vitur",
@@ -649,7 +650,6 @@ namespace Osrs_dps_calculator
                 "Viggora's chainmace",
                 "Voidwaker",
                 "Webweaver bow",
-                "Zamorak godsword",
                 "Zamorakian hasta",
                 "Zamorakian spear",
                 "Zaryte crossbow",
@@ -1854,6 +1854,7 @@ namespace Osrs_dps_calculator
             temp_dps_overkill_textbox_list.Clear();
             temp_avg_hits_to_kill_textbox_list.Clear();
             temp_avg_time_to_kill_textbox_list.Clear();
+            temp_extra_info_textbox_list.Clear();
 
 
             // writing down the stats
@@ -1888,19 +1889,23 @@ namespace Osrs_dps_calculator
                                 case "Scythe of vitur":
                                     if (monster_size == 1)
                                     {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
                                         temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
                                     }
                                     else if (monster_size == 2)
                                     {
-                                        temp_max_hit_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") " + scythe_hitsplat_1_array[i + (y * 4)] + " | " + scythe_hitsplat_2_array[i + (y * 4)]);
+                                        temp_extra_info_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") " + scythe_hitsplat_1_array[i + (y * 4)] + " | " + scythe_hitsplat_2_array[i + (y * 4)]);
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
                                     }
                                     else
                                     {
-                                        temp_max_hit_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") " + scythe_hitsplat_1_array[i + (y * 4)] + " | " + scythe_hitsplat_2_array[i + (y * 4)] + " | " + scythe_hitsplat_3_array[i + (y * 4)]);
+                                        temp_extra_info_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") " + scythe_hitsplat_1_array[i + (y * 4)] + " | " + scythe_hitsplat_2_array[i + (y * 4)] + " | " + scythe_hitsplat_3_array[i + (y * 4)]);
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
                                     }
                                     break;
                                 case "Osmumten's fang":
-                                    temp_max_hit_textbox_list.Add("Max hit " + osmumtens_fang_max_hit_array[i + (y * 4)] + " Min hit " + osmumtens_fang_min_hit_array[i + (y * 4)]);
+                                    temp_extra_info_textbox_list.Add("Max hit " + osmumtens_fang_max_hit_array[i + (y * 4)] + " Min hit " + osmumtens_fang_min_hit_array[i + (y * 4)]);
+                                    temp_max_hit_textbox_list.Add("" + osmumtens_fang_max_hit_array[i + (y * 4)]);
                                     break;
                                 case "Keris":
                                 case "Keris partisan":
@@ -1909,23 +1914,28 @@ namespace Osrs_dps_calculator
                                 case "Keris partisan of the sun":
                                     if (monster_is_kaplhite == true)
                                     {
-                                        temp_max_hit_textbox_list.Add("Crit (" + max_hit_list[i + (y * 8)] * 3 + ") " + max_hit_list[i + (y * 8)]);
+                                        temp_extra_info_textbox_list.Add("Crit (" + max_hit_list[i + (y * 8)] * 3 + ") " + max_hit_list[i + (y * 8)]);
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
                                     }
                                     else
                                     {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
                                         temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
                                     }
                                     break;
                                 case "Dark bow":
-                                    temp_max_hit_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") | " + max_hit_list[i + (y * 8)] / 2 + " | " + max_hit_list[i + (y * 8)] / 2);
+                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") | " + max_hit_list[i + (y * 8)] / 2 + " | " + max_hit_list[i + (y * 8)] / 2);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
                                     break;
                                 default:
                                     if (weapon_name_array[y].Contains("crossbow") == true && ammo_name_array[y].Contains("bolts (e)") == true)
                                     {
-                                        temp_max_hit_textbox_list.Add("" + bolt_normal_dmg_array[i+(y * 4)] + " (" + bolt_proc_dmg_array[i + (y * 4)] + " Chance " + bolt_proc_chance_array[i + (y * 4)] + "%)");
+                                        temp_extra_info_textbox_list.Add("" + bolt_normal_dmg_array[i+(y * 4)] + "(" + bolt_proc_dmg_array[i + (y * 4)] + " Chance " + bolt_proc_chance_array[i + (y * 4)] + " %)");
+                                        temp_max_hit_textbox_list.Add("" + bolt_normal_dmg_array[i + (y * 4)]);
                                     }
                                     else
                                     {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
                                         temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
                                     }
                                     break;
@@ -1934,10 +1944,11 @@ namespace Osrs_dps_calculator
                         }
                         else
                         {
+                            temp_extra_info_textbox_list.Add("Nothing special");
                             temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
                         }
                         temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + (y * 8)]);
-                        temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + (y * 8)] + "%");
+                        temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + (y * 8)]);
                         temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + (y * 8)]);
                         temp_dps_textbox_list.Add("" + dps_list[i + (y * 8)]);
                         temp_avg_dmg_overkill_textbox_list.Add("" + overkill_avg_dmg_per_attack_list[i + (y * 8)]);
@@ -1948,9 +1959,10 @@ namespace Osrs_dps_calculator
                     else
                     {
                         temp_combat_style_textbox_list.Add("No style");
+                        temp_extra_info_textbox_list.Add("Nothing special");
                         temp_max_hit_textbox_list.Add("0");
                         temp_max_attack_roll_textbox_list.Add("0");
-                        temp_hit_chance_textbox_list.Add("0%");
+                        temp_hit_chance_textbox_list.Add("0");
                         temp_avg_dmg_textbox_list.Add("0");
                         temp_dps_textbox_list.Add("0");
                         temp_avg_dmg_overkill_textbox_list.Add("0");
@@ -1959,6 +1971,7 @@ namespace Osrs_dps_calculator
                         temp_avg_time_to_kill_textbox_list.Add("0");
                     }
                 }
+
                 // special attack
                 for (int i = 0; i < 4; i++)
                 {
@@ -1990,115 +2003,90 @@ namespace Osrs_dps_calculator
                                 case "Crystal halberd":
                                     if (monster_size == 1)
                                     {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
                                         temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                        temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                        temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)] + "%");
-                                        temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
                                     }
                                     else
                                     {
-                                        temp_max_hit_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
-                                        temp_max_attack_roll_textbox_list.Add("(" + Math.Round(max_attack_roll_list[i + 4 + (y * 8)], 0) + ") " + special_attack_roll_1_array[i + (y * 4)] + " | " + special_attack_roll_2_array[i + (y * 4)]);
-                                        temp_hit_chance_textbox_list.Add("(" + Math.Round(hit_chance_list[i + 4 + (y * 8)], 2) + "%) " + Math.Round(special_hit_chance_1_array[i + (y * 4)] * 100, 2) + "% | " + Math.Round(special_hit_chance_2_array[i + (y * 4)] * 100, 2) + "%");
-                                        temp_avg_dmg_textbox_list.Add("(" + Math.Round(avg_dmg_per_attack_list[i + 4 + (y * 8)], 3) + ") " + Math.Round(special_average_dmg_1_array[i + (y * 4)], 3) + " | " + Math.Round(special_average_dmg_2_array[i + (y * 4)], 3));
+                                        temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
                                     }
                                     break;
                                 case "Dawnbringer":
                                 case "Osmumten's fang":
                                 case "Voidwaker":
-                                    temp_max_hit_textbox_list.Add("Max hit " + max_hit_list[i + 4 + (y * 8)] + " Min hit " + spec_min_hit_array[i + (y * 4)]);
-                                    temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                    temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)] + "%");
-                                    temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
+                                    temp_extra_info_textbox_list.Add("Max hit " + max_hit_list[i + 4 + (y * 8)] + " Min hit " + spec_min_hit_array[i + (y * 4)]);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
                                     break;
                                 case "Granite hammer":
                                 case "Ursine chainmace":
                                 case "Ancient godsword":
-                                    temp_max_hit_textbox_list.Add("" + special_max_hit_1_array[i + (y * 4)] + " (+" + special_max_hit_2_array[i + (y * 4)] + ")");
-                                    temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                    temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)] + "%");
-                                    temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
+                                    temp_extra_info_textbox_list.Add("" + special_max_hit_1_array[i + (y * 4)] + " (+" + special_max_hit_2_array[i + (y * 4)] + ")");
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
                                     break;
                                 case "Dragon knife":
                                 case "Dragon dagger":
                                 case "Abyssal dagger":
                                 case "Magic shortbow":
                                 case "Magic shortbow (i)":
-                                    temp_max_hit_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
-                                    temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                    temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)] + "%");
-                                    temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
+                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
                                     break;
                                 case "Webweaver bow":
                                 case "Dragon claws":
-                                    temp_max_hit_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)] + " | " + special_max_hit_3_array[i + (y * 4)] + " | " + special_max_hit_3_array[i + (y * 4)]);
-                                    temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                    temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)] + "%");
-                                    temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
+                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)] + " | " + special_max_hit_3_array[i + (y * 4)] + " | " + special_max_hit_3_array[i + (y * 4)]);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
                                     break;
                                 case "Dragon warhammer":
+                                    temp_extra_info_textbox_list.Add("Avg def reduction " + dwh_avg_def_reduction_list[i + (y * 4)]);
                                     temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                    temp_hit_chance_textbox_list.Add("Dmg hitsplat " + Math.Round(dwh_atleast_1_dmg_chance_array[i + (y * 4)] * 100, 4) + "%");
-                                    temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
                                     break;
                                 case "Keris partisan of corruption":
                                     if (monster_is_kaplhite == true)
                                     {
-                                        temp_max_hit_textbox_list.Add("Crit (" + max_hit_list[i + 4 + (y * 8)] * 3 + ") " + max_hit_list[i + 4 + (y * 8)]);
-                                        temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                        temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)] + "%");
-                                        temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
+                                        temp_extra_info_textbox_list.Add("Crit (" + max_hit_list[i + 4 + (y * 8)] * 3 + ") " + max_hit_list[i + 4 + (y * 8)]);
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
                                     }
                                     else
                                     {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
                                         temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                        temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                        temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)] + "%");
-                                        temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
                                     }
                                     break;
                                 case "Saradomin sword":
-                                    temp_max_hit_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
-                                    temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                    temp_hit_chance_textbox_list.Add("(" + Math.Round(hit_chance_list[i + 4 + (y * 8)], 2) + "%) " + Math.Round(special_hit_chance_1_array[i + (y * 4)] * 100, 2) + "% | " + Math.Round(special_hit_chance_2_array[i + (y * 4)] * 100, 2) + "%");
-                                    temp_avg_dmg_textbox_list.Add("(" + Math.Round(avg_dmg_per_attack_list[i + 4 + (y * 8)], 3) + ") " + Math.Round(special_average_dmg_1_array[i + (y * 4)], 3) + " | " + Math.Round(special_average_dmg_2_array[i + (y * 4)], 3));
+                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
                                     break;
                                 case "Eldritch nightmare staff":
                                 case "Volatile nightmare staff":
-                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)] + " (±1, Not accurate)");
-                                    temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                    temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)] + "%");
-                                    temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
+                                    temp_extra_info_textbox_list.Add("Max hit ±1, Not accurate");
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
                                     break;
                                 case "Dragon crossbow":
                                 case "Armadyl crossbow":
                                     if (ammo_name_array[y].Contains("bolts (e)") == true)
                                     {
-                                        temp_max_hit_textbox_list.Add("" + bolt_normal_dmg_array[i + 4 + (y * 8)] + " (" + bolt_proc_dmg_array[i + 4 + (y * 8)] + " Chance " + bolt_proc_chance_array[i + 4 + (y * 8)] + "%)");
+                                        temp_extra_info_textbox_list.Add("" + bolt_normal_dmg_array[i + 4 + (y * 8)] + " (" + bolt_proc_dmg_array[i + 4 + (y * 8)] + " Chance " + bolt_proc_chance_array[i + 4 + (y * 8)] + "%)");
+                                        temp_max_hit_textbox_list.Add("" + bolt_normal_dmg_array[i + 4 + (y * 8)]);
                                     }
                                     else
                                     {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
                                         temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
                                     }
-                                    temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                    temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)] + "%");
-                                    temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
                                     break;
                                 case "Dark bow":
-                                    temp_max_hit_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + " Min hit " + spec_min_hit_array[i + (y * 4)] * 2 + ") | " + max_hit_list[i + 4 + (y * 8)] / 2 + " | " + max_hit_list[i + 4 + (y * 8)] / 2);
-                                    temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                    temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)] + "%");
-                                    temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
+                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + " Min hit " + spec_min_hit_array[i + (y * 4)] * 2 + ") | " + max_hit_list[i + 4 + (y * 8)] / 2 + " | " + max_hit_list[i + 4 + (y * 8)] / 2);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
                                     break;
                                 default:
+                                    temp_extra_info_textbox_list.Add("Nothing special");
                                     temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                                    temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)] + "%");
-                                    temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
                                     break;
                             }
-
+                            temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
+                            temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)]);
+                            temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
                             temp_dps_textbox_list.Add("" + dps_list[i + 4 + (y * 8)]);
                             temp_avg_dmg_overkill_textbox_list.Add("" + overkill_avg_dmg_per_attack_list[i + 4 + (y * 8)]);
                             temp_dps_overkill_textbox_list.Add("" + overkill_dps_list[i + 4 + (y * 8)]);
@@ -2108,9 +2096,10 @@ namespace Osrs_dps_calculator
                         else
                         {
                             temp_combat_style_textbox_list.Add("No style");
+                            temp_extra_info_textbox_list.Add("Nothing special");
                             temp_max_hit_textbox_list.Add("0");
                             temp_max_attack_roll_textbox_list.Add("0");
-                            temp_hit_chance_textbox_list.Add("0%");
+                            temp_hit_chance_textbox_list.Add("0");
                             temp_avg_dmg_textbox_list.Add("0");
                             temp_dps_textbox_list.Add("0");
                             temp_avg_dmg_overkill_textbox_list.Add("0");
@@ -2122,6 +2111,7 @@ namespace Osrs_dps_calculator
                     else
                     {
                         temp_combat_style_textbox_list.Add("No special");
+                        temp_extra_info_textbox_list.Add("Nothing special");
                         temp_max_hit_textbox_list.Add("0");
                         temp_max_attack_roll_textbox_list.Add("0");
                         temp_hit_chance_textbox_list.Add("0");
@@ -2160,7 +2150,6 @@ namespace Osrs_dps_calculator
                 Dispatcher.Invoke(display_data);
                 Dispatcher.Invoke(compare_data);
             }
-
             // multiple calcs data
             else
             {
@@ -2240,7 +2229,7 @@ namespace Osrs_dps_calculator
                 textBox = (TextBox)FindName($"max_attackroll_combat_style_{i + 1}_textbox");
                 textBox.Text = temp_max_attack_roll_textbox_list[i + j];
                 textBox = (TextBox)FindName($"hit_chance_combat_style_{i + 1}_textbox");
-                textBox.Text = temp_hit_chance_textbox_list[i + j];
+                textBox.Text = temp_hit_chance_textbox_list[i + j] + "%";
                 textBox = (TextBox)FindName($"avg_dmg_per_attack_combat_style_{i + 1}_textbox");
                 textBox.Text = temp_avg_dmg_textbox_list[i + j];
                 textBox = (TextBox)FindName($"dps_combat_style_{i + 1}_textbox");
@@ -2253,6 +2242,8 @@ namespace Osrs_dps_calculator
                 textBox.Text = temp_avg_hits_to_kill_textbox_list[i + j];
                 textBox = (TextBox)FindName($"time_to_kill_style_{i + 1}_textbox");
                 textBox.Text = temp_avg_time_to_kill_textbox_list[i + j];
+                textBox = (TextBox)FindName($"extra_info_style_{i + 1}_textbox");
+                textBox.Text = temp_extra_info_textbox_list[i + j];
 
                 //special
                 textBox = (TextBox)FindName($"weapon_combat_style_{i + 1}_special_textbox");
@@ -2262,7 +2253,7 @@ namespace Osrs_dps_calculator
                 textBox = (TextBox)FindName($"max_attackroll_combat_style_{i + 1}_special_textbox");
                 textBox.Text = temp_max_attack_roll_textbox_list[i + 4 + j];
                 textBox = (TextBox)FindName($"hit_chance_combat_style_{i + 1}_special_textbox");
-                textBox.Text = temp_hit_chance_textbox_list[i + 4 + j];
+                textBox.Text = temp_hit_chance_textbox_list[i + 4 + j] + "%";
                 textBox = (TextBox)FindName($"avg_dmg_per_attack_combat_style_{i + 1}_special_textbox");
                 textBox.Text = temp_avg_dmg_textbox_list[i + 4 + j];
                 textBox = (TextBox)FindName($"dps_combat_style_{i + 1}_special_textbox");
@@ -2275,6 +2266,8 @@ namespace Osrs_dps_calculator
                 textBox.Text = temp_avg_hits_to_kill_textbox_list[i + 4 + j];
                 textBox = (TextBox)FindName($"time_to_kill_style_{i + 1}_special_textbox");
                 textBox.Text = temp_avg_time_to_kill_textbox_list[i + 4 + j];
+                textBox = (TextBox)FindName($"extra_info_style_{i + 1}_special_textbox");
+                textBox.Text = temp_extra_info_textbox_list[i + 4 + j];
             }
 
             // monster dps back to player
@@ -2286,7 +2279,6 @@ namespace Osrs_dps_calculator
 
             for (int i = j; i < j + 5; i++)
             {
-                // normal
                 TextBox textBox = (TextBox)FindName($"monster_max_hit_{i - j + 1}_textbox");
                 textBox.Text = "" + monster_max_hit_array[i];
                 textBox = (TextBox)FindName($"monster_attack_roll_{i - j + 1}_textbox");
@@ -2324,7 +2316,7 @@ namespace Osrs_dps_calculator
             compare_styles_set_2_combobox.ToolTip = Convert.ToString(compare_styles_set_2_combobox.SelectedItem);
 
             compare_maxhit_set_1_textbox.Text = temp_max_hit_textbox_list[i];
-            compare_hit_chance_set_1_textbox.Text = temp_hit_chance_textbox_list[i];
+            compare_hit_chance_set_1_textbox.Text = temp_hit_chance_textbox_list[i] + "%";
             compare_average_dmg_set_1_textbox.Text = temp_avg_dmg_textbox_list[i];
             compare_dps_set_1_textbox.Text = temp_dps_textbox_list[i];
             compare_average_dmg_overkill_set_1_textbox.Text = temp_avg_dmg_overkill_textbox_list[i];
@@ -2332,7 +2324,7 @@ namespace Osrs_dps_calculator
             compare_time_to_kill_set_1_textbox.Text = temp_avg_time_to_kill_textbox_list[i];
 
             compare_maxhit_set_2_textbox.Text = temp_max_hit_textbox_list[j];
-            compare_hit_chance_set_2_textbox.Text = temp_hit_chance_textbox_list[j];
+            compare_hit_chance_set_2_textbox.Text = temp_hit_chance_textbox_list[j] + "%";
             compare_average_dmg_set_2_textbox.Text = temp_avg_dmg_textbox_list[j];
             compare_dps_set_2_textbox.Text = temp_dps_textbox_list[j];
             compare_average_dmg_overkill_set_2_textbox.Text = temp_avg_dmg_overkill_textbox_list[j];
@@ -3702,10 +3694,18 @@ namespace Osrs_dps_calculator
                         if (temp_max_hit > -1)
                         {
                             Dispatcher.Invoke(immunities_and_resistances);
-                            special_immune_array[x] = temp_immune;
                             Dispatcher.Invoke(average_dmg);
+                            special_immune_array[x] = temp_immune;
                             special_max_hit_1 = temp_max_hit;
-                            temp_avg_dmg_per_attack = temp_avg_dmg_per_attack + special_additional_dmg;
+
+                            temp_max_hit = special_additional_dmg;
+                            Dispatcher.Invoke(immunities_and_resistances);
+                            Dispatcher.Invoke(average_dmg);
+                            special_immune_2_array[x] = temp_immune;
+                            special_max_hit_2 = temp_max_hit;
+
+                            temp_max_hit = special_max_hit_1 + special_max_hit_2;
+                            Dispatcher.Invoke(average_dmg);
                             if (overkill_checkbox.IsChecked == true && temp_max_hit > 0)
                             {
                                 Dispatcher.Invoke(overkill);
@@ -3758,11 +3758,20 @@ namespace Osrs_dps_calculator
                         Dispatcher.Invoke(hit_chance);
                         if (temp_max_hit > -1)
                         {
+
                             Dispatcher.Invoke(immunities_and_resistances);
-                            special_immune_array[x] = temp_immune;
                             Dispatcher.Invoke(average_dmg);
+                            special_immune_array[x] = temp_immune;
                             special_max_hit_1 = temp_max_hit;
-                            temp_avg_dmg_per_attack = temp_avg_dmg_per_attack + (special_additional_dmg * temp_hit_chance);
+
+                            temp_max_hit = special_additional_dmg;
+                            Dispatcher.Invoke(immunities_and_resistances);
+                            Dispatcher.Invoke(average_dmg);
+                            special_immune_2_array[x] = temp_immune;
+                            special_max_hit_2 = temp_max_hit;
+
+                            temp_max_hit = special_max_hit_1 + special_max_hit_2;
+                            Dispatcher.Invoke(average_dmg);
                             if (overkill_checkbox.IsChecked == true && temp_max_hit > 0)
                             {
                                 Dispatcher.Invoke(overkill);
@@ -3870,7 +3879,8 @@ namespace Osrs_dps_calculator
                             Dispatcher.Invoke(immunities_and_resistances);
                             special_immune_array[x] = temp_immune;
                             Dispatcher.Invoke(average_dmg);
-                            dwh_atleast_1_dmg_chance = (temp_hit_chance * (temp_max_hit / (temp_max_hit + 1)));
+                            dwh_avg_def_reduction_list[dps_calc_fix] = Math.Floor(monster_reduced_def_lvl * (0.3 * (temp_hit_chance * (temp_max_hit / (temp_max_hit + 1)))));
+
                             if (overkill_checkbox.IsChecked == true && temp_max_hit > 0)
                             {
                                 Dispatcher.Invoke(overkill);
@@ -3884,9 +3894,7 @@ namespace Osrs_dps_calculator
                         {
                             temp_avg_dmg_per_attack = 0;
                             temp_avg_hits_to_kill = 0;
-                            dwh_atleast_1_dmg_chance = 0;
                         }
-                        dwh_atleast_1_dmg_chance_array[dps_calc_fix] = dwh_atleast_1_dmg_chance;
                         break;
                     case "Keris partisan of corruption":
                         temp_max_hit = special_max_hit_1;

@@ -966,175 +966,175 @@
         </DataGrid>
 
 
-        <TextBox x:Name="monster_atk_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="756,71,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_str_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="756,96,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_def_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="756,121,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_magic_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="756,146,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_range_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="756,171,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_hp_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="756,196,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_stab_def_textbox" HorizontalAlignment="Left" Height="24" Margin="940,71,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_slash_def_textbox" HorizontalAlignment="Left" Height="24" Margin="940,96,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_crush_def_textbox" HorizontalAlignment="Left" Height="24" Margin="940,121,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_magic_def_textbox" HorizontalAlignment="Left" Height="24" Margin="940,146,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_range_def_textbox" HorizontalAlignment="Left" Height="24" Margin="940,171,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="bgs_dmg_textbox" HorizontalAlignment="Left" Height="24" Margin="684,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
-        <TextBox x:Name="dwh_hits_textbox" HorizontalAlignment="Left" Height="24" Margin="684,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
-        <TextBox x:Name="arclight_hits_textbox" HorizontalAlignment="Left" Height="24" Margin="684,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
-        <CheckBox x:Name="tome_of_water_checkbox" Content="" HorizontalAlignment="Left" Margin="624,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
-        <CheckBox x:Name="vulnerability_checkbox" Content="" HorizontalAlignment="Left" Margin="692,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
-        <TextBox x:Name="max_defence_roll_stab_textbox" HorizontalAlignment="Left" Height="24" Margin="984,71,0,0" Text="0" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="max_defence_roll_slash_textbox" HorizontalAlignment="Left" Height="24" Margin="984,96,0,0" Text="0" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="max_defence_roll_crush_textbox" HorizontalAlignment="Left" Height="24" Margin="984,121,0,0" Text="0" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="max_defence_roll_magic_textbox" HorizontalAlignment="Left" Height="24" Margin="984,146,0,0" Text="0" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="max_defence_roll_range_textbox" HorizontalAlignment="Left" Height="24" Margin="984,171,0,0" Text="0" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <CheckBox x:Name="slayer_task_checkbox" Content="" HorizontalAlignment="Left" Margin="562,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
-        <Image HorizontalAlignment="Left" Height="24" Margin="728,196,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource hitpoints icon}">
+        <TextBox x:Name="monster_atk_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="448,71,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_str_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="448,96,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_def_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="448,121,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_magic_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="448,146,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_range_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="448,171,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_hp_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="448,196,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_stab_def_textbox" HorizontalAlignment="Left" Height="24" Margin="632,71,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_slash_def_textbox" HorizontalAlignment="Left" Height="24" Margin="632,96,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_crush_def_textbox" HorizontalAlignment="Left" Height="24" Margin="632,121,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_magic_def_textbox" HorizontalAlignment="Left" Height="24" Margin="632,146,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_range_def_textbox" HorizontalAlignment="Left" Height="24" Margin="632,171,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="bgs_dmg_textbox" HorizontalAlignment="Left" Height="24" Margin="376,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
+        <TextBox x:Name="dwh_hits_textbox" HorizontalAlignment="Left" Height="24" Margin="376,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
+        <TextBox x:Name="arclight_hits_textbox" HorizontalAlignment="Left" Height="24" Margin="376,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
+        <CheckBox x:Name="tome_of_water_checkbox" Content="" HorizontalAlignment="Left" Margin="316,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
+        <CheckBox x:Name="vulnerability_checkbox" Content="" HorizontalAlignment="Left" Margin="384,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
+        <TextBox x:Name="max_defence_roll_stab_textbox" HorizontalAlignment="Left" Height="24" Margin="676,71,0,0" Text="0" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="max_defence_roll_slash_textbox" HorizontalAlignment="Left" Height="24" Margin="676,96,0,0" Text="0" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="max_defence_roll_crush_textbox" HorizontalAlignment="Left" Height="24" Margin="676,121,0,0" Text="0" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="max_defence_roll_magic_textbox" HorizontalAlignment="Left" Height="24" Margin="676,146,0,0" Text="0" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="max_defence_roll_range_textbox" HorizontalAlignment="Left" Height="24" Margin="676,171,0,0" Text="0" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <CheckBox x:Name="slayer_task_checkbox" Content="" HorizontalAlignment="Left" Margin="254,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
+        <Image HorizontalAlignment="Left" Height="24" Margin="420,196,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource hitpoints icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC hitpoints level (Reduced stat/base stat)"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="524,146,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource slayer icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="216,146,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource slayer icon}">
             <Image.ToolTip>
                 <ToolTip Content="On slayer task"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="658,46,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource vulnerability icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="350,46,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource vulnerability icon}">
             <Image.ToolTip>
                 <ToolTip Content="Vulnerability. Can only lower stats once"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="598,46,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource tome of water icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="290,46,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource tome of water icon}">
             <Image.ToolTip>
                 <ToolTip Content="Tome of water. Boosts curse spells from 10% to 15%"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="656,121,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource arclight icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="348,121,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource arclight icon}">
             <Image.ToolTip>
                 <ToolTip Content="Arclight hits"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="656,146,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource dwh icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="348,146,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource dwh icon}">
             <Image.ToolTip>
                 <ToolTip Content="Dragon warhammer hits"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="656,171,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource bgs icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="348,171,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource bgs icon}">
             <Image.ToolTip>
                 <ToolTip Content="Bandos godsword damage"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="728,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource attack icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="420,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource attack icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC Attack level (Reduced stat/base stat)"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="728,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource strength icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="420,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource strength icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC strength level (Reduced stat/base stat)"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="728,121,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource defence icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="420,121,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource defence icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC defence level (Reduced stat/base stat)"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="728,146,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource magic icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="420,146,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource magic icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC magic level (Reduced stat/base stat)"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="728,171,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource ranged icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="420,171,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource ranged icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC range level (Reduced stat/base stat)"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="914,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource stab defence icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="606,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource stab defence icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC stab defence"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="914,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource slash defence icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="606,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource slash defence icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC slash defence"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="914,121,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource crush defence icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="606,121,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource crush defence icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC crush defence"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="914,146,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource mage defence icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="606,146,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource mage defence icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC magic defence"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="914,171,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource range defence icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="606,171,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource range defence icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC range defence"/>
             </Image.ToolTip>
         </Image>
-        <TextBox x:Name="team_size_textbox" HorizontalAlignment="Left" Height="24" Margin="554,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="1" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
-        <TextBox x:Name="raid_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="554,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
-        <TextBox x:Name="path_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="554,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
-        <Image HorizontalAlignment="Left" Height="24" Margin="524,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource team size icon}">
+        <TextBox x:Name="team_size_textbox" HorizontalAlignment="Left" Height="24" Margin="246,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="1" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
+        <TextBox x:Name="raid_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="246,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
+        <TextBox x:Name="path_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="246,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
+        <Image HorizontalAlignment="Left" Height="24" Margin="216,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource team size icon}">
             <Image.ToolTip>
                 <ToolTip Content="Raid team size"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="524,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource raid lvl icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="216,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource raid lvl icon}">
             <Image.ToolTip>
                 <ToolTip Content="Tombs of Amascut raid level"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="524,46,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource path lvl icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="216,46,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource path lvl icon}">
             <Image.ToolTip>
                 <ToolTip Content="Tombs of Amascut path level"/>
             </Image.ToolTip>
         </Image>
-        <CheckBox x:Name="CM_cox_checkbox" Content="" HorizontalAlignment="Left" Margin="562,121,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
-        <Image HorizontalAlignment="Left" Height="24" Margin="524,121,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource cm cox icon}">
+        <CheckBox x:Name="CM_cox_checkbox" Content="" HorizontalAlignment="Left" Margin="254,121,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
+        <Image HorizontalAlignment="Left" Height="24" Margin="216,121,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource cm cox icon}">
             <Image.ToolTip>
                 <ToolTip Content="Challenge mode CoX"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="656,196,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource hitsplat icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="348,196,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource hitsplat icon}">
             <Image.ToolTip>
                 <ToolTip Content="Damage dealt to monster"/>
             </Image.ToolTip>
         </Image>
-        <TextBox x:Name="dmg_textbox" HorizontalAlignment="Left" Height="24" Margin="684,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
-        <TextBox HorizontalAlignment="Left" Height="24" Margin="984,46,0,0" TextWrapping="Wrap" Text="Max defence rolls" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <Image HorizontalAlignment="Left" Height="24" Margin="656,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource accursed sceptre icon}">
+        <TextBox x:Name="dmg_textbox" HorizontalAlignment="Left" Height="24" Margin="376,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="676,46,0,0" TextWrapping="Wrap" Text="Max defence rolls" VerticalAlignment="Top" Width="100" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <Image HorizontalAlignment="Left" Height="24" Margin="348,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource accursed sceptre icon}">
             <Image.ToolTip>
                 <ToolTip Content="Accursed sceptre special attack. Can only lower stats once"/>
             </Image.ToolTip>
         </Image>
-        <CheckBox x:Name="accursed_secptre_checkbox" Content="" HorizontalAlignment="Left" Margin="692,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
-        <CheckBox x:Name="red_keris_spec_checkbox" Content="" HorizontalAlignment="Left" Margin="562,196,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
-        <Image HorizontalAlignment="Left" Height="24" Margin="524,196,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource red keris spec icon}">
+        <CheckBox x:Name="accursed_secptre_checkbox" Content="" HorizontalAlignment="Left" Margin="384,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
+        <CheckBox x:Name="red_keris_spec_checkbox" Content="" HorizontalAlignment="Left" Margin="254,196,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
+        <Image HorizontalAlignment="Left" Height="24" Margin="216,196,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource red keris spec icon}">
             <Image.ToolTip>
                 <ToolTip Content="Red keris special active. Only applies buff to monsters in Tombs of Amascut"/>
             </Image.ToolTip>
         </Image>
-        <CheckBox x:Name="enfeeble_checkbox" Content="" HorizontalAlignment="Left" Margin="624,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
-        <Image HorizontalAlignment="Left" Height="24" Margin="598,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource enfeeble icon}">
+        <CheckBox x:Name="enfeeble_checkbox" Content="" HorizontalAlignment="Left" Margin="316,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
+        <Image HorizontalAlignment="Left" Height="24" Margin="290,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource enfeeble icon}">
             <Image.ToolTip>
                 <ToolTip Content="Enfeeble. Can only lower stats once"/>
             </Image.ToolTip>
         </Image>
-        <CheckBox x:Name="stun_checkbox" Content="" HorizontalAlignment="Left" Margin="692,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
-        <Image HorizontalAlignment="Left" Height="24" Margin="658,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource stun icon}">
+        <CheckBox x:Name="stun_checkbox" Content="" HorizontalAlignment="Left" Margin="384,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
+        <Image HorizontalAlignment="Left" Height="24" Margin="350,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource stun icon}">
             <Image.ToolTip>
                 <ToolTip Content="Stun. Can only lower stats once"/>
             </Image.ToolTip>
         </Image>
-        <CheckBox x:Name="kandarin_diary_checkbox" Content="" HorizontalAlignment="Left" Margin="562,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
-        <Image HorizontalAlignment="Left" Height="24" Margin="524,171,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource diary icon}">
+        <CheckBox x:Name="kandarin_diary_checkbox" Content="" HorizontalAlignment="Left" Margin="254,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24" IsEnabled="False"/>
+        <Image HorizontalAlignment="Left" Height="24" Margin="216,171,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource diary icon}">
             <Image.ToolTip>
                 <ToolTip Content="Kandarin hard diary (10% higher bolt proc chances)"/>
             </Image.ToolTip>
         </Image>
-        <ComboBox x:Name="monsters_combobox" HorizontalAlignment="Left" Margin="728,46,0,0" VerticalAlignment="Top" Width="250" Height="24" StaysOpenOnEdit="True" Style="{DynamicResource ComboBoxStyle1}" Foreground="#FFFB951D" SelectionChanged="monster_name_combobox_selection_changed" IsEditable="True">
+        <ComboBox x:Name="monsters_combobox" HorizontalAlignment="Left" Margin="420,46,0,0" VerticalAlignment="Top" Width="250" Height="24" StaysOpenOnEdit="True" Style="{DynamicResource ComboBoxStyle1}" Foreground="#FFFB951D" SelectionChanged="monster_name_combobox_selection_changed" IsEditable="True">
             <ComboBox.ToolTip>
                 <ToolTip Content="Select the loadout you want"/>
             </ComboBox.ToolTip>
@@ -1154,45 +1154,44 @@
                 </Style>
             </ComboBox.ItemContainerStyle>
         </ComboBox>
-        <Image HorizontalAlignment="Left" Height="24" Margin="844,171,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource ranged icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="536,171,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource ranged icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC aggressive range bonus"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="844,121,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource magic icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="536,121,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource magic icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC aggressive magic bonus"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="844,196,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource ranged strength}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="536,196,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource ranged strength}">
             <Image.ToolTip>
                 <ToolTip Content="NPC aggressive range strength bonus"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="844,146,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource magic dmg icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="536,146,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource magic dmg icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC aggressive magic damage bonus"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="844,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource attack icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="536,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource attack icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC aggressive attack bonus"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="844,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource strength icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="536,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource strength icon}">
             <Image.ToolTip>
                 <ToolTip Content="NPC aggressive strength bonus"/>
             </Image.ToolTip>
         </Image>
-        <TextBox x:Name="monster_aggressive_atk_textbox" HorizontalAlignment="Left" Height="24" Margin="870,71,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_aggressive_str_textbox" HorizontalAlignment="Left" Height="24" Margin="870,96,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_aggressive_mage_textbox" HorizontalAlignment="Left" Height="24" Margin="870,121,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_aggressive_mage_dmg_textbox" HorizontalAlignment="Left" Height="24" Margin="870,146,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_aggressive_range_textbox" HorizontalAlignment="Left" Height="24" Margin="870,171,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="monster_aggressive_range_str_textbox" HorizontalAlignment="Left" Height="24" Margin="870,196,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="10,189,0,0" Text="Data sorting doesnt work well for max hits, max attack rolls, hit chance % and average dmg. Extra info added to these variables in some weapons mess it up." VerticalAlignment="Top" Width="495" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}" TextWrapping="WrapWithOverflow"/>
-        <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="188" Margin="515,39,0,0" VerticalAlignment="Top" Width="574" CornerRadius="10"/>
-        <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="31" Margin="515,10,0,0" VerticalAlignment="Top" Width="133" CornerRadius="10" Background="#FF514736">
+        <TextBox x:Name="monster_aggressive_atk_textbox" HorizontalAlignment="Left" Height="24" Margin="562,71,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_aggressive_str_textbox" HorizontalAlignment="Left" Height="24" Margin="562,96,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_aggressive_mage_textbox" HorizontalAlignment="Left" Height="24" Margin="562,121,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_aggressive_mage_dmg_textbox" HorizontalAlignment="Left" Height="24" Margin="562,146,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_aggressive_range_textbox" HorizontalAlignment="Left" Height="24" Margin="562,171,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="monster_aggressive_range_str_textbox" HorizontalAlignment="Left" Height="24" Margin="562,196,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
+        <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="188" Margin="207,39,0,0" VerticalAlignment="Top" Width="574" CornerRadius="10"/>
+        <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="31" Margin="207,10,0,0" VerticalAlignment="Top" Width="133" CornerRadius="10" Background="#FF514736">
             <TextBox HorizontalAlignment="Left" Height="20" Margin="0,4,-2,0" TextWrapping="Wrap" Text="Data filter by monster" VerticalAlignment="Top" Width="131" TextAlignment="Center" IsEnabled="False" BorderBrush="{x:Null}" Foreground="#FFFF981F" Background="{x:Null}"/>
         </Border>
     </Grid>
