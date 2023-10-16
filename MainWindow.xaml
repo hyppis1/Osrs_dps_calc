@@ -7,6 +7,7 @@
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="Osrs_dps_calculator.MainWindow"
         mc:Ignorable="d"
         Title="Osrs dps calculator V1.1.0 made by Student tort" 
+    
         
         Height="Auto" 
         Width="Auto" d:DesignWidth="1920" d:DesignHeight="1080">
@@ -835,6 +836,12 @@
 
     </Window.Resources>
 
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+    </Window.Style>
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid Margin="0,0,0,0">
