@@ -6,7 +6,7 @@ I can tell that the program works on windows 10, but no idea if it works on othe
 
 Current version is demo version V1.1.0  
 
-[Download dps calc exe](https://github.com/hyppis1/osrs_dps_calc/raw/main/bin/debug/Osrs%20dps%20calculator.exe)
+[Download dps calc exe](https://github.com/hyppis1/osrs_dps_calc/raw/main/bin/Debug/Osrs%20dps%20calculator.exe)
 
 If you have feedback about the program, id gladly take it. Mainly looking for things that would be "must have" and overall look and feel of the program. Things that are not clear/easy to do, or just annoying to do.  
 
