@@ -614,6 +614,7 @@ namespace Osrs_dps_calculator
                 "Granite hammer",
                 "Granite maul",
                 "Harmonised nightmare staff",
+                "Ham joint",
                 "Heavy ballista",
                 "Ice ancient sceptre",
                 "Inquisitor's mace",
@@ -635,7 +636,6 @@ namespace Osrs_dps_calculator
                 "Saradomin sword",
                 "Saradomin's blessed sword",
                 "Scythe of vitur",
-                "Slab",
                 "Soulreaper axe",
                 "Steel darts",
                 "Swift blade",
@@ -10944,6 +10944,34 @@ namespace Osrs_dps_calculator
                     weapon_stance_array[k+2] = "aggressive";
                     weapon_type_array[k+3] = "stab";
                     weapon_stance_array[k+3] = "defensive";
+                    break;
+                case "Ham joint":
+                    stab_atk_array[i + 4] = 0;
+                    slash_atk_array[i + 4] = 0;
+                    crush_atk_array[i + 4] = 0;
+                    magic_atk_array[i + 4] = 0;
+                    range_atk_array[i + 4] = 0;
+                    stab_def_array[i + 4] = 0;
+                    slash_def_array[i + 4] = 0;
+                    crush_def_array[i + 4] = 0;
+                    magic_def_array[i + 4] = 0;
+                    range_def_array[i + 4] = 0;
+                    melee_str_array[i + 4] = 0;
+                    range_str_array[i + 4] = 0;
+                    magic_dmg_array[i + 4] = 0;
+                    prayer_bonus_array[i + 4] = 0;
+
+                    has_special_attack_array[j] = false;
+                    is_weapon_2h_array[j] = false;
+                    weapon_atk_speed_array[j] = 3;
+                    weapon_type_array[k + 0] = "crush";
+                    weapon_stance_array[k + 0] = "accurate";
+                    weapon_type_array[k + 1] = "crush";
+                    weapon_stance_array[k + 1] = "aggressive";
+                    weapon_type_array[k + 2] = "crush";
+                    weapon_stance_array[k + 2] = "defensive";
+                    weapon_type_array[k + 3] = "none";
+                    weapon_stance_array[k + 3] = "none";
                     break;
                 // mage gear
                 case "Tumeken's shadow":
