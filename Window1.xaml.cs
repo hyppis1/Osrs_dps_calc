@@ -36,19 +36,19 @@ namespace Osrs_dps_calculator
 
             List<Type> columnDataTypes = new List<Type>
             {
-                typeof(string),
-                typeof(string),
-                typeof(string),
-                typeof(string),
-                typeof(string),
-                typeof(string),
-                typeof(string),
-                typeof(double),
-                typeof(double),
-                typeof(double),
-                typeof(double),
-                typeof(double),
-                typeof(string),
+                typeof(string), // loadout name
+                typeof(string), // weapon name
+                typeof(string), // combat style
+                typeof(double), // max hit
+                typeof(double), // max attack roll
+                typeof(double), // hit chance
+                typeof(double), // avverage dmg
+                typeof(double), // dps
+                typeof(double), // avg dmg overkill
+                typeof(double), // dps overkill
+                typeof(double), // avg hits to kill
+                typeof(double), // avg time to kill
+                typeof(string), // monster name
             };
 
             for (int i = 0; i < columnNames.Count; i++)
@@ -64,10 +64,10 @@ namespace Osrs_dps_calculator
                 newRow["Loadout name"] = (giga_data_list[0][i]);
                 newRow["Weapon name"] = (giga_data_list[1][i]);
                 newRow["Combat style"] = (giga_data_list[2][i]);
-                newRow["Max hit"] = (giga_data_list[3][i]);
-                newRow["Max attack roll"] = (giga_data_list[4][i]);
-                newRow["Hit chance %"] = (giga_data_list[5][i]);
-                newRow["Average dmg"] = (giga_data_list[6][i]);
+                newRow["Max hit"] = double.Parse(giga_data_list[3][i]);
+                newRow["Max attack roll"] = double.Parse(giga_data_list[4][i]);
+                newRow["Hit chance %"] = double.Parse(giga_data_list[5][i]);
+                newRow["Average dmg"] = double.Parse(giga_data_list[6][i]);
                 newRow["DPS"] = double.Parse(giga_data_list[7][i]);
                 newRow["Average dmg (Overkill)"] = double.Parse(giga_data_list[8][i]);
                 newRow["DPS (Overkill)"] = double.Parse(giga_data_list[9][i]);
