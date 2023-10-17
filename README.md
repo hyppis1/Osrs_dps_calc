@@ -5,6 +5,7 @@ Im not professional coder so some code might be a little rough. Made this as a h
 I can tell that the program works on windows 10, but no idea if it works on other windows versions. Most likely wont work on linux. And sorry mac users, no can do.  
 
 Current version is demo version V1.1.0  
+Future version will include more gear, and more monsters. If there is something that is "must have", let me know.  
 
 [Download dps calc exe](https://github.com/hyppis1/osrs_dps_calc/raw/main/bin/Debug/Osrs%20dps%20calculator.exe)
 
