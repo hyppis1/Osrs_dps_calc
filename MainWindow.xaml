@@ -852,7 +852,7 @@
 
             <!--Borders-->
             <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="585" Margin="20,80,0,0" VerticalAlignment="Top" Width="605" CornerRadius="10"/>
-            <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="31" Margin="20,51,0,0" VerticalAlignment="Top" Width="104" CornerRadius="10" Background="#FF4B4136">
+            <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="31" Margin="20,51,0,0" VerticalAlignment="Top" Width="104" CornerRadius="10" Background="#FF514736">
                 <TextBox HorizontalAlignment="Left" Height="20" Margin="0,4,0,0" TextWrapping="Wrap" Text="Loadout" VerticalAlignment="Top" Width="100" TextAlignment="Center" IsEnabled="False" BorderBrush="{x:Null}" Foreground="#FFFF981F" Background="{x:Null}"/>
             </Border>
             <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="220" Margin="822,206,0,0" VerticalAlignment="Top" Width="573" CornerRadius="10"/>
@@ -871,7 +871,7 @@
                 <TextBox HorizontalAlignment="Left" Height="20" Margin="0,4,-2,0" TextWrapping="Wrap" Text="Set comparison" VerticalAlignment="Top" Width="98" TextAlignment="Center" IsEnabled="False" BorderBrush="{x:Null}" Foreground="#FFFF981F" Background="{x:Null}"/>
             </Border>
             <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="235" Margin="822,460,0,0" VerticalAlignment="Top" Width="573" CornerRadius="10"/>
-            <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="31" Margin="20,676,0,0" VerticalAlignment="Top" Width="176" CornerRadius="10" Background="#FF4B4136">
+            <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="31" Margin="20,676,0,0" VerticalAlignment="Top" Width="176" CornerRadius="10" Background="#FF514736">
                 <TextBox HorizontalAlignment="Left" Height="20" Margin="0,4,-2,0" TextWrapping="Wrap" Text="Dps calculation for shown set" VerticalAlignment="Top" Width="174" TextAlignment="Center" IsEnabled="False" BorderBrush="{x:Null}" Foreground="#FFFF981F" Background="{x:Null}"/>
             </Border>
             <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="276" Margin="20,705,0,0" VerticalAlignment="Top" Width="1703" CornerRadius="10"/>
