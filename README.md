@@ -10,7 +10,7 @@ Current version is demo version V1.1.0
 
 If you have feedback about the program, id gladly take it. Mainly looking for things that would be "must have" and overall look and feel of the program. Things that are not clear/easy to do, or just annoying to do.  
 
-If there are any bugs, with the program itself doing something unexpected, or if the output values for dps calc are clearly wrong. Please inform me about it.  
+If there are any bugs, with the program itself doing something unexpected, or if the output values for dps calc are clearly wrong. Please inform me about it. Also typos, there are probably plenty of those.  
 
 If you are reading trough the code i have written, i hope you are hungy as there is quite a lot of spaghetti for now. Plan is to rewrite the main dps code some day.
 
