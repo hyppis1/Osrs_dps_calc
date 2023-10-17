@@ -903,6 +903,11 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
+        <ControlTemplate x:Key="CustomTooltipTemplate" TargetType="{x:Type ToolTip}">
+            <Border Background="#FF3A3027" BorderBrush="Black" BorderThickness="2" CornerRadius="5">
+                <TextBlock Text="{TemplateBinding Content}" Padding="10" Foreground="#FFFF981F"/>
+            </Border>
+        </ControlTemplate>
 
 
 
@@ -914,7 +919,7 @@
             <ImageBrush ImageSource="{DynamicResource background}" AlignmentX="Left" AlignmentY="Top" TileMode="FlipY" Stretch="Uniform" Viewport="0,0,480,270" ViewportUnits="Absolute" />
         </Grid.Background>
 
-        <DataGrid ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" Margin="0,240,0,0" Language="en-US" Style="{DynamicResource DataGridStyle1}" Foreground="#FFFB951D" Background="#FF6D5E44" AlternationCount="2">
+        <DataGrid ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" Margin="0,240,0,0" Language="en-US" Style="{DynamicResource DataGridStyle1}" Foreground="#FFFB951D" Background="{x:Null}" AlternationCount="2">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Setter Property="Background" Value="#FF594D39" />
@@ -1073,20 +1078,20 @@
                 <ToolTip Content="NPC range defence"/>
             </Image.ToolTip>
         </Image>
-        <TextBox x:Name="team_size_textbox" HorizontalAlignment="Left" Height="24" Margin="246,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="1" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
-        <TextBox x:Name="raid_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="246,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
-        <TextBox x:Name="path_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="246,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
-        <Image HorizontalAlignment="Left" Height="24" Margin="216,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource team size icon}">
+        <TextBox x:Name="team_size_textbox" HorizontalAlignment="Left" Height="24" Margin="246,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="1" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
+        <TextBox x:Name="raid_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="246,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
+        <TextBox x:Name="path_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="246,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
+        <Image HorizontalAlignment="Left" Height="24" Margin="216,46,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource team size icon}">
             <Image.ToolTip>
                 <ToolTip Content="Raid team size"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="216,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource raid lvl icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="216,71,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource raid lvl icon}">
             <Image.ToolTip>
                 <ToolTip Content="Tombs of Amascut raid level"/>
             </Image.ToolTip>
         </Image>
-        <Image HorizontalAlignment="Left" Height="24" Margin="216,46,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource path lvl icon}">
+        <Image HorizontalAlignment="Left" Height="24" Margin="216,96,0,0" VerticalAlignment="Top" Width="24" Source="{DynamicResource path lvl icon}">
             <Image.ToolTip>
                 <ToolTip Content="Tombs of Amascut path level"/>
             </Image.ToolTip>
@@ -1194,5 +1199,10 @@
         <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="31" Margin="207,10,0,0" VerticalAlignment="Top" Width="133" CornerRadius="10" Background="#FF514736">
             <TextBox HorizontalAlignment="Left" Height="20" Margin="0,4,-2,0" TextWrapping="Wrap" Text="Data filter by monster" VerticalAlignment="Top" Width="131" TextAlignment="Center" IsEnabled="False" BorderBrush="{x:Null}" Foreground="#FFFF981F" Background="{x:Null}"/>
         </Border>
+        <Button Content="?" HorizontalAlignment="Left" Margin="348,11,0,0" VerticalAlignment="Top" Width="24" Style="{DynamicResource ButtonStyle1}" Height="27" Background="#FF514736" Foreground="Black" FontSize="20" FontWeight="Bold" IsTabStop="False">
+            <Button.ToolTip>
+                <ToolTip Template="{StaticResource CustomTooltipTemplate}" Content="Filter data list by selecting monster from drop down menu. Monster stat variables are only visual for selected monster, you can't change the stats here. &#xA;You can sort the data by clicking the column hearders."/>
+            </Button.ToolTip>
+        </Button>
     </Grid>
 </Window>

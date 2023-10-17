@@ -163,14 +163,19 @@ namespace Osrs_dps_calculator
 
         string atk_pot_name;
         string atk_prayer_name;
+        double[] style_bonus_attack_array = new double[8];
         string str_pot_name;
         string str_prayer_name;
+        double[] style_bonus_str_array = new double[8];
         string def_pot_name;
         string def_prayer_name;
+        double[] style_bonus_def_array = new double[8];
         string magic_pot_name;
         string magic_prayer_name;
+        double[] style_bonus_magic_array = new double[8];
         string range_pot_name;
         string range_prayer_name;
+        double[] style_bonus_range_array = new double[8];
         string monster_name;
 
         bool gear_set_2;
@@ -595,7 +600,6 @@ namespace Osrs_dps_calculator
                 "Blade of saeldor",
                 "Bow of faerdhinen",
                 "Craw's bow",
-                "Crush",
                 "Crystal halberd",
                 "Dark bow",
                 "Dawnbringer",
@@ -1414,1081 +1418,6 @@ namespace Osrs_dps_calculator
 
 
         }
-        private void UpdateUI()
-        {
-            string tooltip_content = "";
-            ToolTip customToolTip = new ToolTip
-            {
-                Content = tooltip_content,
-                Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-            };
-
-            if (multiple_calcs == false)
-            {
-                presets_set_1_combobox.Text = "Presets";
-                presets_potions_combobox.Text = "Presets";
-                presets_prayers_combobox.Text = "Presets";
-
-                for (int i = 1; i < 3; i++)
-                {
-                    int j = 0;
-
-                    if (i == 2)
-                    {
-                        j = 11;
-                    }
-
-
-
-
-                    ComboBox ComboBox = (ComboBox)FindName($"weapon_set_{i}_combobox");
-                    ComboBox.Text = weapon_name_array[i-1];
-                    tooltip_content = weapon_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 4] + " || Magic " + magic_atk_array[j + 4] + "\n Slash " + slash_atk_array[j + 4] + " || Magic dmg " + magic_dmg_array[j + 4] + "\n Crush " + crush_atk_array[j + 4] + " || Range " + range_atk_array[j + 4] + "\n Str " + melee_str_array[j + 4]  + " || Range str " + range_str_array[j + 4];
-                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 4] + " || Magic " + magic_def_array[j + 4] + "\n Slash " + slash_def_array[j + 4] + " || Range " + range_def_array[j + 4] + "\n Crush " + crush_def_array[j + 4] + " || Prayer " + prayer_bonus_array[j + 4];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-                    ComboBox = (ComboBox)FindName($"spell_set_{i}_combobox");
-                    ComboBox.Text = spell_name_array[i - 1];
-                    tooltip_content = spell_name_array[i - 1];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-                    ComboBox = (ComboBox)FindName($"ammo_set_{i}_combobox");
-                    ComboBox.Text = ammo_name_array[i - 1];
-                    tooltip_content = ammo_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 3] + " || Magic " + magic_atk_array[j + 3] + "\n Slash " + slash_atk_array[j + 3] + " || Magic dmg " + magic_dmg_array[j + 3] + "\n Crush " + crush_atk_array[j + 3] + " || Range " + range_atk_array[j + 3] + "\n Str " + melee_str_array[j + 3] + " || Range str " + range_str_array[j + 3];
-                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 3] + " || Magic " + magic_def_array[j + 3] + "\n Slash " + slash_def_array[j + 3] + " || Range " + range_def_array[j + 3] + "\n Crush " + crush_def_array[j + 3] + " || Prayer " + prayer_bonus_array[j + 3];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-                    ComboBox = (ComboBox)FindName($"helmet_set_{i}_combobox");
-                    ComboBox.Text = helmet_name_array[i - 1];
-                    tooltip_content = helmet_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 0] + " || Magic " + magic_atk_array[j + 0] + "\n Slash " + slash_atk_array[j + 0] + " || Magic dmg " + magic_dmg_array[j + 0] + "\n Crush " + crush_atk_array[j + 0] + " || Range " + range_atk_array[j + 0] + "\n Str " + melee_str_array[j + 0] + " || Range str " + range_str_array[j + 0];
-                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 0] + " || Magic " + magic_def_array[j + 0] + "\n Slash " + slash_def_array[j + 0] + " || Range " + range_def_array[j + 0] + "\n Crush " + crush_def_array[j + 0] + " || Prayer " + prayer_bonus_array[j + 0];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-                    ComboBox = (ComboBox)FindName($"cape_set_{i}_combobox");
-                    ComboBox.Text = cape_name_array[i - 1];
-                    tooltip_content = cape_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 1] + " || Magic " + magic_atk_array[j + 1] + "\n Slash " + slash_atk_array[j + 1] + " || Magic dmg " + magic_dmg_array[j + 1] + "\n Crush " + crush_atk_array[j + 1] + " || Range " + range_atk_array[j + 1] + "\n Str " + melee_str_array[j + 1] + " || Range str " + range_str_array[j + 1];
-                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 1] + " || Magic " + magic_def_array[j + 1] + "\n Slash " + slash_def_array[j + 1] + " || Range " + range_def_array[j + 1] + "\n Crush " + crush_def_array[j + 1] + " || Prayer " + prayer_bonus_array[j + 1];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-                    ComboBox = (ComboBox)FindName($"necklace_set_{i}_combobox");
-                    ComboBox.Text = amulet_name_array[i - 1];
-                    tooltip_content = amulet_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 2] + " || Magic " + magic_atk_array[j + 2] + "\n Slash " + slash_atk_array[j + 2] + " || Magic dmg " + magic_dmg_array[j + 2] + "\n Crush " + crush_atk_array[j + 2] + " || Range " + range_atk_array[j + 2] + "\n Str " + melee_str_array[j + 2] + " || Range str " + range_str_array[j + 2];
-                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 2] + " || Magic " + magic_def_array[j + 2] + "\n Slash " + slash_def_array[j + 2] + " || Range " + range_def_array[j + 2] + "\n Crush " + crush_def_array[j + 2] + " || Prayer " + prayer_bonus_array[j + 2];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-                    ComboBox = (ComboBox)FindName($"body_set_{i}_combobox");
-                    ComboBox.Text = body_name_array[i - 1];
-                    tooltip_content = body_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 5] + " || Magic " + magic_atk_array[j + 5] + "\n Slash " + slash_atk_array[j + 5] + " || Magic dmg " + magic_dmg_array[j + 5] + "\n Crush " + crush_atk_array[j + 5] + " || Range " + range_atk_array[j + 5] + "\n Str " + melee_str_array[j + 5] + " || Range str " + range_str_array[j + 5];
-                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 5] + " || Magic " + magic_def_array[j + 5] + "\n Slash " + slash_def_array[j + 5] + " || Range " + range_def_array[j + 5] + "\n Crush " + crush_def_array[j + 5] + " || Prayer " + prayer_bonus_array[j + 5];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-                    ComboBox = (ComboBox)FindName($"legs_set_{i}_combobox");
-                    ComboBox.Text = legs_name_array[i - 1];
-                    tooltip_content = legs_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 7] + " || Magic " + magic_atk_array[j + 7] + "\n Slash " + slash_atk_array[j + 7] + " || Magic dmg " + magic_dmg_array[j + 7] + "\n Crush " + crush_atk_array[j + 7] + " || Range " + range_atk_array[j + 7] + "\n Str " + melee_str_array[j + 7] + " || Range str " + range_str_array[j + 7];
-                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 7] + " || Magic " + magic_def_array[j + 7] + "\n Slash " + slash_def_array[j + 7] + " || Range " + range_def_array[j + 7] + "\n Crush " + crush_def_array[j + 7] + " || Prayer " + prayer_bonus_array[j + 7];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-                    ComboBox = (ComboBox)FindName($"off_hand_set_{i}_combobox");
-                    ComboBox.Text = off_hand_name_array[i - 1];
-                    tooltip_content = off_hand_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 6] + " || Magic " + magic_atk_array[j + 6] + "\n Slash " + slash_atk_array[j + 6] + " || Magic dmg " + magic_dmg_array[j + 6] + "\n Crush " + crush_atk_array[j + 6] + " || Range " + range_atk_array[j + 6] + "\n Str " + melee_str_array[j + 6] + " || Range str " + range_str_array[j + 6];
-                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 6] + " || Magic " + magic_def_array[j + 6] + "\n Slash " + slash_def_array[j + 6] + " || Range " + range_def_array[j + 6] + "\n Crush " + crush_def_array[j + 6] + " || Prayer " + prayer_bonus_array[j + 6];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-                    ComboBox = (ComboBox)FindName($"gloves_set_{i}_combobox");
-                    ComboBox.Text = gloves_name_array[i - 1];
-                    tooltip_content = gloves_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 8] + " || Magic " + magic_atk_array[j + 8] + "\n Slash " + slash_atk_array[j + 8] + " || Magic dmg " + magic_dmg_array[j + 8] + "\n Crush " + crush_atk_array[j + 8] + " || Range " + range_atk_array[j + 8] + "\n Str " + melee_str_array[j + 8] + " || Range str " + range_str_array[j + 8];
-                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 8] + " || Magic " + magic_def_array[j + 8] + "\n Slash " + slash_def_array[j + 8] + " || Range " + range_def_array[j + 8] + "\n Crush " + crush_def_array[j + 8] + " || Prayer " + prayer_bonus_array[j + 8];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-                    ComboBox = (ComboBox)FindName($"boots_set_{i}_combobox");
-                    ComboBox.Text = boots_name_array[i - 1];
-                    tooltip_content = boots_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 9] + " || Magic " + magic_atk_array[j + 9] + "\n Slash " + slash_atk_array[j + 9] + " || Magic dmg " + magic_dmg_array[j + 9] + "\n Crush " + crush_atk_array[j + 9] + " || Range " + range_atk_array[j + 9] + "\n Str " + melee_str_array[j + 9] + " || Range str " + range_str_array[j + 9];
-                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 9] + " || Magic " + magic_def_array[j + 9] + "\n Slash " + slash_def_array[j + 9] + " || Range " + range_def_array[j + 9] + "\n Crush " + crush_def_array[j + 9] + " || Prayer " + prayer_bonus_array[j + 9];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-                    ComboBox = (ComboBox)FindName($"ring_set_{i}_combobox");
-                    ComboBox.Text = ring_name_array[i - 1];
-                    tooltip_content = ring_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 10] + " || Magic " + magic_atk_array[j + 10] + "\n Slash " + slash_atk_array[j + 10] + " || Magic dmg " + magic_dmg_array[j + 10] + "\n Crush " + crush_atk_array[j + 10] + " || Range " + range_atk_array[j + 10] + "\n Str " + melee_str_array[j + 10] + " || Range str " + range_str_array[j + 10];
-                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 10] + " || Magic " + magic_def_array[j + 10] + "\n Slash " + slash_def_array[j + 10] + " || Range " + range_def_array[j + 10] + "\n Crush " + crush_def_array[j + 10] + " || Prayer " + prayer_bonus_array[j + 10];
-                    customToolTip = new ToolTip
-                    {
-                        Content = tooltip_content,
-                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                    };
-                    ComboBox.ToolTip = customToolTip;
-
-                    TextBox TextBox = (TextBox)FindName($"stab_atk_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(stab_atk_modifier_array[i-1]);
-                    TextBox = (TextBox)FindName($"stab_atk_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_stab_atk_array[i-1]);
-                    TextBox = (TextBox)FindName($"stab_def_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(stab_def_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"stab_def_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_stab_def_array[i-1]);
-
-                    TextBox = (TextBox)FindName($"slash_atk_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(slash_atk_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"slash_atk_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_slash_atk_array[i - 1]);
-                    TextBox = (TextBox)FindName($"slash_def_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(slash_def_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"slash_def_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_slash_def_array[i - 1]);
-
-                    TextBox = (TextBox)FindName($"crush_atk_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(crush_atk_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"crush_atk_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_crush_atk_array[i - 1]);
-                    TextBox = (TextBox)FindName($"crush_def_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(crush_def_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"crush_def_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_crush_def_array[i - 1]);
-
-                    TextBox = (TextBox)FindName($"magic_atk_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(magic_atk_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"magic_atk_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_magic_atk_array[i - 1]);
-                    TextBox = (TextBox)FindName($"magic_def_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(magic_def_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"magic_def_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_magic_def_array[i - 1]);
-
-                    TextBox = (TextBox)FindName($"range_atk_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(range_atk_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"range_atk_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_range_atk_array[i - 1]);
-                    TextBox = (TextBox)FindName($"range_def_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(range_def_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"range_def_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_range_def_array[i - 1]);
-
-                    TextBox = (TextBox)FindName($"str_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(melee_str_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"str_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_melee_str_array[i - 1]);
-
-                    TextBox = (TextBox)FindName($"range_str_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(range_str_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"range_str_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_range_str_array[i - 1]);
-
-                    TextBox = (TextBox)FindName($"magic_dmg_{i}_modifier_textbox");
-                    TextBox.Text = Convert.ToString(magic_dmg_modifier_array[i - 1]);
-                    TextBox = (TextBox)FindName($"magic_dmg_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_magic_dmg_array[i - 1]);
-
-                    TextBox = (TextBox)FindName($"weapon_attack_speed_{i}_textbox");
-                    TextBox.Text = Convert.ToString(weapon_atk_speed_array[i - 1]);
-                    TextBox = (TextBox)FindName($"custom_weapon_atk_speed_{i}_textbox");
-                    TextBox.Text = Convert.ToString(custom_attack_speed_array[i - 1]);
-
-                    TextBox = (TextBox)FindName($"prayer_bonus_{i}_textbox");
-                    TextBox.Text = Convert.ToString(total_prayer_bonus_array[i - 1]);
-                }
-
-                attack_potions_combobox.Text = atk_pot_name;
-                customToolTip = new ToolTip
-                {
-                    Content = atk_pot_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                attack_potions_combobox.ToolTip = customToolTip;
-
-                strength_potions_combobox.Text = str_pot_name;
-                customToolTip = new ToolTip
-                {
-                    Content = str_pot_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                strength_potions_combobox.ToolTip = customToolTip;
-
-                defence_potions_combobox.Text = def_pot_name;
-                customToolTip = new ToolTip
-                {
-                    Content = def_pot_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                defence_potions_combobox.ToolTip = customToolTip;
-
-                magic_potions_combobox.Text = magic_pot_name;
-                customToolTip = new ToolTip
-                {
-                    Content = magic_pot_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                magic_potions_combobox.ToolTip = customToolTip;
-
-                range_potions_combobox.Text = range_pot_name;
-                customToolTip = new ToolTip
-                {
-                    Content = range_pot_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                range_potions_combobox.ToolTip = customToolTip;
-
-                attack_prayer_combobox.Text = atk_prayer_name;
-                customToolTip = new ToolTip
-                {
-                    Content = atk_prayer_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                attack_prayer_combobox.ToolTip = customToolTip;
-
-                strength_prayer_combobox.Text = str_prayer_name;
-                customToolTip = new ToolTip
-                {
-                    Content = str_prayer_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                strength_prayer_combobox.ToolTip = customToolTip;
-
-                defence_prayer_combobox.Text = def_prayer_name;
-                customToolTip = new ToolTip
-                {
-                    Content = def_prayer_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                defence_prayer_combobox.ToolTip = customToolTip;
-
-                magic_prayer_combobox.Text = magic_prayer_name;
-                customToolTip = new ToolTip
-                {
-                    Content = magic_prayer_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                magic_prayer_combobox.ToolTip = customToolTip;
-
-                range_prayer_combobox.Text = range_prayer_name;
-                customToolTip = new ToolTip
-                {
-                    Content = range_prayer_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                range_prayer_combobox.ToolTip = customToolTip;
-
-                monsters_combobox.Text = monster_name;
-                customToolTip = new ToolTip
-                {
-                    Content = monster_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                monsters_combobox.ToolTip = customToolTip;
-
-                thralls_combobox.Text = thrall_name;
-                customToolTip = new ToolTip
-                {
-                    Content = thrall_name,
-                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
-                };
-                thralls_combobox.ToolTip = customToolTip;
-
-                distance_to_monster_textbox.Text = "" + distance_to_monster;
-
-                // displaying loadout stats for
-                attack_lvl_textbox.Text = "" + attack_lvl;
-                strength_lvl_textbox.Text = "" + strength_lvl;
-                defence_lvl_textbox.Text = "" + defence_lvl;
-                magic_lvl_textbox.Text = "" + magic_lvl;
-                range_lvl_textbox.Text = "" + range_lvl;
-                hp_lvl_textbox.Text = "" + hp_lvl;
-                prayer_lvl_textbox.Text = "" + prayer_lvl;
-                mining_lvl_textbox.Text = "" + mining_lvl;
-
-                attack_lvl_and_pot_modifier_textbox.Text = "" + attack_lvl_and_pot_modifier;
-                strength_lvl_and_pot_modifier_textbox.Text = "" + strength_lvl_and_pot_modifier;
-                defence_lvl_and_pot_modifier_textbox.Text = "" + defence_lvl_and_pot_modifier;
-                magic_lvl_and_pot_modifier_textbox.Text = "" + magic_lvl_and_pot_modifier;
-                range_lvl_and_pot_modifier_textbox.Text = "" + range_lvl_and_pot_modifier;
-                hp_remaining_textbox.Text = "" + hp_remaining;
-                prayer_remaining_textbox.Text = "" + prayer_remaining;
-
-                attack_lvl_and_pot_textbox.Text = "" + attack_lvl_and_pot + "/" + attack_lvl;
-                strength_lvl_and_pot_textbox.Text = "" + strength_lvl_and_pot + "/" + strength_lvl;
-                defence_lvl_and_pot_textbox.Text = "" + defence_lvl_and_pot + "/" + defence_lvl;
-                magic_lvl_and_pot_textbox.Text = "" + magic_lvl_and_pot + "/" + magic_lvl;
-                range_lvl_and_pot_textbox.Text = "" + range_lvl_and_pot + "/" + range_lvl;
-                hp_remaining_and_lvl_textbox.Text = "" + hp_remaining + "/" + hp_lvl;
-                prayer_remaining_and_lvl_textbox.Text = "" + prayer_remaining + "/" + prayer_lvl;
-
-                true_attack_lvl_textbox.Text = "" + true_attack_lvl;
-                true_str_lvl_textbox.Text = "" + true_strength_lvl;
-                true_defence_lvl_textbox.Text = "" + true_defence_lvl;
-                true_magic_lvl_textbox.Text = "" + true_mage_lvl;
-                true_range_lvl_textbox.Text = "" + true_range_lvl;
-                true_range_str_textbox.Text = "" + true_range_str;
-
-                combat_lvl_textbox.Text = "" + combat_lvl;
-
-                soulreaper_axe_stack_textbox.Text = "" + soulreaper_axe_stack;
-                venator_bow_1st_bounce_def_lvl_textbox.Text = "" + venator_bow_1st_bounce_def_lvl;
-                venator_bow_1st_bounce_range_def_textbox.Text = "" + venator_bow_1st_bounce_range_def;
-                venator_bow_2nd_bounce_def_lvl_textbox.Text = "" + venator_bow_2nd_bounce_def_lvl;
-                venator_bow_2nd_bounce_range_def_textbox.Text = "" + venator_bow_2nd_bounce_range_def;
-
-                // monster stats
-                if (monster_name == "Phosani's Totem" || monster_name == "Totem")
-                {
-                    monster_atk_lvl_textbox.Text = "?? " + monster_reduced_atk_lvl + "/" + monster_boosted_atk_lvl + " ??";
-                    monster_str_lvl_textbox.Text = "?? " + monster_reduced_str_lvl + "/" + monster_boosted_str_lvl + " ??";
-                    monster_def_lvl_textbox.Text = "?? " + monster_reduced_def_lvl + "/" + monster_boosted_def_lvl + " ??";
-                    monster_magic_lvl_textbox.Text = "?? " + monster_reduced_magic_lvl + "/" + monster_boosted_magic_lvl + " ??";
-                    monster_range_lvl_textbox.Text = "?? " + monster_reduced_range_lvl + "/" + monster_boosted_range_lvl + " ??";
-                    monster_hp_lvl_textbox.Text = "" + monster_reduced_hp_lvl + "/" + monster_boosted_hp_lvl;
-
-                    monster_stab_def_textbox.Text = "?? " + monster_defensive_stab + " ??";
-                    monster_slash_def_textbox.Text = "?? " + monster_defensive_slash + " ??";
-                    monster_crush_def_textbox.Text = "?? " + monster_defensive_crush + " ??";
-                    monster_magic_def_textbox.Text = "?? " + monster_defensive_magic + " ??";
-                    monster_range_def_textbox.Text = "?? " + monster_defensive_range + " ??";
-
-                    max_defence_roll_stab_textbox.Text = "?? " + monster_max_defensive_roll_stab + " ??";
-                    max_defence_roll_slash_textbox.Text = "?? " + monster_max_defensive_roll_slash + " ??";
-                    max_defence_roll_crush_textbox.Text = "?? " + monster_max_defensive_roll_crush + " ??";
-                    max_defence_roll_magic_textbox.Text = "?? " + monster_max_defensive_roll_magic + " ??";
-                    max_defence_roll_range_textbox.Text = "?? " + monster_max_defensive_roll_range + " ??";
-                }
-                else
-                {
-                    monster_atk_lvl_textbox.Text = "" + monster_reduced_atk_lvl + "/" + monster_boosted_atk_lvl;
-                    monster_str_lvl_textbox.Text = "" + monster_reduced_str_lvl + "/" + monster_boosted_str_lvl;
-                    monster_def_lvl_textbox.Text = "" + monster_reduced_def_lvl + "/" + monster_boosted_def_lvl;
-                    monster_magic_lvl_textbox.Text = "" + monster_reduced_magic_lvl + "/" + monster_boosted_magic_lvl;
-                    monster_range_lvl_textbox.Text = "" + monster_reduced_range_lvl + "/" + monster_boosted_range_lvl;
-                    monster_hp_lvl_textbox.Text = "" + monster_reduced_hp_lvl + "/" + monster_boosted_hp_lvl;
-
-                    monster_stab_def_textbox.Text = "" + monster_defensive_stab;
-                    monster_slash_def_textbox.Text = "" + monster_defensive_slash;
-                    monster_crush_def_textbox.Text = "" + monster_defensive_crush;
-                    monster_magic_def_textbox.Text = "" + monster_defensive_magic;
-                    monster_range_def_textbox.Text = "" + monster_defensive_range;
-
-                    max_defence_roll_stab_textbox.Text = "" + monster_max_defensive_roll_stab;
-                    max_defence_roll_slash_textbox.Text = "" + monster_max_defensive_roll_slash;
-                    max_defence_roll_crush_textbox.Text = "" + monster_max_defensive_roll_crush;
-                    max_defence_roll_magic_textbox.Text = "" + monster_max_defensive_roll_magic;
-                    max_defence_roll_range_textbox.Text = "" + monster_max_defensive_roll_range;
-
-                }
-
-                monster_aggressive_atk_textbox.Text = "" + monster_aggressive_atk;
-                monster_aggressive_str_textbox.Text = "" + monster_aggressive_str;
-                monster_aggressive_mage_textbox.Text = "" + monster_aggressive_magic;
-                monster_aggressive_mage_dmg_textbox.Text = "" + monster_aggressive_magic_dmg;
-                monster_aggressive_range_textbox.Text = "" + monster_aggressive_range;
-                monster_aggressive_range_str_textbox.Text = "" + monster_aggressive_range_str;
-
-                if (thrall_type == "crush")
-                {
-                    thrall_type = "melee";
-                }
-
-                if (thrall_immune == true && thrall_name != "None")
-                {
-                    thrall_combat_style_textbox.Text = "IMMUNE " + thrall_type;
-                }
-                else
-                {
-                    thrall_combat_style_textbox.Text = "" + thrall_type;
-                }
-                thrall_max_hit_textbox.Text = "Max hit " + thrall_max_hit;
-                thrall_avg_dmg_textbox.Text = "Avg dmg " + thrall_avg_dmg;
-                thrall_dps_textbox.Text = "DPS " + thrall_damage_per_second;
-
-                // multiple cals stuff
-                multiple_calcs_iterations.Text = "Loadouts " + multiple_dps_loadouts_combobox.Items.Count + " | Monsters " + multiple_dps_monster_name_combobox.Items.Count + " | Iterations " + multiple_dps_loadouts_combobox.Items.Count * multiple_dps_monster_name_combobox.Items.Count;
-            }
-
-            // info boxes
-
-            temp_combat_style_textbox_list.Clear();
-            temp_max_hit_textbox_list.Clear();
-            temp_max_attack_roll_textbox_list.Clear();
-            temp_hit_chance_textbox_list.Clear();
-            temp_avg_dmg_textbox_list.Clear();
-            temp_dps_textbox_list.Clear();
-            temp_avg_dmg_overkill_textbox_list.Clear();
-            temp_dps_overkill_textbox_list.Clear();
-            temp_avg_hits_to_kill_textbox_list.Clear();
-            temp_avg_time_to_kill_textbox_list.Clear();
-            temp_extra_info_textbox_list.Clear();
-
-
-            // writing down the stats
-
-            // if multi calc, dont do set 2 check
-            int set_2 = 1;
-            if (multiple_calcs == false)
-            {
-                set_2 = 2;
-            }
-
-            for (int y = 0; y < set_2; y++)
-            {
-                // normal attacks
-                for (int i = 0; i < 4; i++)
-                {
-                    if (weapon_stance_array[i + (y * 4)] != "none" && weapon_type_array[i + (y * 4)] != "none")
-                    {
-                        if (is_immune_array[y] == true)
-                        {
-                            temp_combat_style_textbox_list.Add("IMMUNE " + weapon_stance_array[i + (y * 4)] + " " + weapon_type_array[i + (y * 4)]);
-                        }
-                        else
-                        {
-                            temp_combat_style_textbox_list.Add(weapon_stance_array[i + (y * 4)] + " " + weapon_type_array[i + (y * 4)]);
-                        }
-
-                        if (weapon_stance_array[i + (y * 4)] != "spell")
-                        {
-                            switch (weapon_name_array[y])
-                            {
-                                case "Scythe of vitur":
-                                    if (monster_size == 1)
-                                    {
-                                        temp_extra_info_textbox_list.Add("Nothing special");
-                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
-                                    }
-                                    else if (monster_size == 2)
-                                    {
-                                        temp_extra_info_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") " + scythe_hitsplat_1_array[i + (y * 4)] + " | " + scythe_hitsplat_2_array[i + (y * 4)]);
-                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
-                                    }
-                                    else
-                                    {
-                                        temp_extra_info_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") " + scythe_hitsplat_1_array[i + (y * 4)] + " | " + scythe_hitsplat_2_array[i + (y * 4)] + " | " + scythe_hitsplat_3_array[i + (y * 4)]);
-                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
-                                    }
-                                    break;
-                                case "Osmumten's fang":
-                                    temp_extra_info_textbox_list.Add("Max hit " + osmumtens_fang_max_hit_array[i + (y * 4)] + " Min hit " + osmumtens_fang_min_hit_array[i + (y * 4)]);
-                                    temp_max_hit_textbox_list.Add("" + osmumtens_fang_max_hit_array[i + (y * 4)]);
-                                    break;
-                                case "Keris":
-                                case "Keris partisan":
-                                case "Keris partisan of breaching":
-                                case "Keris partisan of corruption":
-                                case "Keris partisan of the sun":
-                                    if (monster_is_kaplhite == true)
-                                    {
-                                        temp_extra_info_textbox_list.Add("Crit (" + max_hit_list[i + (y * 8)] * 3 + ") " + max_hit_list[i + (y * 8)]);
-                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
-                                    }
-                                    else
-                                    {
-                                        temp_extra_info_textbox_list.Add("Nothing special");
-                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
-                                    }
-                                    break;
-                                case "Dark bow":
-                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") | " + max_hit_list[i + (y * 8)] / 2 + " | " + max_hit_list[i + (y * 8)] / 2);
-                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
-                                    break;
-                                default:
-                                    if (weapon_name_array[y].Contains("crossbow") == true && ammo_name_array[y].Contains("bolts (e)") == true)
-                                    {
-                                        temp_extra_info_textbox_list.Add("" + bolt_normal_dmg_array[i+(y * 4)] + "(" + bolt_proc_dmg_array[i + (y * 4)] + " Chance " + bolt_proc_chance_array[i + (y * 4)] + " %)");
-                                        temp_max_hit_textbox_list.Add("" + bolt_normal_dmg_array[i + (y * 4)]);
-                                    }
-                                    else
-                                    {
-                                        temp_extra_info_textbox_list.Add("Nothing special");
-                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
-                                    }
-                                    break;
-
-                            }
-                        }
-                        else
-                        {
-                            temp_extra_info_textbox_list.Add("Nothing special");
-                            temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
-                        }
-                        temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + (y * 8)]);
-                        temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + (y * 8)]);
-                        temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + (y * 8)]);
-                        temp_dps_textbox_list.Add("" + dps_list[i + (y * 8)]);
-                        temp_avg_dmg_overkill_textbox_list.Add("" + overkill_avg_dmg_per_attack_list[i + (y * 8)]);
-                        temp_dps_overkill_textbox_list.Add("" + overkill_dps_list[i + (y * 8)]);
-                        temp_avg_hits_to_kill_textbox_list.Add("" + avg_hits_to_kill_list[i + (y * 8)]);
-                        temp_avg_time_to_kill_textbox_list.Add("" + time_to_kill_list[i + (y * 8)]);
-                    }
-                    else
-                    {
-                        temp_combat_style_textbox_list.Add("No style");
-                        temp_extra_info_textbox_list.Add("Nothing special");
-                        temp_max_hit_textbox_list.Add("0");
-                        temp_max_attack_roll_textbox_list.Add("0");
-                        temp_hit_chance_textbox_list.Add("0");
-                        temp_avg_dmg_textbox_list.Add("0");
-                        temp_dps_textbox_list.Add("0");
-                        temp_avg_dmg_overkill_textbox_list.Add("0");
-                        temp_dps_overkill_textbox_list.Add("0");
-                        temp_avg_hits_to_kill_textbox_list.Add("0");
-                        temp_avg_time_to_kill_textbox_list.Add("0");
-                    }
-                }
-
-                // special attack
-                for (int i = 0; i < 4; i++)
-                {
-                    if (has_special_attack_array[y] == true && spell_name_array[y] == "None")
-                    {
-                        if (weapon_stance_array[i + (y * 4)] != "none" && weapon_type_array[i + (y * 4)] != "none")
-                        {
-
-                            if (special_immune_array[y] == true && special_immune_2_array[y] == true)
-                            {
-                                temp_combat_style_textbox_list.Add("IMMUNE " + weapon_stance_array[i + (y * 4)] + " " + weapon_type_array[i + (y * 4)]);
-                            }
-                            else
-                            {
-                                if ((special_immune_array[y] == true || special_immune_2_array[y] == true) && (weapon_name_array[y] == "Saradomin sword" || weapon_name_array[y] == "Ancient godsword"))
-                                {
-                                    temp_combat_style_textbox_list.Add("IMMUNEN'T " + weapon_stance_array[i + (y * 4)] + " " + weapon_type_array[i + (y * 4)]);
-                                }
-                                else
-                                {
-                                    temp_combat_style_textbox_list.Add("SPECIAL " + weapon_stance_array[i + (y * 4)] + " " + weapon_type_array[i + (y * 4)]);
-                                }
-
-                            }
-
-                            switch (weapon_name_array[y])
-                            {
-                                case "Dragon halberd":
-                                case "Crystal halberd":
-                                    if (monster_size == 1)
-                                    {
-                                        temp_extra_info_textbox_list.Add("Nothing special");
-                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    }
-                                    else
-                                    {
-                                        temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
-                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    }
-                                    break;
-                                case "Dawnbringer":
-                                case "Osmumten's fang":
-                                case "Voidwaker":
-                                    temp_extra_info_textbox_list.Add("Max hit " + max_hit_list[i + 4 + (y * 8)] + " Min hit " + spec_min_hit_array[i + (y * 4)]);
-                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    break;
-                                case "Granite hammer":
-                                case "Ursine chainmace":
-                                case "Ancient godsword":
-                                    temp_extra_info_textbox_list.Add("" + special_max_hit_1_array[i + (y * 4)] + " (+" + special_max_hit_2_array[i + (y * 4)] + ")");
-                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    break;
-                                case "Dragon knife":
-                                case "Dragon dagger":
-                                case "Abyssal dagger":
-                                case "Magic shortbow":
-                                case "Magic shortbow (i)":
-                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
-                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    break;
-                                case "Webweaver bow":
-                                case "Dragon claws":
-                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)] + " | " + special_max_hit_3_array[i + (y * 4)] + " | " + special_max_hit_3_array[i + (y * 4)]);
-                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    break;
-                                case "Dragon warhammer":
-                                    temp_extra_info_textbox_list.Add("Avg def reduction " + dwh_avg_def_reduction_list[i + (y * 4)]);
-                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    break;
-                                case "Keris partisan of corruption":
-                                    if (monster_is_kaplhite == true)
-                                    {
-                                        temp_extra_info_textbox_list.Add("Crit (" + max_hit_list[i + 4 + (y * 8)] * 3 + ") " + max_hit_list[i + 4 + (y * 8)]);
-                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    }
-                                    else
-                                    {
-                                        temp_extra_info_textbox_list.Add("Nothing special");
-                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    }
-                                    break;
-                                case "Saradomin sword":
-                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
-                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    break;
-                                case "Eldritch nightmare staff":
-                                case "Volatile nightmare staff":
-                                    temp_extra_info_textbox_list.Add("Max hit ±1, Not accurate");
-                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    break;
-                                case "Dragon crossbow":
-                                case "Armadyl crossbow":
-                                    if (ammo_name_array[y].Contains("bolts (e)") == true)
-                                    {
-                                        temp_extra_info_textbox_list.Add("" + bolt_normal_dmg_array[i + 4 + (y * 8)] + " (" + bolt_proc_dmg_array[i + 4 + (y * 8)] + " Chance " + bolt_proc_chance_array[i + 4 + (y * 8)] + "%)");
-                                        temp_max_hit_textbox_list.Add("" + bolt_normal_dmg_array[i + 4 + (y * 8)]);
-                                    }
-                                    else
-                                    {
-                                        temp_extra_info_textbox_list.Add("Nothing special");
-                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    }
-                                    break;
-                                case "Dark bow":
-                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + " Min hit " + spec_min_hit_array[i + (y * 4)] * 2 + ") | " + max_hit_list[i + 4 + (y * 8)] / 2 + " | " + max_hit_list[i + 4 + (y * 8)] / 2);
-                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    break;
-                                default:
-                                    temp_extra_info_textbox_list.Add("Nothing special");
-                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
-                                    break;
-                            }
-                            temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
-                            temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)]);
-                            temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
-                            temp_dps_textbox_list.Add("" + dps_list[i + 4 + (y * 8)]);
-                            temp_avg_dmg_overkill_textbox_list.Add("" + overkill_avg_dmg_per_attack_list[i + 4 + (y * 8)]);
-                            temp_dps_overkill_textbox_list.Add("" + overkill_dps_list[i + 4 + (y * 8)]);
-                            temp_avg_hits_to_kill_textbox_list.Add("" + avg_hits_to_kill_list[i + 4 + (y * 8)]);
-                            temp_avg_time_to_kill_textbox_list.Add("" + time_to_kill_list[i + 4 + (y * 8)]);
-                        }
-                        else
-                        {
-                            temp_combat_style_textbox_list.Add("No style");
-                            temp_extra_info_textbox_list.Add("Nothing special");
-                            temp_max_hit_textbox_list.Add("0");
-                            temp_max_attack_roll_textbox_list.Add("0");
-                            temp_hit_chance_textbox_list.Add("0");
-                            temp_avg_dmg_textbox_list.Add("0");
-                            temp_dps_textbox_list.Add("0");
-                            temp_avg_dmg_overkill_textbox_list.Add("0");
-                            temp_dps_overkill_textbox_list.Add("0");
-                            temp_avg_hits_to_kill_textbox_list.Add("0");
-                            temp_avg_time_to_kill_textbox_list.Add("0");
-                        }
-                    }
-                    else
-                    {
-                        temp_combat_style_textbox_list.Add("No special");
-                        temp_extra_info_textbox_list.Add("Nothing special");
-                        temp_max_hit_textbox_list.Add("0");
-                        temp_max_attack_roll_textbox_list.Add("0");
-                        temp_hit_chance_textbox_list.Add("0");
-                        temp_avg_dmg_textbox_list.Add("0");
-                        temp_dps_textbox_list.Add("0");
-                        temp_avg_dmg_overkill_textbox_list.Add("0");
-                        temp_dps_overkill_textbox_list.Add("0");
-                        temp_avg_hits_to_kill_textbox_list.Add("0");
-                        temp_avg_time_to_kill_textbox_list.Add("0");
-                    }
-                }
-            }
-
-
-
-
-            // display data
-            if (multiple_calcs == false)
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    if(compare_styles_set_1_combobox.Items[i].ToString() != temp_combat_style_textbox_list[i])
-                    {
-                        compare_styles_set_1_combobox.Items[i] = temp_combat_style_textbox_list[i];
-                    }
-
-                    if (compare_styles_set_2_combobox.Items[i].ToString() != temp_combat_style_textbox_list[i + 8])
-                    {
-                        compare_styles_set_2_combobox.Items[i] = temp_combat_style_textbox_list[i + 8];
-                    }
-
-
-
-                }
-
-                Dispatcher.Invoke(display_data);
-                Dispatcher.Invoke(compare_data);
-            }
-            // multiple calcs data
-            else
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    multiple_loadout_name_data_list.Add(loadout_name);
-                    multiple_weapon_name_data_list.Add(weapon_name_array[0]);
-                    multiple_combat_style_data_list.Add(temp_combat_style_textbox_list[i]);
-                    multiple_max_hit_data_list.Add(temp_max_hit_textbox_list[i]);
-                    multiple_max_attack_roll_data_list.Add(temp_max_attack_roll_textbox_list[i]);
-                    multiple_hit_chance_data_list.Add(temp_hit_chance_textbox_list[i]);
-                    multiple_avg_dmg_data_list.Add(temp_avg_dmg_textbox_list[i]);
-                    multiple_dps_data_list.Add(temp_dps_textbox_list[i]);
-                    multiple_avg_dmg_overkill_data_list.Add(temp_avg_dmg_overkill_textbox_list[i]);
-                    multiple_dps_overkill_data_list.Add(temp_dps_overkill_textbox_list[i]);
-                    multiple_avg_hits_to_kill_data_list.Add(temp_avg_hits_to_kill_textbox_list[i]);
-                    multiple_time_to_kill_data_list.Add(temp_avg_time_to_kill_textbox_list[i]);
-                }
-
-                multiple_monsters_stats_data_list.Add(monster_reduced_atk_lvl + "/" + monster_boosted_atk_lvl);
-                multiple_monsters_stats_data_list.Add(monster_reduced_str_lvl + "/" + monster_boosted_str_lvl);
-                multiple_monsters_stats_data_list.Add(monster_reduced_def_lvl + "/" + monster_boosted_def_lvl);
-                multiple_monsters_stats_data_list.Add(monster_reduced_magic_lvl + "/" + monster_boosted_magic_lvl);
-                multiple_monsters_stats_data_list.Add(monster_reduced_range_lvl + "/" + monster_boosted_range_lvl);
-                multiple_monsters_stats_data_list.Add(monster_reduced_hp_lvl + "/" + monster_boosted_hp_lvl);
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_defensive_stab));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_defensive_slash));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_defensive_crush));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_defensive_magic));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_defensive_range));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_max_defensive_roll_stab));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_max_defensive_roll_slash));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_max_defensive_roll_crush));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_max_defensive_roll_magic));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_max_defensive_roll_range));
-
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_atk));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_str));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_magic));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_magic_dmg));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_range));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_range_str));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(arclight_hits));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(dwh_hits));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(bgs_dmg));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(dmg_delt));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(team_size));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(toa_raid_lvl));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(toa_path_lvl));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(CM_cox_checkbox.IsChecked));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(slayer_task_checkbox.IsChecked));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(kandarin_diary_checkbox.IsChecked));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(red_keris_spec_checkbox.IsChecked));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(tome_of_water_checkbox.IsChecked));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(vulnerability_checkbox.IsChecked));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(enfeeble_checkbox.IsChecked));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(stun_checkbox.IsChecked));
-                multiple_monsters_stats_data_list.Add(Convert.ToString(accursed_secptre_checkbox.IsChecked));
-
-            }
-        }
-        private void display_data()
-        {
-            int j = 0;
-            if (show_set_2 == true)
-            {
-                j = 8;
-            }
-
-            for (int i = 0; i < 4; i++)
-            {
-                // normal
-                TextBox textBox = (TextBox)FindName($"weapon_combat_style_{i + 1}_textbox");
-                textBox.Text = temp_combat_style_textbox_list[i + j];
-                textBox = (TextBox)FindName($"max_hit_combat_style_{i + 1}_textbox");
-                textBox.Text = temp_max_hit_textbox_list[i + j];
-                textBox = (TextBox)FindName($"max_attackroll_combat_style_{i + 1}_textbox");
-                textBox.Text = temp_max_attack_roll_textbox_list[i + j];
-                textBox = (TextBox)FindName($"hit_chance_combat_style_{i + 1}_textbox");
-                textBox.Text = temp_hit_chance_textbox_list[i + j] + "%";
-                textBox = (TextBox)FindName($"avg_dmg_per_attack_combat_style_{i + 1}_textbox");
-                textBox.Text = temp_avg_dmg_textbox_list[i + j];
-                textBox = (TextBox)FindName($"dps_combat_style_{i + 1}_textbox");
-                textBox.Text = temp_dps_textbox_list[i + j];
-                textBox = (TextBox)FindName($"overkill_avg_dmg_per_attack_style_{i + 1}_textbox");
-                textBox.Text = temp_avg_dmg_overkill_textbox_list[i + j];
-                textBox = (TextBox)FindName($"overkill_dps_combat_style_{i + 1}_textbox");
-                textBox.Text = temp_dps_overkill_textbox_list[i + j];
-                textBox = (TextBox)FindName($"avg_hits_to_kill_style_{i + 1}_textbox");
-                textBox.Text = temp_avg_hits_to_kill_textbox_list[i + j];
-                textBox = (TextBox)FindName($"time_to_kill_style_{i + 1}_textbox");
-                textBox.Text = temp_avg_time_to_kill_textbox_list[i + j];
-                textBox = (TextBox)FindName($"extra_info_style_{i + 1}_textbox");
-                textBox.Text = temp_extra_info_textbox_list[i + j];
-
-                //special
-                textBox = (TextBox)FindName($"weapon_combat_style_{i + 1}_special_textbox");
-                textBox.Text = temp_combat_style_textbox_list[i + 4 + j];
-                textBox = (TextBox)FindName($"max_hit_combat_style_{i + 1}_special_textbox");
-                textBox.Text = temp_max_hit_textbox_list[i + 4 + j];
-                textBox = (TextBox)FindName($"max_attackroll_combat_style_{i + 1}_special_textbox");
-                textBox.Text = temp_max_attack_roll_textbox_list[i + 4 + j];
-                textBox = (TextBox)FindName($"hit_chance_combat_style_{i + 1}_special_textbox");
-                textBox.Text = temp_hit_chance_textbox_list[i + 4 + j] + "%";
-                textBox = (TextBox)FindName($"avg_dmg_per_attack_combat_style_{i + 1}_special_textbox");
-                textBox.Text = temp_avg_dmg_textbox_list[i + 4 + j];
-                textBox = (TextBox)FindName($"dps_combat_style_{i + 1}_special_textbox");
-                textBox.Text = temp_dps_textbox_list[i + 4 + j];
-                textBox = (TextBox)FindName($"overkill_avg_dmg_per_attack_style_{i + 1}_special_textbox");
-                textBox.Text = temp_avg_dmg_overkill_textbox_list[i + 4 + j];
-                textBox = (TextBox)FindName($"overkill_dps_combat_style_{i + 1}_special_textbox");
-                textBox.Text = temp_dps_overkill_textbox_list[i + 4 + j];
-                textBox = (TextBox)FindName($"avg_hits_to_kill_style_{i + 1}_special_textbox");
-                textBox.Text = temp_avg_hits_to_kill_textbox_list[i + 4 + j];
-                textBox = (TextBox)FindName($"time_to_kill_style_{i + 1}_special_textbox");
-                textBox.Text = temp_avg_time_to_kill_textbox_list[i + 4 + j];
-                textBox = (TextBox)FindName($"extra_info_style_{i + 1}_special_textbox");
-                textBox.Text = temp_extra_info_textbox_list[i + 4 + j];
-            }
-
-            // monster dps back to player
-            j = 0;
-            if (show_set_2 == true)
-            {
-                j = 5;
-            }
-
-            for (int i = j; i < j + 5; i++)
-            {
-                TextBox textBox = (TextBox)FindName($"monster_max_hit_{i - j + 1}_textbox");
-                textBox.Text = "" + monster_max_hit_array[i];
-                textBox = (TextBox)FindName($"monster_attack_roll_{i - j + 1}_textbox");
-                textBox.Text = "" + monster_attack_roll_array[i] + " || " + player_def_roll_array[i];
-                textBox = (TextBox)FindName($"monster_hit_chance_{i - j + 1}_textbox");
-                textBox.Text = "" + monster_hit_chance_array[i] * 100 + "%";
-                textBox = (TextBox)FindName($"monster_avg_dmg_{i - j + 1}_textbox");
-                textBox.Text = "" + monster_avg_dmg_array[i];
-            }
-
-        }
-        private void compare_data()
-        {
-
-            if (compare_styles_set_1_combobox.SelectedItem == null)
-            {
-                compare_styles_set_1_combobox.SelectedIndex = 0;
-            }
-
-            if (compare_styles_set_2_combobox.SelectedItem == null)
-            {
-                compare_styles_set_2_combobox.SelectedIndex = 0;
-            }
-
-
-            int i = compare_styles_set_1_combobox.SelectedIndex;
-            int j = compare_styles_set_2_combobox.SelectedIndex + 8;
-            int l = i;
-            int m = j;
-
-            compare_styles_set_1_combobox.Text = Convert.ToString(compare_styles_set_1_combobox.SelectedItem);
-            compare_styles_set_1_combobox.ToolTip = Convert.ToString(compare_styles_set_1_combobox.SelectedItem);
-
-            compare_styles_set_2_combobox.Text = Convert.ToString(compare_styles_set_2_combobox.SelectedItem);
-            compare_styles_set_2_combobox.ToolTip = Convert.ToString(compare_styles_set_2_combobox.SelectedItem);
-
-            compare_maxhit_set_1_textbox.Text = temp_max_hit_textbox_list[i];
-            compare_hit_chance_set_1_textbox.Text = temp_hit_chance_textbox_list[i] + "%";
-            compare_average_dmg_set_1_textbox.Text = temp_avg_dmg_textbox_list[i];
-            compare_dps_set_1_textbox.Text = temp_dps_textbox_list[i];
-            compare_average_dmg_overkill_set_1_textbox.Text = temp_avg_dmg_overkill_textbox_list[i];
-            compare_dps_overkill_set_1_textbox.Text = temp_dps_overkill_textbox_list[i];
-            compare_time_to_kill_set_1_textbox.Text = temp_avg_time_to_kill_textbox_list[i];
-
-            compare_maxhit_set_2_textbox.Text = temp_max_hit_textbox_list[j];
-            compare_hit_chance_set_2_textbox.Text = temp_hit_chance_textbox_list[j] + "%";
-            compare_average_dmg_set_2_textbox.Text = temp_avg_dmg_textbox_list[j];
-            compare_dps_set_2_textbox.Text = temp_dps_textbox_list[j];
-            compare_average_dmg_overkill_set_2_textbox.Text = temp_avg_dmg_overkill_textbox_list[j];
-            compare_dps_overkill_set_2_textbox.Text = temp_dps_overkill_textbox_list[j];
-            compare_time_to_kill_set_2_textbox.Text = temp_avg_time_to_kill_textbox_list[j];
-
-            double temp_compare_max_hit_1;
-            double temp_compare_max_hit_2;
-
-            if (weapon_name_array[0] == "Osmumten's fang" && l < 4)
-            {
-                temp_compare_max_hit_1 = osmumtens_fang_max_hit_array[l];
-            }
-            else
-            {
-                temp_compare_max_hit_1 = max_hit_list[i];
-            }
-
-            if (weapon_name_array[1] == "Osmumten's fang" && m < 8)
-            {
-                temp_compare_max_hit_2 = osmumtens_fang_max_hit_array[m];
-            }
-            else
-            {
-                temp_compare_max_hit_2 = max_hit_list[j];
-            }
-
-            compare_maxhit_difference_textbox.Text = Math.Round((Math.Max(temp_compare_max_hit_1, temp_compare_max_hit_2) / Math.Min(temp_compare_max_hit_1, temp_compare_max_hit_2) - 1) * 100,5) + "%";
-            compare_hit_chance_difference_textbox.Text = Math.Round((Math.Max(hit_chance_list[i], hit_chance_list[j]) / Math.Min(hit_chance_list[i], hit_chance_list[j]) - 1) * 100,5) + "%";
-            compare_average_dmg_difference_textbox.Text = Math.Round((Math.Max(avg_dmg_per_attack_list[i], avg_dmg_per_attack_list[j]) / Math.Min(avg_dmg_per_attack_list[i], avg_dmg_per_attack_list[j]) - 1) * 100,5) + "%";
-            compare_dps_difference_textbox.Text = Math.Round((Math.Max(dps_list[i], dps_list[j]) / Math.Min(dps_list[i], dps_list[j]) - 1) * 100,5) + "%";
-            compare_average_dmg_overkill_difference_textbox.Text = Math.Round((Math.Max(overkill_avg_dmg_per_attack_list[i], overkill_avg_dmg_per_attack_list[j]) / Math.Min(overkill_avg_dmg_per_attack_list[i], overkill_avg_dmg_per_attack_list[j]) - 1) * 100,5) + "%";
-            compare_dps_overkill_difference_textbox.Text = Math.Round((Math.Max(overkill_dps_list[i], overkill_dps_list[j]) / Math.Min(overkill_dps_list[i], overkill_dps_list[j]) - 1) * 100,5) + "%";
-            compare_time_to_kill_difference_textbox.Text = Math.Round((Math.Max(time_to_kill_list[i], time_to_kill_list[j]) / Math.Min(time_to_kill_list[i], time_to_kill_list[j]) - 1) * 100,5) + "%";
-
-            // coloring
-            // max hit
-            if (temp_compare_max_hit_1 == Math.Max(temp_compare_max_hit_1, temp_compare_max_hit_2))
-            {
-                compare_maxhit_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_maxhit_set_2_textbox.BorderBrush = Brushes.DarkRed;
-            }
-            else
-            {
-                compare_maxhit_set_1_textbox.BorderBrush = Brushes.DarkRed;
-                compare_maxhit_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            if (temp_compare_max_hit_1 == temp_compare_max_hit_2)
-            {
-                compare_maxhit_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_maxhit_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            // hit chance
-            if (hit_chance_list[i] == Math.Max(hit_chance_list[i], hit_chance_list[j]))
-            {
-                compare_hit_chance_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_hit_chance_set_2_textbox.BorderBrush = Brushes.DarkRed;
-            }
-            else
-            {
-                compare_hit_chance_set_1_textbox.BorderBrush = Brushes.DarkRed;
-                compare_hit_chance_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            if (hit_chance_list[i] == hit_chance_list[j])
-            {
-                compare_hit_chance_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_hit_chance_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            // avg dmg
-            if (avg_dmg_per_attack_list[i] == Math.Max(avg_dmg_per_attack_list[i], avg_dmg_per_attack_list[j]))
-            {
-                compare_average_dmg_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_average_dmg_set_2_textbox.BorderBrush = Brushes.DarkRed;
-            }
-            else
-            {
-                compare_average_dmg_set_1_textbox.BorderBrush = Brushes.DarkRed;
-                compare_average_dmg_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            if (avg_dmg_per_attack_list[i] == avg_dmg_per_attack_list[j])
-            {
-                compare_average_dmg_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_average_dmg_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            // dps
-            if (dps_list[i] == Math.Max(dps_list[i], dps_list[j]))
-            {
-                compare_dps_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_dps_set_2_textbox.BorderBrush = Brushes.DarkRed;
-            }
-            else
-            {
-                compare_dps_set_1_textbox.BorderBrush = Brushes.DarkRed;
-                compare_dps_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            if (dps_list[i] == dps_list[j])
-            {
-                compare_dps_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_dps_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            // avg dmg overkill
-            if (overkill_avg_dmg_per_attack_list[i] == Math.Max(overkill_avg_dmg_per_attack_list[i], overkill_avg_dmg_per_attack_list[j]))
-            {
-                compare_average_dmg_overkill_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_average_dmg_overkill_set_2_textbox.BorderBrush = Brushes.DarkRed;
-            }
-            else
-            {
-                compare_average_dmg_overkill_set_1_textbox.BorderBrush = Brushes.DarkRed;
-                compare_average_dmg_overkill_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            if (overkill_avg_dmg_per_attack_list[i] == overkill_avg_dmg_per_attack_list[j])
-            {
-                compare_average_dmg_overkill_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_average_dmg_overkill_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            // dps overkill
-            if (overkill_dps_list[i] == Math.Max(overkill_dps_list[i], overkill_dps_list[j]))
-            {
-                compare_dps_overkill_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_dps_overkill_set_2_textbox.BorderBrush = Brushes.DarkRed;
-            }
-            else
-            {
-                compare_dps_overkill_set_1_textbox.BorderBrush = Brushes.DarkRed;
-                compare_dps_overkill_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            if (overkill_dps_list[i] == overkill_dps_list[j])
-            {
-                compare_dps_overkill_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_dps_overkill_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-            // time to kill
-            if (time_to_kill_list[i] == Math.Max(time_to_kill_list[i], time_to_kill_list[j]))
-            {
-                compare_time_to_kill_set_1_textbox.BorderBrush = Brushes.DarkRed;
-                compare_time_to_kill_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-            else
-            {
-                compare_time_to_kill_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_time_to_kill_set_2_textbox.BorderBrush = Brushes.DarkRed;
-            }
-
-            if (time_to_kill_list[i] == time_to_kill_list[j])
-            {
-                compare_time_to_kill_set_1_textbox.BorderBrush = Brushes.Green;
-                compare_time_to_kill_set_2_textbox.BorderBrush = Brushes.Green;
-            }
-
-
-        }
         private void Stats()
         {
             int a = 0;
@@ -2669,7 +1598,7 @@ namespace Osrs_dps_calculator
                     gear_set_2 = true;
                 }
 
-                for (int j = b + 0; j < b + 4; j++)
+                for (int j = b; j < b + 4; j++)
                 {
                     if (spell_name_array[a] == "None")
                     {
@@ -2774,8 +1703,419 @@ namespace Osrs_dps_calculator
             Dispatcher.Invoke(UpdateUI);
             if (multiple_calcs == false)
             {
-                Dispatcher.Invoke(monster_dmg_dealing_calc);
+                Dispatcher.Invoke(monster_max_hit_and_atk_roll);
+                Dispatcher.Invoke(monster_hit_chance_and_avg_dmg);
                 Dispatcher.Invoke(coloring_menu);
+            }
+
+        }
+        private void monster_stat_boosts()
+        {
+            monster_boosted_atk_lvl = monster_combat_atk_lvl;
+            monster_boosted_str_lvl = monster_combat_str_lvl;
+            monster_boosted_def_lvl = monster_combat_def_lvl;
+            monster_boosted_magic_lvl = monster_combat_magic_lvl;
+            monster_boosted_range_lvl = monster_combat_range_lvl;
+            monster_boosted_hp_lvl = monster_combat_hp_lvl;
+
+            double atk_modifier = 1;
+            double str_modifier = 1;
+            double def_modifier = 1;
+            double magic_modifier = 1;
+            double range_modifier = 1;
+            double hp_modifier = 1;
+
+            // tob
+            if (monster_is_in_tob == true && monster_name != "Combat dummy")
+            {
+                if (team_size <= 3)
+                {
+                    hp_modifier = 0.75;
+                }
+                if (team_size == 4)
+                {
+                    hp_modifier = 0.875;
+                }
+                monster_boosted_hp_lvl = Math.Round(monster_combat_hp_lvl * hp_modifier);
+            }
+
+            // toa
+            if (monster_is_in_toa == true && monster_name != "Combat dummy")
+            {
+                // Raid lvl
+                if (monster_name == "Wardens Core")
+                {
+                    hp_modifier = (1 + toa_raid_lvl * 0.001);
+                }
+                else
+                {
+                    hp_modifier = (1 + toa_raid_lvl * 0.004);
+                }
+
+                // Path lvl
+                if (monster_name == "Akkha" || monster_name == "Ba-Ba" || monster_name == "Kephri" || monster_name == "Zebak" || monster_name == "Arcane Scarab" || monster_name == "Spitting Scarab" || monster_name == "Soldier Scarab")
+                {
+                    if (toa_path_lvl > 0)
+                    {
+                        hp_modifier = hp_modifier * (1.03 + 0.05 * toa_path_lvl);
+                    }
+                }
+
+                // Team size
+                if (team_size == 2)
+                {
+                    hp_modifier = hp_modifier * 1.9;
+                }
+                if (team_size == 3)
+                {
+                    hp_modifier = hp_modifier * 2.8;
+                }
+                if (team_size > 3)
+                {
+                    hp_modifier = hp_modifier * (2.8 + 0.6 * (Math.Min(8, team_size) - 3));
+                }
+
+                // odd rounding what ever
+                if (monster_name == "Akkha" || monster_name == "Ba-Ba" || monster_name == "Zebak" || monster_name == "Arcane Scarab" || monster_name == "Spitting Scarab" || monster_name == "Soldier Scarab" || monster_name == "Obelisk" || monster_name == "Wardens Core" || monster_name == "Wardens P3" || monster_name == "Wardens P4")
+                {
+                    monster_boosted_hp_lvl = (Math.Round((monster_combat_hp_lvl * hp_modifier) / 10)) * 10;
+                }
+                else if (monster_name == "Kephri" || monster_name == "Wardens P2" || monster_name == "Akkha's Shadow")
+                {
+                    monster_boosted_hp_lvl = (Math.Floor((monster_combat_hp_lvl * hp_modifier) / 5)) * 5;
+                }
+                // baboons
+                else
+                {
+                    monster_boosted_hp_lvl = Math.Floor(monster_combat_hp_lvl * hp_modifier);
+                }
+            }
+
+            // cox
+            if (monster_is_in_cox == true && monster_name != "Combat dummy")
+            {
+                // mining lvl modifier
+                if (monster_name == "Guardian")
+                {
+                    hp_modifier = monster_combat_hp_lvl - 99 + mining_lvl;
+                    monster_boosted_hp_lvl = Math.Floor(monster_boosted_hp_lvl - (monster_boosted_hp_lvl - hp_modifier));
+                }
+                // combat lvl modifier
+                if (monster_name.Contains("Great olm") == true)
+                {
+                    atk_modifier = 1;
+                    str_modifier = 1;
+                    def_modifier = 1;
+                    magic_modifier = 1;
+                    range_modifier = 1;
+                    hp_modifier = 1;
+                }
+                else
+                {
+                    atk_modifier = ((Math.Floor(hp_lvl * 4 / 9)) + 55) / 99;
+                    str_modifier = atk_modifier;
+                    def_modifier = atk_modifier;
+                    magic_modifier = atk_modifier;
+                    range_modifier = atk_modifier;
+                    hp_modifier = combat_lvl / 126;
+                }
+
+                monster_boosted_atk_lvl = Math.Floor(monster_boosted_atk_lvl * atk_modifier);
+                monster_boosted_str_lvl = Math.Floor(monster_boosted_str_lvl * str_modifier);
+                monster_boosted_def_lvl = Math.Floor(monster_boosted_def_lvl * def_modifier);
+                monster_boosted_magic_lvl = Math.Floor(monster_boosted_magic_lvl * magic_modifier);
+                monster_boosted_range_lvl = Math.Floor(monster_boosted_range_lvl * range_modifier);
+                monster_boosted_hp_lvl = Math.Floor(monster_boosted_hp_lvl * hp_modifier);
+                // party size modifier
+                if (monster_name.Contains("Great olm") == true)
+                {
+                    hp_modifier = (team_size - 3 * Math.Floor(team_size / 8) + 1) / 2;
+                }
+                else if (monster_name == "Scavenger")
+                {
+                    hp_modifier = 1;
+                }
+                else
+                {
+                    hp_modifier = (1 + Math.Floor(team_size / 2));
+                }
+
+                if (monster_name == "Abyssal portal")
+                {
+                    def_modifier = (Math.Floor(Math.Sqrt(team_size - 1)) + Math.Floor((team_size - 1) * 7 / 10) + 100) / 100;
+                    atk_modifier = def_modifier;
+                    str_modifier = def_modifier;
+                    magic_modifier = def_modifier;
+                    range_modifier = def_modifier;
+                }
+                else
+                {
+                    def_modifier = (Math.Floor(Math.Sqrt(team_size - 1)) + Math.Floor((team_size - 1) * 7 / 10) + 100) / 100;
+                    atk_modifier = (Math.Floor(Math.Sqrt(team_size - 1)) * 7 + (team_size - 1) + 100) / 100;
+                    str_modifier = atk_modifier;
+                    magic_modifier = atk_modifier;
+                    range_modifier = atk_modifier;
+                }
+
+                if (monster_boosted_atk_lvl == 1)
+                {
+                    monster_boosted_atk_lvl = 1;
+                }
+                else
+                {
+                    monster_boosted_atk_lvl = Math.Floor(monster_boosted_atk_lvl * atk_modifier);
+                }
+                if (monster_boosted_str_lvl == 1)
+                {
+                    monster_boosted_str_lvl = 1;
+                }
+                else
+                {
+                    monster_boosted_str_lvl = Math.Floor(monster_boosted_str_lvl * str_modifier);
+                }
+                if (monster_boosted_magic_lvl == 1)
+                {
+                    monster_boosted_magic_lvl = 1;
+                }
+                else
+                {
+                    monster_boosted_magic_lvl = Math.Floor(monster_boosted_magic_lvl * magic_modifier);
+                }
+                if (monster_boosted_range_lvl == 1)
+                {
+                    monster_boosted_range_lvl = 1;
+                }
+                else
+                {
+                    monster_boosted_range_lvl = Math.Floor(monster_boosted_range_lvl * range_modifier);
+                }
+                monster_boosted_def_lvl = Math.Floor(monster_boosted_def_lvl * def_modifier);
+                monster_boosted_hp_lvl = Math.Floor(monster_boosted_hp_lvl * hp_modifier);
+                // CM scaling
+                if (CM_cox_checkbox.IsChecked == true)
+                {
+                    if (monster_name.Contains("Great olm") == true || monster_name == "Glowing crystal")
+                    {
+                        hp_modifier = 1;
+                    }
+                    else
+                    {
+
+                        hp_modifier = 1.5;
+                    }
+                    atk_modifier = 1.5;
+                    str_modifier = 1.5;
+                    range_modifier = 1.5;
+                    if (monster_name.Contains("Tekton") == true)
+                    {
+                        magic_modifier = 1.2;
+                    }
+                    else
+                    {
+                        magic_modifier = 1.5;
+                    }
+                    if (monster_name.Contains("Tekton") == true)
+                    {
+                        def_modifier = 1.2;
+                    }
+                    else
+                    {
+                        def_modifier = 1.5;
+                    }
+                    if (monster_name == "Gloving crystal")
+                    {
+                        def_modifier = 1;
+                    }
+
+                    monster_boosted_atk_lvl = Math.Floor(monster_boosted_atk_lvl * atk_modifier);
+                    monster_boosted_str_lvl = Math.Floor(monster_boosted_str_lvl * str_modifier);
+                    monster_boosted_def_lvl = Math.Floor(monster_boosted_def_lvl * def_modifier);
+                    monster_boosted_magic_lvl = Math.Floor(monster_boosted_magic_lvl * magic_modifier);
+                    monster_boosted_range_lvl = Math.Floor(monster_boosted_range_lvl * range_modifier);
+                    monster_boosted_hp_lvl = Math.Floor(monster_boosted_hp_lvl * hp_modifier);
+                }
+            }
+        }
+        private void monster_stat_reduction()
+        {
+            monster_reduced_atk_lvl = monster_boosted_atk_lvl;
+            monster_reduced_str_lvl = monster_boosted_str_lvl;
+            monster_reduced_def_lvl = monster_boosted_def_lvl;
+            monster_reduced_magic_lvl = monster_boosted_magic_lvl;
+            monster_reduced_range_lvl = monster_boosted_range_lvl;
+            monster_reduced_hp_lvl = monster_boosted_hp_lvl;
+
+
+            monster_reduced_hp_lvl = monster_reduced_hp_lvl - dmg_delt;
+            if (monster_reduced_hp_lvl < 0)
+            {
+                monster_reduced_hp_lvl = 0;
+            }
+
+
+            // cant reduce stats and vardovis
+            if (monster_name == "Verzik vitur P1" || monster_name == "Verzik vitur P2" || monster_name == "Verzik vitur P3" || monster_name == "Vardorvis" || monster_name == "Awakened Leviathan" || monster_name == "Awakened Vardorvis" || monster_name == "Awakened Duke Sucellus" || monster_name == "Awakened Whisperer")
+            {
+                monster_reduced_atk_lvl = monster_boosted_atk_lvl;
+                monster_reduced_str_lvl = monster_boosted_str_lvl;
+                monster_reduced_def_lvl = monster_boosted_def_lvl;
+                monster_reduced_magic_lvl = monster_boosted_magic_lvl;
+                monster_reduced_range_lvl = monster_boosted_range_lvl;
+                if (monster_name == "Vardorvis")
+                {
+                    monster_reduced_def_lvl = monster_boosted_def_lvl - Math.Floor((monster_boosted_hp_lvl - monster_reduced_hp_lvl) / 10.0); // 1 def lost for 10 hp
+                    monster_reduced_str_lvl = monster_boosted_str_lvl + Math.Floor((monster_boosted_hp_lvl - monster_reduced_hp_lvl) / (70.0 / 9.0));  // 1 str gained for 7,7 hp
+                }
+                if (monster_name == "Awakened Vardorvis")
+                {
+                    monster_reduced_def_lvl = monster_boosted_def_lvl - Math.Floor((monster_boosted_hp_lvl - monster_reduced_hp_lvl) / (1400.0 / 87.0)); // 1 def lost for 16 hp
+                    monster_reduced_str_lvl = monster_boosted_str_lvl + Math.Floor((monster_boosted_hp_lvl - monster_reduced_hp_lvl) / (1400.0 / 131.0)); // 1 str gained for 10,6 hp
+                }
+
+            }
+            // normal stat reduction
+            else
+            {
+                double curse_spell_effectiviness = 0.1;
+                if (tome_of_water_checkbox.IsChecked == true)
+                {
+                    curse_spell_effectiviness = 0.15;
+                }
+                // vulnerability
+                if (vulnerability_checkbox.IsChecked == true)
+                {
+                    monster_reduced_def_lvl = monster_reduced_def_lvl - Math.Floor(monster_reduced_def_lvl * curse_spell_effectiviness);
+                }
+                // enfeeble
+                if (enfeeble_checkbox.IsChecked == true)
+                {
+                    monster_reduced_str_lvl = monster_reduced_str_lvl - Math.Floor(monster_reduced_str_lvl * curse_spell_effectiviness);
+                }
+                // stun
+                if (stun_checkbox.IsChecked == true)
+                {
+                    monster_reduced_atk_lvl = monster_reduced_atk_lvl - Math.Floor(monster_reduced_atk_lvl * curse_spell_effectiviness);
+                }
+
+                // accused secptre
+                if (accursed_secptre_checkbox.IsChecked == true)
+                {
+                    monster_reduced_def_lvl = monster_boosted_def_lvl - Math.Floor(monster_boosted_def_lvl * 0.15);
+                    monster_reduced_magic_lvl = monster_boosted_magic_lvl - Math.Floor(monster_boosted_magic_lvl * 0.15);
+                }
+
+                // arlicht hits
+                if (monster_is_demon == true)
+                {
+                    monster_reduced_atk_lvl = monster_reduced_atk_lvl - Math.Floor((monster_boosted_atk_lvl * 0.1) * arclight_hits);
+                    monster_reduced_str_lvl = monster_reduced_str_lvl - Math.Floor((monster_boosted_str_lvl * 0.1) * arclight_hits);
+                    monster_reduced_def_lvl = monster_reduced_def_lvl - Math.Floor((monster_boosted_def_lvl * 0.1) * arclight_hits);
+                }
+                else
+                {
+                    monster_reduced_atk_lvl = monster_reduced_atk_lvl - Math.Floor((monster_boosted_atk_lvl * 0.05) * arclight_hits);
+                    monster_reduced_str_lvl = monster_reduced_str_lvl - Math.Floor((monster_boosted_str_lvl * 0.05) * arclight_hits);
+                    monster_reduced_def_lvl = monster_reduced_def_lvl - Math.Floor((monster_boosted_def_lvl * 0.05) * arclight_hits);
+                }
+
+                if (monster_reduced_atk_lvl < 1)
+                {
+                    monster_reduced_atk_lvl = 0;
+                }
+                if (monster_reduced_str_lvl < 1)
+                {
+                    monster_reduced_str_lvl = 0;
+                }
+                if (monster_reduced_def_lvl < 1)
+                {
+                    monster_reduced_def_lvl = 0;
+                }
+
+                // dwh hits
+                if (dwh_hits != 0)
+                {
+                    for (int i = 0; i < dwh_hits; i++)
+                    {
+                        monster_reduced_def_lvl = monster_reduced_def_lvl - Math.Floor(monster_reduced_def_lvl * 0.3);
+                    }
+                }
+
+                // bgs dmg
+                double temp_monster_reduced_lvl;
+                double temp_bgs_dmg = bgs_dmg;
+                // defence
+                temp_monster_reduced_lvl = monster_reduced_def_lvl;
+                monster_reduced_def_lvl = monster_reduced_def_lvl - temp_bgs_dmg;
+
+                // minimum defence
+                if (monster_reduced_def_lvl < monster_defence_cap)
+                {
+                    monster_reduced_def_lvl = monster_defence_cap;
+                }
+
+                // strength
+                if (monster_reduced_def_lvl < 1)
+                {
+                    monster_reduced_def_lvl = 0;
+                    temp_bgs_dmg = temp_bgs_dmg - temp_monster_reduced_lvl;
+
+                    temp_monster_reduced_lvl = monster_reduced_str_lvl;
+                    monster_reduced_str_lvl = monster_reduced_str_lvl - temp_bgs_dmg;
+                    // attack
+                    if (monster_reduced_str_lvl < 0)
+                    {
+                        monster_reduced_str_lvl = 0;
+                        temp_bgs_dmg = temp_bgs_dmg - temp_monster_reduced_lvl;
+
+                        temp_monster_reduced_lvl = monster_reduced_atk_lvl;
+                        monster_reduced_atk_lvl = monster_reduced_atk_lvl - temp_bgs_dmg;
+                        // magic
+                        if (monster_reduced_atk_lvl < 0)
+                        {
+                            monster_reduced_atk_lvl = 0;
+                            temp_bgs_dmg = temp_bgs_dmg - temp_monster_reduced_lvl;
+
+                            temp_monster_reduced_lvl = monster_reduced_magic_lvl;
+                            monster_reduced_magic_lvl = monster_reduced_magic_lvl - temp_bgs_dmg;
+                            // range
+                            if (monster_reduced_magic_lvl < 0)
+                            {
+                                monster_reduced_magic_lvl = 0;
+                                temp_bgs_dmg = temp_bgs_dmg - temp_monster_reduced_lvl;
+
+                                monster_reduced_range_lvl = monster_reduced_range_lvl - temp_bgs_dmg;
+                                if (monster_reduced_range_lvl < 0)
+                                {
+                                    monster_reduced_range_lvl = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        private void monster_max_defence_roll()
+        {
+            monster_max_defensive_roll_stab = (monster_reduced_def_lvl + 9) * (monster_defensive_stab + 64);
+            monster_max_defensive_roll_slash = (monster_reduced_def_lvl + 9) * (monster_defensive_slash + 64);
+            monster_max_defensive_roll_crush = (monster_reduced_def_lvl + 9) * (monster_defensive_crush + 64);
+            monster_max_defensive_roll_magic = (monster_reduced_magic_lvl + 9) * (monster_defensive_magic + 64);
+            monster_max_defensive_roll_range = (monster_reduced_def_lvl + 9) * (monster_defensive_range + 64);
+
+            if (monster_is_in_toa == true)
+            {
+                monster_max_defensive_roll_stab = Math.Floor(monster_max_defensive_roll_stab * (1 + toa_raid_lvl * 0.004));
+                monster_max_defensive_roll_slash = Math.Floor(monster_max_defensive_roll_slash * (1 + toa_raid_lvl * 0.004));
+                monster_max_defensive_roll_crush = Math.Floor(monster_max_defensive_roll_crush * (1 + toa_raid_lvl * 0.004));
+                monster_max_defensive_roll_magic = Math.Floor(monster_max_defensive_roll_magic * (1 + toa_raid_lvl * 0.004));
+                monster_max_defensive_roll_range = Math.Floor(monster_max_defensive_roll_range * (1 + toa_raid_lvl * 0.004));
+            }
+
+            // the odd "mage" defence rolls
+            if (monster_name == "Ice demon" || monster_name == "Verzik vitur P1" || monster_name == "Verzik vitur P2" || monster_name == "Verzik vitur P3" || monster_name == "Baboon Brawler (small)" || monster_name == "Baboon Brawler (big)")
+            {
+                monster_max_defensive_roll_magic = (monster_reduced_def_lvl + 9) * (monster_defensive_magic + 64);
             }
 
         }
@@ -2807,12 +2147,10 @@ namespace Osrs_dps_calculator
                 }
             }
 
-
+            Dispatcher.Invoke(attack_styles);
 
             if (temp_weapon_type != "none" && temp_weapon_stance != "none")
             {
-
-                Dispatcher.Invoke(attack_styles);
                 Dispatcher.Invoke(max_hit_and_attack_roll);
                 Dispatcher.Invoke(hit_chance);
                 if (temp_max_hit > -1)
@@ -3053,6 +2391,1845 @@ namespace Osrs_dps_calculator
                 bolt_normal_dmg_array[dps_calc_fix] = 0;
                 bolt_proc_dmg_array[dps_calc_fix] = 0;
                 bolt_proc_chance_array[dps_calc_fix] = 0;
+            }
+        }
+        private void attack_styles()
+        {
+            style_bonus_attack_array[dps_calc_fix] = 0;
+            style_bonus_str_array[dps_calc_fix] = 0;
+            style_bonus_def_array[dps_calc_fix] = 0;
+            style_bonus_magic_array[dps_calc_fix] = 0;
+            style_bonus_range_array[dps_calc_fix] = 0;
+
+            switch (temp_weapon_type)
+            {
+                case "ranged":
+                    switch (temp_weapon_stance)
+                    {
+                        case "short fuse":
+                        case "accurate":
+                            style_bonus_range_array[dps_calc_fix] = 3;
+                            break;
+                        case "medium fuse":
+                        case "rapid":
+                            // no stat bonuces, just rapid
+                            break;
+                        case "long fuse":
+                        case "longrange":
+                            style_bonus_def_array[dps_calc_fix] = 3;
+                            break;
+                        default:
+                            MessageBox.Show("Incorrect weapon stance range, gl");
+                            break;
+                    }
+                    break;
+                case "magic":
+                    switch (temp_weapon_stance)
+                    {
+                        case "accurate":
+                            style_bonus_magic_array[dps_calc_fix] = 2;
+                            break;
+                        case "longrange":
+                            style_bonus_def_array[dps_calc_fix] = 3;
+                            break;
+                        default:
+                            MessageBox.Show("Incorrect weapon stance mage, gl");
+                            break;
+                    }
+                    break;
+                case "cast":
+                case "cast longrange":
+                    style_bonus_def_array[dps_calc_fix] = 3;
+                    break;
+                case "cast accurate":
+                    style_bonus_magic_array[dps_calc_fix] = 2;
+                    break;
+                case "slash":
+                case "stab":
+                case "crush":
+                    switch (temp_weapon_stance)
+                    {
+                        case "accurate":
+                            style_bonus_attack_array[dps_calc_fix] = 3;
+                            break;
+                        case "aggressive":
+                            style_bonus_str_array[dps_calc_fix] = 3;
+                            break;
+                        case "defensive":
+                            style_bonus_def_array[dps_calc_fix] = 3;
+                            break;
+                        case "controlled":
+                            style_bonus_attack_array[dps_calc_fix] = 1;
+                            style_bonus_str_array[dps_calc_fix] = 1;
+                            style_bonus_def_array[dps_calc_fix] = 1;
+                            break;
+                        default:
+                            MessageBox.Show("Incorrect weapon stance melee, gl");
+                            break;
+                    }
+                    break;
+                case "none":
+                    // none bonuses
+                    break;
+                default:
+                    MessageBox.Show("Incorrect weapon type, gl");
+                    break;
+            }
+        }
+        private void max_hit_and_attack_roll()
+        {
+            int i = 0;
+            int j = 0;
+            if (gear_set_2 == true)
+            {
+                i = 1;
+                j = 11;
+            }
+
+            double gear_bonus_melee = 1;
+            double gear_bonus_range_and_mage = 1;
+            if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
+            {
+                gear_bonus_melee = 7.0 / 6.0;
+                gear_bonus_range_and_mage = 1.15;
+            }
+            if (amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true)
+            {
+                gear_bonus_melee = 1.2;
+                gear_bonus_range_and_mage = 1.2;
+            }
+            if (weapon_name_array[i] == "Dragon hunter lance" && monster_is_dragon == true)
+            {
+                gear_bonus_melee += 0.2;
+            }
+
+            bool elite_void = false;
+            bool normal_void = false;
+            if (helmet_name_array[i] == "Void helmet" && body_name_array[i] == "Elite void top" && legs_name_array[i] == "Elite void robe" && gloves_name_array[i] == "Void gloves")
+            {
+                elite_void = true;
+            }
+            if (helmet_name_array[i] == "Void helmet" && (body_name_array[i] == "Void top" || body_name_array[i] == "Elite void top") && (legs_name_array[i] == "Void robe" || legs_name_array[i] == "Elite void robe") && gloves_name_array[i] == "Void gloves" && elite_void == false)
+            {
+                normal_void = true;
+            }
+
+            switch (temp_weapon_type)
+            {
+                case "ranged":
+                    // check to not count ammo range str for weapons that dont use ammo
+                    double temp_ranged_str = total_range_str_array[i];
+                    if (weapon_name_array[i] == "Bow of faerdhinen" || weapon_name_array[i] == "Crystal bow" || weapon_name_array[i] == "Webweaver bow" || weapon_name_array[i] == "Craw's bow" || weapon_name_array[i].Contains("chinchompa") == true || weapon_name_array[i].Contains("dart") == true || weapon_name_array[i].Contains("knife") == true || weapon_name_array[i].Contains("thrownaxe") == true)
+                    {
+                        temp_ranged_str = total_range_str_array[i] - range_str_array[j + 3];
+                    }
+
+                    // soft max hit calc before specific scenarios
+                    temp_effective_range_str = true_range_str + style_bonus_range_array[dps_calc_fix] + 8;
+                    if (elite_void == true)
+                    {
+                        temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.125);
+                    }
+                    if (normal_void == true)
+                    {
+                        temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.1);
+                    }
+                    temp_max_hit = Math.Floor((temp_effective_range_str * (temp_ranged_str + 64) / 640) + 0.5);
+
+                    // soft max attack roll calc before specific scenarios
+                    temp_effective_range_lvl = true_range_lvl + style_bonus_range_array[dps_calc_fix] + 8;
+                    if (elite_void == true || normal_void == true)
+                    {
+                        temp_effective_range_lvl = Math.Floor(temp_effective_range_lvl * 1.1);
+                    }
+                    temp_max_attack_roll = temp_effective_range_lvl * (total_range_atk_array[i] + 64);
+
+                    switch (weapon_name_array[i])
+                    {
+                        case "Twisted bow":
+                            double twisted_bow_modifier = Math.Max(monster_reduced_magic_lvl, monster_aggressive_magic);
+                            double twisted_bow_dmg_modifier = 0;
+                            double twisted_bow_accuracy_modifier = 0;
+                            if (monster_is_in_cox == true)
+                            {
+                                if (twisted_bow_modifier > 350)
+                                {
+                                    twisted_bow_modifier = 350;
+                                }
+                            }
+                            else
+                            {
+                                if (twisted_bow_modifier > 250)
+                                {
+                                    twisted_bow_modifier = 250;
+                                }
+
+                            }
+
+                            twisted_bow_accuracy_modifier = Math.Floor((140 + ((30 * twisted_bow_modifier / 10) - 10) / 100) - ((Math.Pow((3 * twisted_bow_modifier / 10) - 100, 2)) / 100));
+                            if (twisted_bow_accuracy_modifier > 140)
+                            {
+                                twisted_bow_accuracy_modifier = 140;
+                            }
+                            twisted_bow_dmg_modifier = Math.Floor((250 + ((30 * twisted_bow_modifier / 10) - 14) / 100) - ((Math.Pow((3 * twisted_bow_modifier / 10) - 140, 2)) / 100));
+                            if (twisted_bow_dmg_modifier > 250)
+                            {
+                                twisted_bow_dmg_modifier = 250;
+                            }
+
+
+                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
+                            temp_max_hit = Math.Floor(temp_max_hit * (twisted_bow_dmg_modifier / 100));
+
+
+                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * gear_bonus_range_and_mage);
+                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * (twisted_bow_accuracy_modifier / 100));
+                            break;
+                        case "Bow of faerdhinen":
+                            double crystal_bonus_dmg = 1;
+                            double crystal_bonus_accuracy = 1;
+                            if (helmet_name_array[i] == "Crystal helm")
+                            {
+                                crystal_bonus_dmg = crystal_bonus_dmg + 0.025;
+                                crystal_bonus_accuracy = crystal_bonus_accuracy + 0.05;
+                            }
+                            if (body_name_array[i] == "Crystal body")
+                            {
+                                crystal_bonus_dmg = crystal_bonus_dmg + 0.075;
+                                crystal_bonus_accuracy = crystal_bonus_accuracy + 0.15;
+                            }
+                            if (legs_name_array[i] == "Crystal legs")
+                            {
+                                crystal_bonus_dmg = crystal_bonus_dmg + 0.05;
+                                crystal_bonus_accuracy = crystal_bonus_accuracy + 0.1;
+                            }
+
+                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage * crystal_bonus_dmg);
+
+                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * gear_bonus_range_and_mage * crystal_bonus_accuracy);
+                            break;
+                        case "Dragon hunter crossbow":
+                            if (monster_is_dragon == true)
+                            {
+                                temp_max_hit = Math.Floor(temp_max_hit * (gear_bonus_range_and_mage + 0.25));
+                                temp_max_attack_roll = Math.Floor(temp_max_attack_roll * (gear_bonus_range_and_mage + 0.3));
+                            }
+                            else
+                            {
+                                temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
+                                temp_max_attack_roll = Math.Floor(temp_max_attack_roll * gear_bonus_range_and_mage);
+                            }
+                            break;
+                        case "Black chinchompa":
+                        case "Red chinchompa":
+                        case "Grey chinchompa":
+                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
+
+                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * gear_bonus_range_and_mage);
+
+                            double chin_accuracy_modifier = 1;
+                            switch (temp_weapon_stance)
+                            {
+                                case "short fuse":
+                                    if (distance_to_monster > 3)
+                                    {
+                                        chin_accuracy_modifier = 0.75;
+                                    }
+                                    if (distance_to_monster > 6)
+                                    {
+                                        chin_accuracy_modifier = 0.50;
+                                    }
+                                    break;
+                                case "medium fuse":
+                                    if (distance_to_monster < 4 || distance_to_monster > 6)
+                                    {
+                                        chin_accuracy_modifier = 0.75;
+                                    }
+                                    break;
+                                case "long fuse":
+                                    if (distance_to_monster < 7)
+                                    {
+                                        chin_accuracy_modifier = 0.75;
+                                    }
+                                    if (distance_to_monster < 4)
+                                    {
+                                        chin_accuracy_modifier = 0.50;
+                                    }
+                                    break;
+                            }
+                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * chin_accuracy_modifier);
+
+                            break;
+                        default:
+                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
+
+                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * gear_bonus_range_and_mage);
+                            break;
+                    }
+                    break;
+                case "magic":
+                    // welcome to magical spaghetti zone
+
+                    Dispatcher.Invoke(mage_staff_max_hit);
+                    double shadow_multiplier = 3;
+                    if (monster_is_in_toa == true)
+                    {
+                        shadow_multiplier = 4;
+                    }
+                    double temp_magic_dmg = 0;
+                    if (amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true)
+                    {
+                        temp_magic_dmg += 20;
+                    }
+                    if (elite_void == true)
+                    {
+                        temp_magic_dmg += 2.5;
+                    }
+                    if (total_magic_dmg_array[i] != 0 || temp_magic_dmg != 0)
+                    {
+                        // shadow calcs as its odd for some magic dmg bonuses
+                        if (weapon_name_array[i] == "Tumeken's shadow")
+                        {
+                            if (total_magic_dmg_array[i] != 0)
+                            {
+                                // slayer helmet wont affect as either salve or void is overwriting it
+                                if ((amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true) || elite_void == true)
+                                {
+                                    temp_max_hit = staff_base_max_hit * (1 + (((total_magic_dmg_array[i] / 100) * shadow_multiplier) + (temp_magic_dmg / 100)));
+                                    temp_max_hit = Math.Floor(temp_max_hit);
+                                }
+                                // salve and void check just happened, so only counting for slayer helmet
+                                else
+                                {
+                                    temp_max_hit = staff_base_max_hit * (1 + ((total_magic_dmg_array[i] / 100) * shadow_multiplier));
+                                    temp_max_hit = Math.Floor(temp_max_hit);
+                                    if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
+                                    {
+                                        temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // magic dmg needs to be 0 to get here, so either salve or void must be equipped
+                                // and both would overwire slayer helmet
+                                temp_max_hit = staff_base_max_hit * (1 + (temp_magic_dmg / 100));
+                                temp_max_hit = Math.Floor(temp_max_hit);
+                            }
+                        }
+                        // other staff mage dmg calcs
+                        else
+                        {
+                            if (total_magic_dmg_array[i] != 0)
+                            {
+                                // slayer helmet wont affect as either salve or void is overwriting it
+                                if ((amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true) || elite_void == true)
+                                {
+                                    temp_max_hit = staff_base_max_hit * (1 + ((total_magic_dmg_array[i] + temp_magic_dmg) / 100));
+                                    temp_max_hit = Math.Floor(temp_max_hit);
+                                }
+                                // salve and void check just happened, so only counting for slayer helmet
+                                else
+                                {
+                                    temp_max_hit = staff_base_max_hit * (1 + (total_magic_dmg_array[i] / 100));
+                                    temp_max_hit = Math.Floor(temp_max_hit);
+                                    if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
+                                    {
+                                        temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // magic dmg needs to be 0 to get here, so either salve or void must be equipped
+                                // and both would overwire slayer helmet
+                                temp_max_hit = staff_base_max_hit * (1 + (temp_magic_dmg / 100));
+                                temp_max_hit = Math.Floor(temp_max_hit);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // cant have salve nor void as both temp_mage_dmg and mage_dmg are 0
+                        // can have slayer helmet bonus still tho
+                        temp_max_hit = staff_base_max_hit;
+                        if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
+                        {
+                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
+                        }
+                    }
+
+                    // also dawnbringer is its own thing for being odd
+                    if (weapon_name_array[i] == "Dawnbringer")
+                    {
+                        temp_max_hit = Math.Floor(magic_lvl_and_pot * (1 + ((temp_magic_dmg + total_magic_dmg_array[i]) / 100))) / 6 - 1;
+                        temp_max_hit = Math.Floor(temp_max_hit);
+                        if ((helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true) && !(amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true))
+                        {
+                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
+                        }
+                    }
+
+                    // why jamflex mage void works differently from range/mage void with the +8???? and its +9???? and style bonus????
+                    if (elite_void == true || normal_void == true)
+                    {
+                        temp_effective_mage_lvl = Math.Floor(true_mage_lvl * 1.45) + style_bonus_magic_array[dps_calc_fix] + 9;
+                    }
+                    else
+                    {
+                        temp_effective_mage_lvl = true_mage_lvl + style_bonus_magic_array[dps_calc_fix] + 9;
+                    }
+                    switch (weapon_name_array[i])
+                    {
+                        case "Tumeken's shadow":
+                            temp_max_attack_roll = Math.Floor(temp_effective_mage_lvl * ((total_magic_atk_array[i] * shadow_multiplier) + 64) * gear_bonus_range_and_mage);
+                            break;
+                        default:
+                            temp_max_attack_roll = Math.Floor(temp_effective_mage_lvl * (total_magic_atk_array[i] + 64) * gear_bonus_range_and_mage);
+                            break;
+                    }
+                    temp_max_attack_roll = Math.Floor(temp_max_attack_roll);
+
+                    if (weapon_name_array[i] == "Dawnbringer")
+                    {
+                        if (monster_name != "Verzik vitur P1" || monster_name == "Combat dummy")
+                        {
+                            temp_max_hit = 0;
+                            temp_max_attack_roll = 0;
+                        }
+                    }
+                    break;
+                case "cast":
+                case "cast accurate":
+                case "cast longrange":
+                    // welcome to magical spaghetti zone 2.0 electric boogaloo
+
+                    Dispatcher.Invoke(spells_max_hit);
+                    temp_magic_dmg = 0;
+                    if (amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true)
+                    {
+                        temp_magic_dmg += 20;
+                    }
+                    if (elite_void == true)
+                    {
+                        temp_magic_dmg += 2.5;
+                    }
+
+                    if (total_magic_dmg_array[i] != 0 || temp_magic_dmg != 0)
+                    {
+                        // slayer helmet wont affect as either salve or void is overwriting it
+                        if ((amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true) || elite_void == true)
+                        {
+                            temp_max_hit = Math.Floor(spell_base_max_hit * (1 + ((total_magic_dmg_array[i] + temp_magic_dmg) / 100)));
+                        }
+                        // salve and void check just happened, so only counting for slayer helmet
+                        else
+                        {
+                            temp_max_hit = Math.Floor(spell_base_max_hit * (1 + ((total_magic_dmg_array[i] + temp_magic_dmg) / 100)));
+                            if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
+                            {
+                                temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
+                            }
+                        }
+
+
+                    }
+                    else
+                    {
+                        // cant have salve nor void as both temp_mage_dmg and mage_dmg are 0
+                        // can have slayer helmet bonus still tho
+                        temp_max_hit = spell_base_max_hit;
+                        if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
+                        {
+                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
+                        }
+                    }
+
+                    if (off_hand_name_array[i] == "Tome of fire" && spell_name_array[i].Contains("Fire") == true)
+                    {
+                        temp_max_hit = Math.Floor(temp_max_hit * 1.5);
+                    }
+
+                    if (off_hand_name_array[i] == "Tome of water" && spell_name_array[i].Contains("Water") == true)
+                    {
+                        temp_max_hit = Math.Floor(temp_max_hit * 1.2);
+                    }
+
+                    // why jamflex mage void works differently from range/mage void with the +9???? also why mage is +9??? and style bonus????
+                    if (elite_void == true || normal_void == true)
+                    {
+                        temp_effective_mage_lvl = Math.Floor(true_mage_lvl * 1.45) + style_bonus_magic_array[dps_calc_fix] + 9;
+                    }
+                    else
+                    {
+                        temp_effective_mage_lvl = true_mage_lvl + style_bonus_magic_array[dps_calc_fix] + 9;
+                    }
+
+                    temp_max_attack_roll = Math.Floor(temp_effective_mage_lvl * (total_magic_atk_array[i] + 64) * gear_bonus_range_and_mage);
+
+                    if (off_hand_name_array[i] == "Tome of water" && (spell_name_array[i].Contains("Water") == true || spell_book_array[i] == "Curse"))
+                    {
+                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.2);
+                    }
+
+                    if (weapon_name_array[i] == "Ice ancient sceptre" && spell_name_array[i].Contains("Ice") == true)
+                    {
+                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.1);
+                    }
+                    break;
+                case "slash":
+                case "stab":
+                case "crush":
+                    if (weapon_name_array[i] == "Soulreaper axe")
+                    {
+                        temp_effective_strength_lvl = Math.Floor(strength_lvl_and_pot * (strenght_prayer + 0.06 * soulreaper_axe_stack)) + style_bonus_str_array[dps_calc_fix] + 8;
+                    }
+                    else
+                    {
+                        temp_effective_strength_lvl = true_strength_lvl + style_bonus_str_array[dps_calc_fix] + 8;
+                    }
+
+                    if (elite_void == true || normal_void == true)
+                    {
+                        temp_effective_strength_lvl = Math.Floor(temp_effective_strength_lvl * 1.1);
+                    }
+                    temp_max_hit = Math.Floor(((temp_effective_strength_lvl * (total_melee_str_array[i] + 64)) + 320) / 640);
+                    temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_melee);
+
+                    temp_effective_attack_lvl = true_attack_lvl + style_bonus_attack_array[dps_calc_fix] + 8;
+                    if (elite_void == true || normal_void == true)
+                    {
+                        temp_effective_attack_lvl = Math.Floor(temp_effective_attack_lvl * 1.1);
+                    }
+
+                    if (temp_weapon_type == "stab")
+                    {
+                        temp_max_attack_roll = temp_effective_attack_lvl * (total_stab_atk_array[i] + 64);
+                        temp_max_attack_roll = (temp_max_attack_roll * gear_bonus_melee);
+                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll);
+
+                    }
+                    else if (temp_weapon_type == "slash")
+                    {
+                        temp_max_attack_roll = temp_effective_attack_lvl * (total_slash_atk_array[i] + 64);
+                        temp_max_attack_roll = (temp_max_attack_roll * gear_bonus_melee);
+                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll);
+                    }
+                    else if (temp_weapon_type == "crush")
+                    {
+                        double inq_bonus = 1;
+                        if (helmet_name_array[i] == "Inquisitor's great helm")
+                        {
+                            inq_bonus = inq_bonus + 0.005;
+                        }
+                        if (body_name_array[i] == "Inquisitor's hauberk")
+                        {
+                            inq_bonus = inq_bonus + 0.005;
+                        }
+                        if (legs_name_array[i] == "Inquisitor's plateskirt")
+                        {
+                            inq_bonus = inq_bonus + 0.005;
+                        }
+                        if (helmet_name_array[i] == "Inquisitor's great helm" && body_name_array[i] == "Inquisitor's hauberk" && legs_name_array[i] == "Inquisitor's plateskirt")
+                        {
+                            inq_bonus = inq_bonus + 0.01;
+                        }
+                        temp_max_attack_roll = temp_effective_attack_lvl * (total_crush_atk_array[i] + 64);
+                        temp_max_attack_roll = (temp_max_attack_roll * gear_bonus_melee);
+                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll);
+
+                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll * inq_bonus);
+                        temp_max_hit = Math.Floor(temp_max_hit * inq_bonus);
+                    }
+
+                    if (weapon_name_array[i] == "Arclight" && monster_is_demon == true)
+                    {
+                        if (monster_name == "Duke Sucellus")
+                        {
+                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.49);
+                            temp_max_hit = Math.Floor(temp_max_hit * 1.49);
+                        }
+                        else
+                        {
+                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.7);
+                            temp_max_hit = Math.Floor(temp_max_hit * 1.7);
+                        }
+                    }
+
+                    if (weapon_name_array[i].Contains("Keris") == true && monster_is_kaplhite == true)
+                    {
+                        temp_max_hit = Math.Floor(temp_max_hit * 1.33);
+                        if (weapon_name_array[i] == "Keris partisan of breaching")
+                        {
+                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.33);
+                        }
+                    }
+
+                    if (weapon_name_array[i] == "Keris partisan of the sun" && monster_is_in_toa == true)
+                    {
+                        if (monster_reduced_hp_lvl < monster_boosted_hp_lvl * 0.25)
+                        {
+                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.25);
+                        }
+
+                    }
+                    break;
+            }
+
+            if (red_keris_spec_checkbox.IsChecked == true && monster_is_in_toa == true)
+            {
+                temp_max_hit = Math.Floor(temp_max_hit * 1.25);
+            }
+
+            if (monster_is_in_wilderness == true && (weapon_name_array[i] == "Craw's bow" || weapon_name_array[i] == "Webweaver bow" || weapon_name_array[i] == "Thammaron's sceptre" || weapon_name_array[i] == "Accursed sceptre" || weapon_name_array[i] == "Viggora's chainmace" || weapon_name_array[i] == "Ursine chainmace"))
+            {
+                temp_max_hit = Math.Floor(temp_max_hit * 1.5);
+                temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.5);
+            }
+
+            if ((monster_name == "Totem" || monster_name == "Phosani's Totem") && (temp_weapon_type == "magic" || temp_weapon_stance == "spell"))
+            {
+                temp_max_hit = temp_max_hit * 2;
+            }
+
+            if (monster_name == "Wardens Core")
+            {
+                temp_max_hit = temp_max_hit * 5;
+            }
+
+            if (temp_max_hit < 0)
+            {
+                temp_max_hit = 0;
+            }
+        }
+        private void mage_staff_max_hit()
+        {
+            int i = 0;
+            if (gear_set_2 == true)
+            {
+                i = 1;
+            }
+            switch (weapon_name_array[i])
+            {
+                case "Tumeken's shadow":
+                    staff_base_max_hit = magic_lvl_and_pot / 3 + 1;
+                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    if (staff_base_max_hit < 1)
+                    {
+                        staff_base_max_hit = 1;
+                    }
+                    break;
+                case "Sanguinesti staff":
+                    staff_base_max_hit = magic_lvl_and_pot / 3 - 1;
+                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    if (staff_base_max_hit < 5)
+                    {
+                        staff_base_max_hit = 5;
+                    }
+                    break;
+                case "Trident of the swamp":
+                    staff_base_max_hit = magic_lvl_and_pot / 3 - 2;
+                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    if (staff_base_max_hit < 4)
+                    {
+                        staff_base_max_hit = 4;
+                    }
+                    break;
+                case "Trident of the seas":
+                    staff_base_max_hit = magic_lvl_and_pot / 3 - 5;
+                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    if (staff_base_max_hit < 1)
+                    {
+                        staff_base_max_hit = 1;
+                    }
+                    break;
+                case "Accursed sceptre":
+                    staff_base_max_hit = magic_lvl_and_pot / 3 - 6;
+                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    if (staff_base_max_hit < 0)
+                    {
+                        staff_base_max_hit = 0;
+                    }
+                    break;
+                case "Thammaron's sceptre":
+                    staff_base_max_hit = magic_lvl_and_pot / 3 - 8;
+                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    if (staff_base_max_hit < 0)
+                    {
+                        staff_base_max_hit = 0;
+                    }
+                    break;
+                    // dawnbringer is calced in max_hits_and_attack_rolls method
+            }
+
+        }
+        private void spells_max_hit()
+        {
+            int i = 0;
+            if (gear_set_2 == true)
+            {
+                i = 1;
+            }
+            switch (spell_name_array[i])
+            {
+                case "None":
+                    spell_base_max_hit = 0;
+                    break;
+                case "Fire Surge":
+                    spell_base_max_hit = 24;
+                    break;
+                case "Earth Surge":
+                    spell_base_max_hit = 23;
+                    break;
+                case "Water Surge":
+                    spell_base_max_hit = 22;
+                    break;
+                case "Wind Surge":
+                    spell_base_max_hit = 21;
+                    break;
+                case "Fire Wave":
+                    spell_base_max_hit = 20;
+                    break;
+                case "Earth Wave":
+                    spell_base_max_hit = 19;
+                    break;
+                case "Water Wave":
+                    spell_base_max_hit = 18;
+                    break;
+                case "Wind Wave":
+                    spell_base_max_hit = 17;
+                    break;
+                case "Fire Blast":
+                    spell_base_max_hit = 16;
+                    break;
+                case "Earth Blast":
+                    spell_base_max_hit = 15;
+                    break;
+                case "Water Blast":
+                    spell_base_max_hit = 14;
+                    break;
+                case "Wind Blast":
+                    spell_base_max_hit = 13;
+                    break;
+                case "Fire Bolt":
+                    spell_base_max_hit = 12;
+                    break;
+                case "Earth Bolt":
+                    spell_base_max_hit = 11;
+                    break;
+                case "Water Bolt":
+                    spell_base_max_hit = 10;
+                    break;
+                case "Wind Bolt":
+                    spell_base_max_hit = 9;
+                    break;
+                case "Fire Strike":
+                    spell_base_max_hit = 8;
+                    break;
+                case "Earth Strike":
+                    spell_base_max_hit = 6;
+                    break;
+                case "Water Strike":
+                    spell_base_max_hit = 4;
+                    break;
+                case "Wind Strike":
+                    spell_base_max_hit = 2;
+                    break;
+                case "Crumble Undead":
+                    spell_base_max_hit = 15;
+                    break;
+                case "God Spell":
+                    spell_base_max_hit = 20;
+                    break;
+                case "God Spell (charged)":
+                    spell_base_max_hit = 30;
+                    break;
+                case "Iban Blast":
+                    spell_base_max_hit = 25;
+                    break;
+                case "Magic Dart":
+                    spell_base_max_hit = (Math.Floor((magic_lvl_and_pot + magic_lvl_and_pot_modifier) / 10) + 10);
+                    break;
+                // curses
+                case "Snare":
+                    spell_base_max_hit = 3;
+                    break;
+                case "Entangle":
+                    spell_base_max_hit = 5;
+                    break;
+                // ancients
+                case "Ice Barrage":
+                    spell_base_max_hit = 30;
+                    break;
+                case "Blood Barrage":
+                    spell_base_max_hit = 29;
+                    break;
+                case "Shadow Brrage":
+                    spell_base_max_hit = 28;
+                    break;
+                case "Smoke Barrage":
+                    spell_base_max_hit = 27;
+                    break;
+                case "Ice Blitz":
+                    spell_base_max_hit = 26;
+                    break;
+                case "Blood Blitz":
+                    spell_base_max_hit = 25;
+                    break;
+                case "Shadow Blitz":
+                    spell_base_max_hit = 24;
+                    break;
+                case "Smoke Blitz":
+                    spell_base_max_hit = 23;
+                    break;
+                case "Ice Burst":
+                    spell_base_max_hit = 22;
+                    break;
+                case "Blood Burst":
+                    spell_base_max_hit = 21;
+                    break;
+                case "Shadow Burst":
+                    spell_base_max_hit = 18;
+                    break;
+                case "Smoke Burst":
+                    spell_base_max_hit = 17;
+                    break;
+                case "Ice Rush":
+                    spell_base_max_hit = 16;
+                    break;
+                case "Blood Rush":
+                    spell_base_max_hit = 15;
+                    break;
+                case "Shadow Rush":
+                    spell_base_max_hit = 14;
+                    break;
+                case "Smoke Rush":
+                    spell_base_max_hit = 13;
+                    break;
+                // arceus
+                case "Dark Demonbane":
+                    spell_base_max_hit = 30;
+                    break;
+                case "Superior Demonbane":
+                    spell_base_max_hit = 23;
+                    break;
+                case "Inferior Demonbane":
+                    spell_base_max_hit = 16;
+                    break;
+                case "Undead Grasp":
+                    spell_base_max_hit = 24;
+                    break;
+                case "Skeletal Grasp":
+                    spell_base_max_hit = 17;
+                    break;
+                case "Ghostly Grasp":
+                    spell_base_max_hit = 12;
+                    break;
+                default:
+                    spell_base_max_hit = 0;
+                    break;
+
+            }
+        }
+        private void hit_chance()
+        {
+            int i = 0;
+            if (gear_set_2 == true)
+            {
+                i = 1;
+            }
+
+            bool ignores_accuracy = false;
+            if (monster_name == "Wardens Core" && (temp_weapon_type == "stab" || temp_weapon_type == "slash" || temp_weapon_type == "crush"))
+            {
+                ignores_accuracy = true;
+            }
+            if (monster_name == "Verzik vitur P1" && weapon_name_array[i] == "Dawnbringer" && spell_name_array[i] == "none")
+            {
+                ignores_accuracy = true;
+            }
+
+            if ((monster_name == "Totem" || monster_name == "Phosani's Totem") && (temp_weapon_type == "magic" || temp_weapon_stance == "spell"))
+            {
+                ignores_accuracy = true;
+            }
+
+            if (monster_name == "Sleepwalker")
+            {
+                ignores_accuracy = true;
+            }
+
+            if (temp_weapon_type == "crush" && (monster_name == "Phosani's Husk (range)" || monster_name == "Phosani's Husk (mage)" || monster_name == "Phosani's Parasite (weakened)"))
+            {
+                ignores_accuracy = true;
+            }
+
+            if (monster_name == "Nylocas Matomenos (maiden)" && spell_name_array[i].Contains("Ice") == true && temp_max_attack_roll > 21999)
+            {
+                ignores_accuracy = true;
+            }
+
+            if (monster_name == "Zombified Spawn" && spell_name_array[i] == "Crumble Undead" && total_magic_atk_array[i] > -64)
+            {
+                ignores_accuracy = true;
+            }
+
+            if (ignores_accuracy == false)
+            {
+                if (temp_max_attack_roll > 0)
+                {
+                    switch (temp_weapon_type)
+                    {
+                        case "stab":
+                            temp_monster_max_defensive_roll = monster_max_defensive_roll_stab;
+                            break;
+                        case "slash":
+                            temp_monster_max_defensive_roll = monster_max_defensive_roll_slash;
+                            break;
+                        case "crush":
+                            temp_monster_max_defensive_roll = monster_max_defensive_roll_crush;
+                            break;
+                        case "ranged":
+                            temp_monster_max_defensive_roll = monster_max_defensive_roll_range;
+                            break;
+                        case "magic":
+                            if (ring_name_array[i] == "Brimstone ring")
+                            {
+                                temp_monster_max_defensive_roll = Math.Floor(monster_max_defensive_roll_magic * 0.975);
+                            }
+                            else
+                            {
+                                temp_monster_max_defensive_roll = monster_max_defensive_roll_magic;
+                            }
+                            break;
+                        case "cast":
+                        case "cast accurate":
+                        case "cast longrange":
+                            if (ring_name_array[i] == "Brimstone ring")
+                            {
+                                temp_monster_max_defensive_roll = Math.Floor(monster_max_defensive_roll_magic * 0.975);
+                            }
+                            else
+                            {
+                                temp_monster_max_defensive_roll = monster_max_defensive_roll_magic;
+                            }
+                            break;
+                    }
+                    if (spell_name_array[i] != "none")
+                    {
+                        switch (weapon_name_array[i])
+                        {
+                            case "Osmumten's fang":
+                                if (monster_is_in_toa == true)
+                                {
+                                    if (temp_max_attack_roll > temp_monster_max_defensive_roll)
+                                    {
+                                        temp_hit_chance = 1 - (temp_monster_max_defensive_roll + 2) / (2 * (temp_max_attack_roll + 1));
+                                        temp_hit_chance = temp_hit_chance + (1 - temp_hit_chance) * temp_hit_chance;
+                                    }
+                                    else
+                                    {
+                                        temp_hit_chance = temp_max_attack_roll / (2 * (temp_monster_max_defensive_roll + 1));
+                                        temp_hit_chance = temp_hit_chance + (1 - temp_hit_chance) * temp_hit_chance;
+                                    }
+                                }
+                                else
+                                {
+                                    if (temp_max_attack_roll > temp_monster_max_defensive_roll)
+                                    {
+                                        temp_hit_chance = (1 - (((temp_monster_max_defensive_roll + 2) * (2 * temp_monster_max_defensive_roll + 3)) / (6 * Math.Pow(temp_max_attack_roll + 1, 2))));
+                                    }
+                                    else
+                                    {
+                                        temp_hit_chance = (temp_max_attack_roll * (4 * temp_max_attack_roll + 5)) / (6 * (temp_max_attack_roll + 1) * (temp_monster_max_defensive_roll + 1));
+                                    }
+                                }
+                                break;
+                            default:
+                                if (temp_max_attack_roll > temp_monster_max_defensive_roll)
+                                {
+                                    temp_hit_chance = 1 - (temp_monster_max_defensive_roll + 2) / (2 * (temp_max_attack_roll + 1));
+                                }
+                                else
+                                {
+                                    temp_hit_chance = temp_max_attack_roll / (2 * (temp_monster_max_defensive_roll + 1));
+                                }
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        if (temp_max_attack_roll > temp_monster_max_defensive_roll)
+                        {
+                            temp_hit_chance = 1 - (temp_monster_max_defensive_roll + 2) / (2 * (temp_max_attack_roll + 1));
+                        }
+                        else
+                        {
+                            temp_hit_chance = temp_max_attack_roll / (2 * (temp_monster_max_defensive_roll + 1));
+                        }
+                    }
+
+                }
+                else
+                {
+                    temp_hit_chance = 0;
+                }
+            }
+            else
+            {
+                temp_hit_chance = 1;
+            }
+
+
+
+        }
+        private void bolt_proc_effects()
+        {
+            int i = 0;
+            if (gear_set_2 == true)
+            {
+                i = 1;
+            }
+
+            bolt_proc_kandarin_bonus = 1;
+            if (kandarin_diary_checkbox.IsChecked == true)
+            {
+                bolt_proc_kandarin_bonus = 1.1;
+            }
+            switch (ammo_name_array[i])
+            {
+                case "Ruby dragon bolts (e)":
+                case "Ruby bolts (e)": // bypass accuracy roll
+                    bolt_proc_chance = 6 * bolt_proc_kandarin_bonus;
+                    bolt_proc_chance_acb_spec = bolt_proc_chance + 6;
+                    if (weapon_name_array[i] == "Zaryte crossbow")
+                    {
+                        bolt_proc_dmg = Math.Floor(monster_reduced_hp_lvl * 0.22);
+                        bolt_proc_dmg = Math.Min(bolt_proc_dmg, 110);
+                    }
+                    else
+                    {
+                        bolt_proc_dmg = Math.Floor(monster_reduced_hp_lvl * 0.2);
+                        bolt_proc_dmg = Math.Min(bolt_proc_dmg, 100);
+                    }
+                    break;
+                case "Opal dragon bolts (e)":
+                case "Opal bolts (e)": // bypass accuracy roll
+                    bolt_proc_chance = 5 * bolt_proc_kandarin_bonus;
+                    bolt_proc_chance_acb_spec = bolt_proc_chance + 5;
+                    if (weapon_name_array[i] == "Zaryte crossbow")
+                    {
+                        bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 9);
+                    }
+                    else
+                    {
+                        bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 10);
+                    }
+                    break;
+                case "Dragonstone dragon bolts (e)":
+                case "Dragonstone bolts (e)":
+                    // If the target is immune to dragonfire, the special effect will not activate. maybe someday added
+                    bolt_proc_chance = 6 * bolt_proc_kandarin_bonus;
+                    bolt_proc_chance_acb_spec = bolt_proc_chance + 6;
+                    if (weapon_name_array[i] == "Zaryte crossbow")
+                    {
+                        bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 4.5454545454545454545454545454545);
+                    }
+                    else
+                    {
+                        bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 5);
+                    }
+                    break;
+                case "Pearl dragon bolts (e)":
+                case "Pearl bolts (e)": // bypass accuracy roll
+                    // seems like zcb has no extra bonus??
+                    bolt_proc_chance = 6 * bolt_proc_kandarin_bonus;
+                    bolt_proc_chance_acb_spec = bolt_proc_chance + 6;
+                    bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 20);
+                    // sorry cbad adding "fiery" type
+                    if (monster_name == "King Black Dragon" || monster_name == "Vorkath")
+                    {
+                        bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 15);
+                    }
+                    break;
+                case "Diamond dragon bolts (e)":
+                case "Diamond bolts (e)": // bypass accuracy roll
+                    bolt_proc_chance = 10 * bolt_proc_kandarin_bonus;
+                    bolt_proc_chance_acb_spec = bolt_proc_chance + 10;
+                    if (weapon_name_array[i] == "Zaryte crossbow")
+                    {
+                        bolt_proc_dmg = Math.Floor(temp_max_hit * 1.25);
+                    }
+                    else
+                    {
+                        bolt_proc_dmg = Math.Floor(temp_max_hit * 1.15);
+                    }
+                    break;
+                case "Onyx dragon bolts (e)":
+                case "Onyx bolts (e)":
+                    // undead immune to bonus dmg or just lifesteal??
+                    bolt_proc_chance = 11 * bolt_proc_kandarin_bonus;
+                    bolt_proc_chance_acb_spec = bolt_proc_chance + 11;
+                    if (weapon_name_array[i] == "Zaryte crossbow")
+                    {
+                        bolt_proc_dmg = Math.Floor(temp_max_hit * 1.30);
+                    }
+                    else
+                    {
+                        bolt_proc_dmg = Math.Floor(temp_max_hit * 1.20);
+                    }
+                    break;
+            }
+        }
+        private void immunities_and_resistances()
+        {
+            int i = 0;
+            if (gear_set_2 == true)
+            {
+                i = 1;
+            }
+            // and few damage boosts (guardians and ice demon)
+
+            temp_immune = false;
+
+
+            if (immune_to_melee == true)
+            {
+                if (temp_weapon_type == "stab" || temp_weapon_type == "slash" || temp_weapon_stance == "crush")
+                {
+                    temp_immune = true;
+                }
+            }
+
+            if (immune_to_range == true)
+            {
+                if (temp_weapon_type == "ranged")
+                {
+                    temp_immune = true;
+                }
+            }
+
+            if (immune_to_mage == true)
+            {
+                if (temp_weapon_type == "magic" || temp_weapon_stance == "cast")
+                {
+                    temp_immune = true;
+                }
+            }
+
+
+            // pickaxe
+            if (monster_name == "Guardian")
+            {
+                if (weapon_name_array[i].Contains("Pickaxe") == false)
+                {
+                    temp_immune = true;
+                }
+            }
+
+            // other dmg modifiers
+
+            if (monster_name == "Alchemical Hydra (not weakened)")
+            {
+                temp_max_hit = Math.Floor(temp_max_hit * 0.25);
+            }
+
+            if (monster_name == "Pestilent Bloat (moving)" || monster_name == "Hard mode Pestilent Bloat (moving)")
+            {
+                temp_max_hit = Math.Floor(temp_max_hit * 0.5);
+            }
+
+            if (monster_name == "Vorkath (Quickfire Barrage)")
+            {
+                temp_max_hit = Math.Floor(temp_max_hit * 0.5);
+            }
+
+            if (monster_name == "The Leviathan (Special)" || monster_name == "Awakened Leviathan (Special)")
+            {
+                temp_max_hit = Math.Floor(temp_max_hit * 0.6666666666666);
+            }
+
+            if (monster_name == "Corporeal Beast")
+            {
+                if (temp_weapon_type == "magic" || temp_weapon_stance == "spell")
+                {
+                    // do nothing, janky but works
+                }
+                else if ((weapon_name_array[i].Contains("spear") == true || weapon_name_array[i].Contains("halberd") == true || weapon_name_array[i] == "Osmumten's fang") && temp_weapon_type == "stab")
+                {
+                    // do nothing, janky but works
+                }
+                else
+                {
+                    temp_max_hit = Math.Floor(temp_max_hit * 0.5);
+                }
+            }
+
+            // cox
+            if ((monster_name == "Tekton" || monster_name == "Tekton (enraged)") && (temp_weapon_type == "magic" || temp_weapon_stance == "spell"))
+            {
+                temp_max_hit = Math.Floor(temp_max_hit * 0.2);
+            }
+            if (monster_name == "Ice demon")
+            {
+                if (spell_name_array[i].Contains("Fire") == true)
+                {
+                    temp_max_hit = Math.Floor(temp_max_hit * 1.5);
+                }
+                else
+                {
+                    temp_max_hit = Math.Floor(temp_max_hit * 0.3333333333);
+                }
+            }
+            if (monster_name == "Glowing crystal" && (temp_weapon_type == "magic" || temp_weapon_stance == "spell"))
+            {
+                temp_max_hit = Math.Floor(temp_max_hit * 0.3333333333);
+            }
+            if (monster_name == "Great olm (melee claw)" && (temp_weapon_type == "magic" || temp_weapon_type == "ranged" || temp_weapon_stance == "spell"))
+            {
+                temp_max_hit = Math.Floor(temp_max_hit * 0.3333333333);
+            }
+            if (monster_name == "Great olm (mage claw)" && (temp_weapon_type != "magic" || temp_weapon_stance == "spell"))
+            {
+                temp_max_hit = Math.Floor(temp_max_hit * 0.3333333333);
+            }
+            if (monster_name == "Great olm (head)" && temp_weapon_type != "ranged")
+            {
+                temp_max_hit = Math.Floor(temp_max_hit * 0.3333333333);
+            }
+            if (monster_name == "Guardian" && weapon_name_array[i].Contains("Pickaxe") == true)
+            {
+                if (dragon_picaxe_spec_checkbox.IsChecked == true)
+                {
+                    temp_max_hit = Math.Floor(temp_max_hit * ((50 + mining_lvl + 3 + mining_lvl_req_array[i]) / 150));
+                }
+                else
+                {
+                    temp_max_hit = Math.Floor(temp_max_hit * ((50 + mining_lvl + mining_lvl_req_array[i]) / 150));
+                }
+            }
+            // verzik vitur p1 dmg modifier in average_dmg method
+        }
+        private void average_dmg()
+        {
+            int x = 0;
+            if (gear_set_2 == true)
+            {
+                x = 1;
+            }
+
+            if (monster_name == "Verzik vitur P1" && (weapon_name_array[x] != "Dawnbringer" || temp_weapon_stance == "spell"))
+            {
+                if (weapon_name_array[x] == "Scythe of vitur" && spell_name_array[x] == "None")
+                {
+                    scythe_hitsplat_1 = temp_max_hit;
+                    scythe_hitsplat_2 = Math.Floor(temp_max_hit * 0.5);
+                    scythe_hitsplat_3 = Math.Floor(temp_max_hit * 0.25);
+                    double max_hit_probability = 1 / (scythe_hitsplat_1 + 1);
+                    double throne_max_hit_cap_probability = 0.090909090909090909;
+                    double expected_min = 0;
+                    double var_x;
+
+                    for (int i = 0; i < (scythe_hitsplat_1 + 1); i++)
+                    {
+                        for (int j = 0; j < (11); j++)
+                        {
+                            var_x = Math.Min(i, j);
+                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
+                        }
+
+                    }
+                    temp_avg_dmg_per_attack = expected_min * temp_hit_chance;
+                    expected_min = 0;
+                    max_hit_probability = 1 / (scythe_hitsplat_2 + 1);
+                    for (int i = 0; i < (scythe_hitsplat_2 + 1); i++)
+                    {
+                        for (int j = 0; j < (11); j++)
+                        {
+                            var_x = Math.Min(i, j);
+                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
+                        }
+
+                    }
+                    temp_avg_dmg_per_attack += expected_min * temp_hit_chance;
+                    expected_min = 0;
+                    max_hit_probability = 1 / (scythe_hitsplat_3 + 1);
+                    for (int i = 0; i < (scythe_hitsplat_3 + 1); i++)
+                    {
+                        for (int j = 0; j < (11); j++)
+                        {
+                            var_x = Math.Min(i, j);
+                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
+                        }
+
+                    }
+                    temp_avg_dmg_per_attack += expected_min * temp_hit_chance;
+
+                    if (temp_max_hit > 10)
+                    {
+                        temp_max_hit = 10;
+                    }
+                    if (scythe_hitsplat_1 > 10)
+                    {
+                        scythe_hitsplat_1 = 10;
+                    }
+                    if (scythe_hitsplat_2 > 10)
+                    {
+                        scythe_hitsplat_2 = 10;
+                    }
+                    if (scythe_hitsplat_3 > 10)
+                    {
+                        scythe_hitsplat_3 = 10;
+                    }
+
+
+                }
+                else if (weapon_name_array[x] == "Osmumten's fang" && spell_name_array[x] == "None")
+                {
+                    osmumtens_fang_min_hit = Math.Floor(temp_max_hit * 0.15);
+                    if (special_attack_fix == true)
+                    {
+                        osmumtens_fang_max_hit = temp_max_hit;
+                    }
+                    else
+                    {
+                        osmumtens_fang_max_hit = temp_max_hit - osmumtens_fang_min_hit;
+                    }
+                    double max_hit_probability = 1 / (osmumtens_fang_max_hit - osmumtens_fang_min_hit + 1);
+                    double throne_max_hit_cap_probability = 0.090909090909090909;
+                    double expected_min = 0;
+                    double var_x;
+
+                    for (double i = osmumtens_fang_min_hit; i < (osmumtens_fang_max_hit + 1); i++)
+                    {
+                        for (int j = 0; j < (11); j++)
+                        {
+                            var_x = Math.Min(i, j);
+                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
+                        }
+
+                    }
+                    temp_avg_dmg_per_attack = expected_min * temp_hit_chance;
+                    if (temp_max_hit > 10)
+                    {
+                        temp_max_hit = 10;
+                    }
+                    if (osmumtens_fang_max_hit > 10)
+                    {
+                        osmumtens_fang_max_hit = 10;
+                    }
+                    if (osmumtens_fang_min_hit > 10)
+                    {
+                        osmumtens_fang_min_hit = 10;
+                    }
+                }
+                else
+                {
+                    double max_hit_probability = 1 / (temp_max_hit + 1);
+                    double throne_max_hit_cap;
+                    double expected_min = 0;
+                    double var_x;
+                    if (temp_weapon_type == "magic" || temp_weapon_type == "ranged" || temp_weapon_stance == "spell")
+                    {
+                        throne_max_hit_cap = 3;
+                    }
+                    else
+                    {
+                        throne_max_hit_cap = 10;
+                    }
+                    double throne_max_hit_cap_probability = 1 / (throne_max_hit_cap + 1);
+                    for (int i = 0; i < (temp_max_hit + 1); i++)
+                    {
+                        for (int j = 0; j < (throne_max_hit_cap + 1); j++)
+                        {
+                            var_x = Math.Min(i, j);
+                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
+                        }
+
+                    }
+                    temp_avg_dmg_per_attack = expected_min * temp_hit_chance;
+
+                    if (temp_weapon_type == "magic" || temp_weapon_type == "ranged" || temp_weapon_stance == "spell")
+                    {
+                        if (temp_max_hit > 3)
+                        {
+                            temp_max_hit = 3;
+                        }
+                    }
+                    else
+                    {
+                        if (temp_max_hit > 10)
+                        {
+                            temp_max_hit = 10;
+                        }
+                    }
+
+
+                }
+
+
+            }
+            else
+            {
+                if (weapon_name_array[x] == "Scythe of vitur" && spell_name_array[x] == "None")
+                {
+                    if (monster_size == 1)
+                    {
+                        scythe_hitsplat_1 = temp_max_hit;
+                    }
+                    else if (monster_size == 2)
+                    {
+                        scythe_hitsplat_1 = temp_max_hit;
+                        scythe_hitsplat_2 = Math.Floor(temp_max_hit * 0.5);
+                        temp_max_hit = scythe_hitsplat_1 + scythe_hitsplat_2;
+                    }
+                    else
+                    {
+                        scythe_hitsplat_1 = temp_max_hit;
+                        scythe_hitsplat_2 = Math.Floor(temp_max_hit * 0.5);
+                        scythe_hitsplat_3 = Math.Floor(temp_max_hit * 0.25);
+                        temp_max_hit = scythe_hitsplat_1 + scythe_hitsplat_2 + scythe_hitsplat_3;
+                    }
+                    temp_avg_dmg_per_attack = (temp_max_hit * temp_hit_chance) / 2;
+                }
+                else if (weapon_name_array[x] == "Osmumten's fang" && spell_name_array[x] == "None")
+                {
+                    osmumtens_fang_min_hit = Math.Floor(temp_max_hit * 0.15);
+                    if (special_attack_fix == true)
+                    {
+                        osmumtens_fang_max_hit = temp_max_hit;
+                    }
+                    else
+                    {
+                        osmumtens_fang_max_hit = temp_max_hit - osmumtens_fang_min_hit;
+                    }
+                    if (monster_name == "Wardens Core")
+                    {
+                        temp_max_hit = osmumtens_fang_max_hit;
+                    }
+                    temp_avg_dmg_per_attack = ((osmumtens_fang_min_hit + osmumtens_fang_max_hit) * temp_hit_chance) / 2;
+                }
+                else if (weapon_name_array[x] == "Venator bow")
+                {
+                    temp_avg_dmg_per_attack = (temp_max_hit * temp_hit_chance) / 2;
+                    double temp_max_def_roll;
+                    double temp_temp_hit_chance;
+                    if (venator_1st_bounce_checkbox.IsChecked == true)
+                    {
+                        temp_max_def_roll = (venator_bow_1st_bounce_def_lvl + 9) * (venator_bow_1st_bounce_range_def + 64);
+                        if (temp_max_attack_roll > temp_max_def_roll)
+                        {
+                            temp_temp_hit_chance = 1 - (temp_max_def_roll + 2) / (2 * (temp_max_attack_roll + 1));
+                        }
+                        else
+                        {
+                            temp_temp_hit_chance = temp_max_attack_roll / (2 * (temp_max_def_roll + 1));
+                        }
+
+                        temp_avg_dmg_per_attack += Math.Floor(temp_max_hit / 100.0 * 66) * temp_temp_hit_chance / 2;
+                    }
+                    if (venator_2nd_bounce_checkbox.IsChecked == true)
+                    {
+                        temp_max_def_roll = (venator_bow_2nd_bounce_def_lvl + 9) * (venator_bow_2nd_bounce_range_def + 64);
+                        if (temp_max_attack_roll > temp_max_def_roll)
+                        {
+                            temp_temp_hit_chance = 1 - (temp_max_def_roll + 2) / (2 * (temp_max_attack_roll + 1));
+                        }
+                        else
+                        {
+                            temp_temp_hit_chance = temp_max_attack_roll / (2 * (temp_max_def_roll + 1));
+                        }
+
+                        temp_avg_dmg_per_attack += Math.Floor(temp_max_hit / 100.0 * 66) * temp_temp_hit_chance / 2;
+                    }
+
+                }
+                else if (weapon_name_array[x].Contains("Keris") == true && monster_is_kaplhite == true && spell_name_array[x] == "None")
+                {
+                    temp_avg_dmg_per_attack = ((temp_max_hit + (temp_max_hit * 3 * (1.0 / 51.0))) * temp_hit_chance) / 2;
+                }
+                else
+                {
+                    temp_avg_dmg_per_attack = (temp_max_hit * temp_hit_chance) / 2;
+                }
+
+            }
+
+            // zulrah dmg cap
+            if (monster_name.Contains("Zulrah") == true && temp_max_hit > 50)
+            {
+                double[] zulrah_dmg_dist = new double[Convert.ToInt32(temp_max_hit + 1)];
+                zulrah_dmg_dist[0] = 1 - temp_hit_chance;
+                for (int i = 1; i < temp_max_hit + 1; i++)
+                {
+                    if (i < 51)
+                    {
+                        zulrah_dmg_dist[i] = i * temp_hit_chance;
+                    }
+                    else
+                    {
+                        zulrah_dmg_dist[i] = 47.5 * temp_hit_chance;
+                    }
+                }
+                temp_max_hit = 50;
+                temp_avg_dmg_per_attack = (zulrah_dmg_dist.Sum() / zulrah_dmg_dist.Length);
+            }
+
+            if (weapon_name_array[x].Contains("crossbow") == true && (ammo_name_array[x] == "Ruby dragon bolts (e)" || ammo_name_array[x] == "Ruby bolts (e)"))
+            {
+                temp_avg_dmg_per_attack = temp_max_hit * temp_hit_chance;
+            }
+
+            if (monster_name == "Sleepwalker")
+            {
+                temp_avg_dmg_per_attack = temp_max_hit;
+            }
+
+            if (temp_weapon_type == "crush" && (monster_name == "Phosani's Husk (range)" || monster_name == "Phosani's Husk (mage)" || monster_name == "Phosani's Parasite (weakened)"))
+            {
+                temp_avg_dmg_per_attack = temp_max_hit;
+            }
+
+            if (monster_name == "Wardens Core" && (temp_weapon_type == "stab" || temp_weapon_type == "slash" || temp_weapon_type == "crush"))
+            {
+                temp_avg_dmg_per_attack = temp_max_hit;
+            }
+
+            if (monster_name == "Zombified Spawn" && spell_name_array[x] == "Crumble Undead" && total_magic_atk_array[x] > -64)
+            {
+                temp_max_hit = monster_reduced_hp_lvl;
+                temp_avg_dmg_per_attack = temp_max_hit;
+            }
+        }
+        private void overkill()
+        {
+            // plan is to rewrite this someday when i know how to make it in a lesser spaghetti mess
+            // some odd magic happens here, dont ask. Copied over from Bitterkoekje Dps calcs.
+            // where overkill was made by math/code wizard called Inevitably
+            // https://docs.google.com/spreadsheets/d/1wBXIlvAmqoQpu5u9XBfD4B0PW7D8owyO_CnRDiTHBKQ/edit#gid=158500257
+            // also has some minor problems, like verzik p1 dmg cap messes overkill calcs.
+            // and some big problem if max hit needs to be rounded. Mainly from bolt proc special dmg calcs
+
+            int x = 0;
+            if (gear_set_2 == true)
+            {
+                x = 1;
+            }
+
+
+            if (temp_avg_dmg_per_attack != temp_max_hit)
+            {
+                double accuracy_var = temp_hit_chance * (1 - (1 / (temp_max_hit + 1)));
+                int temp_temp_max_hit = Convert.ToInt32(temp_max_hit);
+                if (thrall_dps_checkbox.IsChecked == true && thrall_name != "None")
+                {
+                    temp_temp_max_hit = Convert.ToInt32(temp_temp_max_hit + (thrall_max_hit * 4 / temp_weapon_attack_speed));
+                }
+                int max_hit_var = Convert.ToInt32(temp_temp_max_hit);
+                int monster_hp_var = Convert.ToInt32(monster_reduced_hp_lvl);
+                int scythe_1 = Convert.ToInt32(scythe_hitsplat_1);
+                int scythe_2 = Convert.ToInt32(scythe_hitsplat_2);
+                int scythe_3 = Convert.ToInt32(scythe_hitsplat_3);
+
+                if (monster_reduced_hp_lvl > 0 || monster_name != "None")
+                {
+                    if (temp_weapon_stance != "spell")
+                    {
+                        switch (weapon_name_array[x])
+                        {
+                            case "Scythe of vitur":
+                                if (thrall_dps_checkbox.IsChecked == true && thrall_name != "None")
+                                {
+                                    scythe_1 = scythe_1 + Convert.ToInt32((thrall_max_hit * 4 / temp_weapon_attack_speed));
+                                }
+                                double acc = temp_hit_chance;
+                                int array_size;
+                                if (monster_size == 1)
+                                {
+                                    array_size = scythe_1 + 1;
+                                }
+                                else if (monster_size == 2)
+                                {
+                                    array_size = scythe_1 + scythe_2 + 1;
+                                }
+                                else
+                                {
+                                    array_size = scythe_1 + scythe_2 + scythe_3 + 1;
+                                }
+
+
+                                double[] dist = new double[array_size];
+                                int[] maxdist = { scythe_1 + 1, scythe_2 + 1, scythe_3 + 1 };
+
+                                // monster size 3
+                                if (monster_size >= 3)
+                                {
+                                    int denom = 0;
+                                    for (int i = 0; i < maxdist[0]; i++)
+                                    {
+                                        for (int j = 0; j < maxdist[1]; j++)
+                                        {
+                                            for (int k = 0; k < maxdist[2]; k++)
+                                            {
+                                                int hit = i + j + k;
+                                                double numer = Math.Pow(acc, 3);
+                                                denom = (scythe_1 + 1) * (scythe_2 + 1) * (scythe_3 + 1);
+                                                dist[hit] += (numer / denom);
+                                            }
+                                        }
+                                    }
+                                    int[][] combs = new int[][]
+                                    {
+                                    new int[] { maxdist[0], maxdist[1] },
+                                    new int[] { maxdist[0], maxdist[2] },
+                                    new int[] { maxdist[1], maxdist[2] }
+                                    };
+                                    for (int i = 0; i < combs.Length; i++)
+                                    {
+                                        for (int j = 0; j < combs[i][0]; j++)
+                                        {
+                                            for (int k = 0; k < combs[i][1]; k++)
+                                            {
+                                                dist[j + k] += Math.Pow(acc, 2) * (1 - acc) / (combs[i][0] * combs[i][1]);
+                                            }
+                                        }
+                                    }
+
+                                    for (int i = 0; i < maxdist.Length; i++)
+                                    {
+                                        for (int j = 0; j < maxdist[i]; j++)
+                                        {
+                                            dist[j] += acc * Math.Pow(1 - acc, 2) / maxdist[i];
+                                        }
+                                    }
+                                    dist[0] += Math.Pow(1 - acc, 3);
+                                }
+
+                                // monster size 2
+                                if (monster_size == 2)
+                                {
+                                    for (int i = 0; i < maxdist[0]; i++)
+                                    {
+                                        for (int j = 0; j < maxdist[1]; j++)
+                                        {
+                                            dist[i + j] += Math.Pow(acc, 2) / (maxdist[0] * maxdist[1]);
+                                        }
+                                    }
+
+                                    for (int i = 0; i < (maxdist.Length - 1); i++)
+                                    {
+                                        for (int j = 0; j < maxdist[i]; j++)
+                                        {
+                                            dist[j] += acc * (1 - acc) / maxdist[i];
+                                        }
+                                    }
+                                    dist[0] += Math.Pow(1 - acc, 2);
+                                }
+
+                                // monster size 1
+                                if (monster_size == 1)
+                                {
+                                    for (int i = 0; i < maxdist[0]; i++)
+                                    {
+                                        dist[i] = acc / maxdist[0];
+                                    }
+                                    dist[0] += (1 - acc);
+                                }
+
+                                List<double> expectation = new List<double> { 0 };
+                                double sum = dist.Sum();
+
+                                for (int i = 1; i < (monster_reduced_hp_lvl + 1); i++)
+                                {
+                                    double temp = 0;
+                                    for (int j = 0; j < dist.Length; j++)
+                                    {
+                                        if (j != 0)
+                                        {
+                                            temp += dist[j] * expectation[Math.Max(expectation.Count - j, 0)];
+                                        }
+                                    }
+                                    temp /= sum;
+                                    expectation.Add((1 + temp) / (1 - dist[0]));
+                                }
+
+                                temp_avg_hits_to_kill = expectation.Last();
+                                break;
+                            case "Osmumten's fang":
+                                if (osmumtens_fang_min_hit > 0)
+                                {
+                                    int fang_max = Convert.ToInt32(osmumtens_fang_max_hit);
+                                    int fang_min = Convert.ToInt32(osmumtens_fang_min_hit);
+                                    if (thrall_dps_checkbox.IsChecked == true && thrall_name != "None")
+                                    {
+                                        fang_max = fang_max + Convert.ToInt32((thrall_max_hit * 4 / temp_weapon_attack_speed));
+                                    }
+                                    double[] dist_fang = new double[fang_max + 1];
+                                    double acc_fang = temp_hit_chance;
+                                    dist_fang[0] = 1 - temp_hit_chance;
+                                    for (int i = 1; i <= fang_max; i++)
+                                    {
+                                        if (i < fang_min)
+                                        {
+                                            dist_fang[i] = 0;
+                                        }
+                                        else
+                                        {
+                                            dist_fang[i] = acc_fang / (fang_max - fang_min + 1);
+                                        }
+                                    }
+
+                                    List<double> expectation_fang = new List<double> { 0 };
+                                    double sum_fang = dist_fang.Sum();
+
+                                    for (int i = 1; i < (monster_reduced_hp_lvl + 1); i++)
+                                    {
+                                        double temp = 0;
+                                        for (int j = 0; j < dist_fang.Length; j++)
+                                        {
+                                            if (j != 0)
+                                            {
+                                                temp += dist_fang[j] * expectation_fang[Math.Max(expectation_fang.Count - j, 0)];
+                                            }
+                                        }
+                                        temp /= sum_fang;
+                                        expectation_fang.Add((1 + temp) / (1 - dist_fang[0]));
+                                    }
+
+                                    temp_avg_hits_to_kill = expectation_fang.Last();
+                                }
+                                else
+                                {
+                                    double[] expected_hits_fang = new double[monster_hp_var + 1];
+                                    double sum_var_fang = 0;
+                                    int fang_max = Convert.ToInt32(osmumtens_fang_max_hit);
+                                    if (thrall_dps_checkbox.IsChecked == true && thrall_name != "None")
+                                    {
+                                        fang_max = fang_max + Convert.ToInt32((thrall_max_hit * 4 / temp_weapon_attack_speed));
+                                    }
+                                    for (int i = 1; i < (monster_reduced_hp_lvl + 1); i++)
+                                    {
+                                        if (i - fang_max - 1 >= 0)
+                                        {
+                                            sum_var_fang -= expected_hits_fang[i - fang_max - 1];
+                                        }
+                                        sum_var_fang += expected_hits_fang[i - 1];
+                                        expected_hits_fang[i] = 1 / accuracy_var + sum_var_fang / fang_max;
+                                    }
+
+                                    temp_avg_hits_to_kill = expected_hits_fang[monster_hp_var];
+                                }
+                                break;
+                            default:
+                                double[] expected_hits = new double[monster_hp_var + 1];
+                                double sum_var = 0;
+                                for (int i = 1; i < (monster_reduced_hp_lvl + 1); i++)
+                                {
+                                    if (i - temp_temp_max_hit - 1 >= 0)
+                                    {
+                                        sum_var -= expected_hits[i - max_hit_var - 1];
+                                    }
+                                    sum_var += expected_hits[i - 1];
+                                    expected_hits[i] = 1 / accuracy_var + sum_var / temp_temp_max_hit;
+                                }
+
+                                temp_avg_hits_to_kill = expected_hits[monster_hp_var];
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        double[] expected_hits = new double[monster_hp_var + 1];
+                        double sum_var = 0;
+                        for (int i = 1; i < (monster_reduced_hp_lvl + 1); i++)
+                        {
+                            if (i - temp_temp_max_hit - 1 >= 0)
+                            {
+                                sum_var -= expected_hits[i - max_hit_var - 1];
+                            }
+                            sum_var += expected_hits[i - 1];
+                            expected_hits[i] = 1 / accuracy_var + sum_var / temp_temp_max_hit;
+                        }
+
+                        temp_avg_hits_to_kill = expected_hits[monster_hp_var];
+                    }
+
+                }
+                else
+                {
+                    temp_avg_hits_to_kill = 0;
+                }
+            }
+            else
+            {
+                temp_avg_hits_to_kill = Math.Ceiling(monster_reduced_hp_lvl / (temp_avg_dmg_per_attack * temp_hit_chance));
+            }
+        }
+        private void thrall_dps()
+        {
+            temp_max_hit = thrall_max_hit;
+            temp_weapon_type = thrall_type;
+            Dispatcher.Invoke(immunities_and_resistances);
+            thrall_immune = temp_immune;
+            // random fixes
+            if (monster_name == "Guardian")
+            {
+                thrall_immune = true;
+                temp_max_hit = thrall_max_hit;
+            }
+            if (monster_name == "Ice demon")
+            {
+                temp_max_hit = Math.Floor(thrall_max_hit / 3);
+            }
+
+            if ((monster_name == "Totem" || monster_name == "Phosani's Totem") && thrall_type == "magic")
+            {
+                temp_max_hit = temp_max_hit * 2;
+            }
+
+
+            thrall_max_hit = Math.Round(temp_max_hit, 7);
+
+            switch (monster_name)
+            {
+                case "Verzik vitur P1":
+                    double max_hit_probability = 1 / (temp_max_hit + 1);
+                    double throne_max_hit_cap;
+                    double expected_min = 0;
+                    double var_x;
+                    if (temp_weapon_type == "magic" || temp_weapon_type == "ranged")
+                    {
+                        throne_max_hit_cap = 3;
+                    }
+                    else
+                    {
+                        throne_max_hit_cap = 10;
+                    }
+                    double throne_max_hit_cap_probability = 1 / (throne_max_hit_cap + 1);
+                    for (int i = 0; i < (temp_max_hit + 1); i++)
+                    {
+                        for (int j = 0; j < (throne_max_hit_cap + 1); j++)
+                        {
+                            var_x = Math.Min(i, j);
+                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
+                        }
+
+                    }
+                    thrall_avg_dmg = Math.Round(expected_min, 7);
+                    break;
+                default:
+                    thrall_avg_dmg = Math.Round(temp_max_hit / 2, 7);
+                    break;
+            }
+            if (thrall_immune == true)
+            {
+                thrall_max_hit = 0;
+                thrall_avg_dmg = 0;
+                thrall_damage_per_second = 0;
+            }
+            else
+            {
+                thrall_damage_per_second = Math.Round(thrall_avg_dmg / 2.4, 7);
             }
         }
         private void special_attack_modifier()
@@ -4117,7 +5294,7 @@ namespace Osrs_dps_calculator
                             temp_effective_mage_lvl = true_mage_lvl + 9;
                         }
 
-                        temp_max_attack_roll = Math.Floor((temp_effective_mage_lvl * (total_magic_atk_array[x] + 64) * gear_bonus_range_and_mage));
+                        temp_max_attack_roll = Math.Floor(temp_effective_mage_lvl * (total_magic_atk_array[x] + 64) * gear_bonus_range_and_mage);
                         if (weapon_name_array[x] == "Volatile nightmare staff")
                         {
                             temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.5);
@@ -4590,72 +5767,1227 @@ namespace Osrs_dps_calculator
 
 
         }
-        private void thrall_dps()
+        private void monster_max_hit_and_atk_roll()
         {
-            temp_max_hit = thrall_max_hit;
-            temp_weapon_type = thrall_type;
-            Dispatcher.Invoke(immunities_and_resistances);
-            thrall_immune = temp_immune;
-            // random fixes
-            if (monster_name == "Guardian")
+            // max hits and attack rolls
+            // set 1
+            monster_max_hit_array[0] = Math.Floor((((monster_reduced_str_lvl + 9) * (monster_aggressive_str + 64)) + 320) / 640.0);
+            monster_max_hit_array[1] = monster_max_hit_array[0];
+            monster_max_hit_array[2] = monster_max_hit_array[0];
+            monster_max_hit_array[3] = Math.Floor(((monster_boosted_magic_lvl + 9) * (monster_aggressive_magic_dmg + 64) / 640.0) + 0.5); // gets max hit from "base" mage lvl before reductions
+            monster_max_hit_array[4] = Math.Floor(((monster_reduced_range_lvl + 9) * (monster_aggressive_range_str + 64) / 640.0) + 0.5);
+
+            monster_attack_roll_array[0] = (monster_reduced_atk_lvl + 9) * (monster_aggressive_atk + 64);
+            monster_attack_roll_array[1] = monster_attack_roll_array[0];
+            monster_attack_roll_array[2] = monster_attack_roll_array[0];
+            monster_attack_roll_array[4] = (monster_reduced_magic_lvl + 9) * (monster_aggressive_magic + 64);
+            monster_attack_roll_array[3] = (monster_reduced_range_lvl + 9) * (monster_aggressive_range + 64);
+
+            // set 2
+            monster_max_hit_array[5] = monster_max_hit_array[0];
+            monster_max_hit_array[6] = monster_max_hit_array[0];
+            monster_max_hit_array[7] = monster_max_hit_array[0];
+            monster_max_hit_array[8] = monster_max_hit_array[3];
+            monster_max_hit_array[9] = monster_max_hit_array[4];
+
+            monster_attack_roll_array[5] = monster_attack_roll_array[0];
+            monster_attack_roll_array[6] = monster_attack_roll_array[0];
+            monster_attack_roll_array[7] = monster_attack_roll_array[0];
+            monster_attack_roll_array[8] = monster_attack_roll_array[3];
+            monster_attack_roll_array[9] = monster_attack_roll_array[4];
+
+            // toa scaling
+            if (monster_is_in_toa == true)
             {
-                thrall_immune = true;
-                temp_max_hit = thrall_max_hit;
+                double max_hit_modifier = 1 + toa_raid_lvl * 0.004;
+                double attack_roll_modifier = 1 + toa_raid_lvl * 0.004;
+
+                if (toa_path_lvl > 0)
+                {
+                    max_hit_modifier = max_hit_modifier * (1.03 + 0.05 * toa_path_lvl);
+                }
+
+                for (int i = 0; i < 10; i++)
+                {
+                    monster_max_hit_array[i] = Math.Floor(monster_max_hit_array[i] * Math.Min(max_hit_modifier, 2.5));
+                    monster_attack_roll_array[i] = Math.Floor(monster_attack_roll_array[i] * attack_roll_modifier);
+                }
             }
-            if (monster_name == "Ice demon")
+
+        }
+        private void monster_hit_chance_and_avg_dmg()
+        {
+
+            // get style bonus from set comparison data
+            if (compare_styles_set_1_combobox.SelectedItem == null)
             {
-                temp_max_hit = Math.Floor(thrall_max_hit / 3);
+                compare_styles_set_1_combobox.SelectedIndex = 0;
+            }
+            if (compare_styles_set_2_combobox.SelectedItem == null)
+            {
+                compare_styles_set_2_combobox.SelectedIndex = 0;
             }
 
-            if ((monster_name == "Totem" || monster_name == "Phosani's Totem") && thrall_type == "magic")
+            int style_bonus_set_1 = compare_styles_set_1_combobox.SelectedIndex;
+            int style_bonus_set_2 = compare_styles_set_2_combobox.SelectedIndex + 4;
+
+            // recycle special attack selection back to normal attack selection index
+            if (style_bonus_set_1 >= 4)
             {
-                temp_max_hit = temp_max_hit * 2;
+                style_bonus_set_1 -= 4;
+            }
+            if (style_bonus_set_2 >= 8)
+            {
+                style_bonus_set_2 -= 4;
+            }
+
+            int style_bonus = style_bonus_set_1;
+            int k = 0;
+            if (show_set_2 == true)
+            {
+                style_bonus = style_bonus_set_2;
+                k = 5;
             }
 
 
-            thrall_max_hit = Math.Round(temp_max_hit, 7);
+            // player defence roll and justiciar armour set dmg reduction 
 
-            switch (monster_name)
+            int j = 0;
+            for (int i = k; i < 5 + k; i++)
             {
-                case "Verzik vitur P1":
-                    double max_hit_probability = 1 / (temp_max_hit + 1);
-                    double throne_max_hit_cap;
-                    double expected_min = 0;
-                    double var_x;
-                    if (temp_weapon_type == "magic" || temp_weapon_type == "ranged")
+                if (i == 5)
+                {
+                    j = 1;
+                }
+
+                switch (i)
+                {
+                    case 0:
+                    case 5:
+                        player_def_roll_array[i] = (true_defence_lvl + style_bonus_def_array[style_bonus] + 8) * (total_stab_def_array[j] + 64);
+                        if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
+                        {
+                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_stab_def_array[j] / 3000.0, 0));
+                        }
+                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
+                        break;
+                    case 1:
+                    case 6:
+                        player_def_roll_array[i] = (true_defence_lvl + style_bonus_def_array[style_bonus] + 8 ) * (total_slash_def_array[j] + 64);
+                        if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
+                        {
+                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_slash_def_array[j] / 3000.0, 0));
+                        }
+                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
+                        break;
+                    case 2:
+                    case 7:
+                        player_def_roll_array[i] = (true_defence_lvl + style_bonus_def_array[style_bonus] + 8) * (total_crush_def_array[j] + 64);
+                        if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
+                        {
+                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_crush_def_array[j] / 3000.0, 0));
+                        }
+                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
+                        break;
+                    case 3:
+                    case 8:
+                        player_def_roll_array[i] = Math.Floor(true_defence_lvl * 0.30 + true_mage_lvl * 0.70 + style_bonus_def_array[style_bonus] + 8) * (total_magic_def_array[j] + 64);
+                        if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
+                        {
+                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_magic_def_array[j] / 3000.0, 0));
+                        }
+                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * mage_prayer_effectiviness / 100.0);
+                        break;
+                    case 4:
+                    case 9:
+                        player_def_roll_array[i] = (true_defence_lvl + style_bonus_def_array[style_bonus] + 8) * (total_range_def_array[j] + 64);
+                        if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
+                        {
+                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_range_def_array[j] / 3000.0, 0));
+                        }
+                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * range_prayer_effectiviness / 100.0);
+                        break;
+                }
+            }
+
+            // hit chance and avg dmg for all styles
+
+            for (int i = k; i < 5 + k; i++)
+            {
+
+                if (monster_attack_roll_array[i] > player_def_roll_array[i])
+                {
+                    monster_hit_chance_array[i] = Math.Round(1 - (player_def_roll_array[i] + 2) / (2 * (monster_attack_roll_array[i] + 1)), 5);
+                }
+                else
+                {
+                    monster_hit_chance_array[i] = Math.Round(monster_attack_roll_array[i] / (2 * (player_def_roll_array[i] + 1)), 5);
+                }
+
+                monster_avg_dmg_array[i] = Math.Round((monster_max_hit_array[i] * monster_hit_chance_array[i]) / 2.0, 5);
+            }
+
+            // update textboxes
+
+            for (int i = k; i < 5 + k; i++)
+            {
+                TextBox textBox = (TextBox)FindName($"monster_max_hit_{i - k + 1}_textbox");
+                textBox.Text = "" + monster_max_hit_array[i];
+                textBox = (TextBox)FindName($"monster_attack_roll_{i - k + 1}_textbox");
+                textBox.Text = "" + monster_attack_roll_array[i] + " || " + player_def_roll_array[i];
+                textBox = (TextBox)FindName($"monster_hit_chance_{i - k + 1}_textbox");
+                textBox.Text = "" + monster_hit_chance_array[i] * 100 + "%";
+                textBox = (TextBox)FindName($"monster_avg_dmg_{i - k + 1}_textbox");
+                textBox.Text = "" + monster_avg_dmg_array[i];
+            }
+        }
+        private void UpdateUI()
+        {
+            string tooltip_content = "";
+            ToolTip customToolTip = new ToolTip
+            {
+                Content = tooltip_content,
+                Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+            };
+
+            // multiple calcs is false, so update ui
+            if (multiple_calcs == false)
+            {
+                presets_set_1_combobox.Text = "Presets";
+                presets_potions_combobox.Text = "Presets";
+                presets_prayers_combobox.Text = "Presets";
+
+                for (int i = 1; i < 3; i++)
+                {
+                    int j = 0;
+
+                    if (i == 2)
                     {
-                        throne_max_hit_cap = 3;
+                        j = 11;
+                    }
+
+
+                    ComboBox ComboBox = (ComboBox)FindName($"weapon_set_{i}_combobox");
+                    ComboBox.Text = weapon_name_array[i - 1];
+                    tooltip_content = weapon_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 4] + " || Magic " + magic_atk_array[j + 4] + "\n Slash " + slash_atk_array[j + 4] + " || Magic dmg " + magic_dmg_array[j + 4] + "\n Crush " + crush_atk_array[j + 4] + " || Range " + range_atk_array[j + 4] + "\n Str " + melee_str_array[j + 4] + " || Range str " + range_str_array[j + 4];
+                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 4] + " || Magic " + magic_def_array[j + 4] + "\n Slash " + slash_def_array[j + 4] + " || Range " + range_def_array[j + 4] + "\n Crush " + crush_def_array[j + 4] + " || Prayer " + prayer_bonus_array[j + 4];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+                    ComboBox = (ComboBox)FindName($"spell_set_{i}_combobox");
+                    ComboBox.Text = spell_name_array[i - 1];
+                    tooltip_content = spell_name_array[i - 1];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+                    ComboBox = (ComboBox)FindName($"ammo_set_{i}_combobox");
+                    ComboBox.Text = ammo_name_array[i - 1];
+                    tooltip_content = ammo_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 3] + " || Magic " + magic_atk_array[j + 3] + "\n Slash " + slash_atk_array[j + 3] + " || Magic dmg " + magic_dmg_array[j + 3] + "\n Crush " + crush_atk_array[j + 3] + " || Range " + range_atk_array[j + 3] + "\n Str " + melee_str_array[j + 3] + " || Range str " + range_str_array[j + 3];
+                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 3] + " || Magic " + magic_def_array[j + 3] + "\n Slash " + slash_def_array[j + 3] + " || Range " + range_def_array[j + 3] + "\n Crush " + crush_def_array[j + 3] + " || Prayer " + prayer_bonus_array[j + 3];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+                    ComboBox = (ComboBox)FindName($"helmet_set_{i}_combobox");
+                    ComboBox.Text = helmet_name_array[i - 1];
+                    tooltip_content = helmet_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 0] + " || Magic " + magic_atk_array[j + 0] + "\n Slash " + slash_atk_array[j + 0] + " || Magic dmg " + magic_dmg_array[j + 0] + "\n Crush " + crush_atk_array[j + 0] + " || Range " + range_atk_array[j + 0] + "\n Str " + melee_str_array[j + 0] + " || Range str " + range_str_array[j + 0];
+                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 0] + " || Magic " + magic_def_array[j + 0] + "\n Slash " + slash_def_array[j + 0] + " || Range " + range_def_array[j + 0] + "\n Crush " + crush_def_array[j + 0] + " || Prayer " + prayer_bonus_array[j + 0];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+                    ComboBox = (ComboBox)FindName($"cape_set_{i}_combobox");
+                    ComboBox.Text = cape_name_array[i - 1];
+                    tooltip_content = cape_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 1] + " || Magic " + magic_atk_array[j + 1] + "\n Slash " + slash_atk_array[j + 1] + " || Magic dmg " + magic_dmg_array[j + 1] + "\n Crush " + crush_atk_array[j + 1] + " || Range " + range_atk_array[j + 1] + "\n Str " + melee_str_array[j + 1] + " || Range str " + range_str_array[j + 1];
+                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 1] + " || Magic " + magic_def_array[j + 1] + "\n Slash " + slash_def_array[j + 1] + " || Range " + range_def_array[j + 1] + "\n Crush " + crush_def_array[j + 1] + " || Prayer " + prayer_bonus_array[j + 1];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+                    ComboBox = (ComboBox)FindName($"necklace_set_{i}_combobox");
+                    ComboBox.Text = amulet_name_array[i - 1];
+                    tooltip_content = amulet_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 2] + " || Magic " + magic_atk_array[j + 2] + "\n Slash " + slash_atk_array[j + 2] + " || Magic dmg " + magic_dmg_array[j + 2] + "\n Crush " + crush_atk_array[j + 2] + " || Range " + range_atk_array[j + 2] + "\n Str " + melee_str_array[j + 2] + " || Range str " + range_str_array[j + 2];
+                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 2] + " || Magic " + magic_def_array[j + 2] + "\n Slash " + slash_def_array[j + 2] + " || Range " + range_def_array[j + 2] + "\n Crush " + crush_def_array[j + 2] + " || Prayer " + prayer_bonus_array[j + 2];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+                    ComboBox = (ComboBox)FindName($"body_set_{i}_combobox");
+                    ComboBox.Text = body_name_array[i - 1];
+                    tooltip_content = body_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 5] + " || Magic " + magic_atk_array[j + 5] + "\n Slash " + slash_atk_array[j + 5] + " || Magic dmg " + magic_dmg_array[j + 5] + "\n Crush " + crush_atk_array[j + 5] + " || Range " + range_atk_array[j + 5] + "\n Str " + melee_str_array[j + 5] + " || Range str " + range_str_array[j + 5];
+                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 5] + " || Magic " + magic_def_array[j + 5] + "\n Slash " + slash_def_array[j + 5] + " || Range " + range_def_array[j + 5] + "\n Crush " + crush_def_array[j + 5] + " || Prayer " + prayer_bonus_array[j + 5];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+                    ComboBox = (ComboBox)FindName($"legs_set_{i}_combobox");
+                    ComboBox.Text = legs_name_array[i - 1];
+                    tooltip_content = legs_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 7] + " || Magic " + magic_atk_array[j + 7] + "\n Slash " + slash_atk_array[j + 7] + " || Magic dmg " + magic_dmg_array[j + 7] + "\n Crush " + crush_atk_array[j + 7] + " || Range " + range_atk_array[j + 7] + "\n Str " + melee_str_array[j + 7] + " || Range str " + range_str_array[j + 7];
+                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 7] + " || Magic " + magic_def_array[j + 7] + "\n Slash " + slash_def_array[j + 7] + " || Range " + range_def_array[j + 7] + "\n Crush " + crush_def_array[j + 7] + " || Prayer " + prayer_bonus_array[j + 7];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+                    ComboBox = (ComboBox)FindName($"off_hand_set_{i}_combobox");
+                    ComboBox.Text = off_hand_name_array[i - 1];
+                    tooltip_content = off_hand_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 6] + " || Magic " + magic_atk_array[j + 6] + "\n Slash " + slash_atk_array[j + 6] + " || Magic dmg " + magic_dmg_array[j + 6] + "\n Crush " + crush_atk_array[j + 6] + " || Range " + range_atk_array[j + 6] + "\n Str " + melee_str_array[j + 6] + " || Range str " + range_str_array[j + 6];
+                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 6] + " || Magic " + magic_def_array[j + 6] + "\n Slash " + slash_def_array[j + 6] + " || Range " + range_def_array[j + 6] + "\n Crush " + crush_def_array[j + 6] + " || Prayer " + prayer_bonus_array[j + 6];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+                    ComboBox = (ComboBox)FindName($"gloves_set_{i}_combobox");
+                    ComboBox.Text = gloves_name_array[i - 1];
+                    tooltip_content = gloves_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 8] + " || Magic " + magic_atk_array[j + 8] + "\n Slash " + slash_atk_array[j + 8] + " || Magic dmg " + magic_dmg_array[j + 8] + "\n Crush " + crush_atk_array[j + 8] + " || Range " + range_atk_array[j + 8] + "\n Str " + melee_str_array[j + 8] + " || Range str " + range_str_array[j + 8];
+                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 8] + " || Magic " + magic_def_array[j + 8] + "\n Slash " + slash_def_array[j + 8] + " || Range " + range_def_array[j + 8] + "\n Crush " + crush_def_array[j + 8] + " || Prayer " + prayer_bonus_array[j + 8];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+                    ComboBox = (ComboBox)FindName($"boots_set_{i}_combobox");
+                    ComboBox.Text = boots_name_array[i - 1];
+                    tooltip_content = boots_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 9] + " || Magic " + magic_atk_array[j + 9] + "\n Slash " + slash_atk_array[j + 9] + " || Magic dmg " + magic_dmg_array[j + 9] + "\n Crush " + crush_atk_array[j + 9] + " || Range " + range_atk_array[j + 9] + "\n Str " + melee_str_array[j + 9] + " || Range str " + range_str_array[j + 9];
+                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 9] + " || Magic " + magic_def_array[j + 9] + "\n Slash " + slash_def_array[j + 9] + " || Range " + range_def_array[j + 9] + "\n Crush " + crush_def_array[j + 9] + " || Prayer " + prayer_bonus_array[j + 9];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+                    ComboBox = (ComboBox)FindName($"ring_set_{i}_combobox");
+                    ComboBox.Text = ring_name_array[i - 1];
+                    tooltip_content = ring_name_array[i - 1] + "\n Offensive stats" + "\n Stab " + stab_atk_array[j + 10] + " || Magic " + magic_atk_array[j + 10] + "\n Slash " + slash_atk_array[j + 10] + " || Magic dmg " + magic_dmg_array[j + 10] + "\n Crush " + crush_atk_array[j + 10] + " || Range " + range_atk_array[j + 10] + "\n Str " + melee_str_array[j + 10] + " || Range str " + range_str_array[j + 10];
+                    tooltip_content += "\n Defensive stats" + "\n Stab " + stab_def_array[j + 10] + " || Magic " + magic_def_array[j + 10] + "\n Slash " + slash_def_array[j + 10] + " || Range " + range_def_array[j + 10] + "\n Crush " + crush_def_array[j + 10] + " || Prayer " + prayer_bonus_array[j + 10];
+                    customToolTip = new ToolTip
+                    {
+                        Content = tooltip_content,
+                        Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                    };
+                    ComboBox.ToolTip = customToolTip;
+
+                    TextBox TextBox = (TextBox)FindName($"stab_atk_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(stab_atk_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"stab_atk_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_stab_atk_array[i - 1]);
+                    TextBox = (TextBox)FindName($"stab_def_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(stab_def_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"stab_def_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_stab_def_array[i - 1]);
+
+                    TextBox = (TextBox)FindName($"slash_atk_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(slash_atk_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"slash_atk_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_slash_atk_array[i - 1]);
+                    TextBox = (TextBox)FindName($"slash_def_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(slash_def_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"slash_def_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_slash_def_array[i - 1]);
+
+                    TextBox = (TextBox)FindName($"crush_atk_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(crush_atk_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"crush_atk_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_crush_atk_array[i - 1]);
+                    TextBox = (TextBox)FindName($"crush_def_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(crush_def_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"crush_def_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_crush_def_array[i - 1]);
+
+                    TextBox = (TextBox)FindName($"magic_atk_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(magic_atk_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"magic_atk_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_magic_atk_array[i - 1]);
+                    TextBox = (TextBox)FindName($"magic_def_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(magic_def_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"magic_def_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_magic_def_array[i - 1]);
+
+                    TextBox = (TextBox)FindName($"range_atk_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(range_atk_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"range_atk_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_range_atk_array[i - 1]);
+                    TextBox = (TextBox)FindName($"range_def_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(range_def_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"range_def_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_range_def_array[i - 1]);
+
+                    TextBox = (TextBox)FindName($"str_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(melee_str_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"str_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_melee_str_array[i - 1]);
+
+                    TextBox = (TextBox)FindName($"range_str_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(range_str_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"range_str_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_range_str_array[i - 1]);
+
+                    TextBox = (TextBox)FindName($"magic_dmg_{i}_modifier_textbox");
+                    TextBox.Text = Convert.ToString(magic_dmg_modifier_array[i - 1]);
+                    TextBox = (TextBox)FindName($"magic_dmg_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_magic_dmg_array[i - 1]);
+
+                    TextBox = (TextBox)FindName($"weapon_attack_speed_{i}_textbox");
+                    TextBox.Text = Convert.ToString(weapon_atk_speed_array[i - 1]);
+                    TextBox = (TextBox)FindName($"custom_weapon_atk_speed_{i}_textbox");
+                    TextBox.Text = Convert.ToString(custom_attack_speed_array[i - 1]);
+
+                    TextBox = (TextBox)FindName($"prayer_bonus_{i}_textbox");
+                    TextBox.Text = Convert.ToString(total_prayer_bonus_array[i - 1]);
+                }
+
+                attack_potions_combobox.Text = atk_pot_name;
+                customToolTip = new ToolTip
+                {
+                    Content = atk_pot_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                attack_potions_combobox.ToolTip = customToolTip;
+
+                strength_potions_combobox.Text = str_pot_name;
+                customToolTip = new ToolTip
+                {
+                    Content = str_pot_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                strength_potions_combobox.ToolTip = customToolTip;
+
+                defence_potions_combobox.Text = def_pot_name;
+                customToolTip = new ToolTip
+                {
+                    Content = def_pot_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                defence_potions_combobox.ToolTip = customToolTip;
+
+                magic_potions_combobox.Text = magic_pot_name;
+                customToolTip = new ToolTip
+                {
+                    Content = magic_pot_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                magic_potions_combobox.ToolTip = customToolTip;
+
+                range_potions_combobox.Text = range_pot_name;
+                customToolTip = new ToolTip
+                {
+                    Content = range_pot_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                range_potions_combobox.ToolTip = customToolTip;
+
+                attack_prayer_combobox.Text = atk_prayer_name;
+                customToolTip = new ToolTip
+                {
+                    Content = atk_prayer_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                attack_prayer_combobox.ToolTip = customToolTip;
+
+                strength_prayer_combobox.Text = str_prayer_name;
+                customToolTip = new ToolTip
+                {
+                    Content = str_prayer_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                strength_prayer_combobox.ToolTip = customToolTip;
+
+                defence_prayer_combobox.Text = def_prayer_name;
+                customToolTip = new ToolTip
+                {
+                    Content = def_prayer_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                defence_prayer_combobox.ToolTip = customToolTip;
+
+                magic_prayer_combobox.Text = magic_prayer_name;
+                customToolTip = new ToolTip
+                {
+                    Content = magic_prayer_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                magic_prayer_combobox.ToolTip = customToolTip;
+
+                range_prayer_combobox.Text = range_prayer_name;
+                customToolTip = new ToolTip
+                {
+                    Content = range_prayer_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                range_prayer_combobox.ToolTip = customToolTip;
+
+                monsters_combobox.Text = monster_name;
+                customToolTip = new ToolTip
+                {
+                    Content = monster_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                monsters_combobox.ToolTip = customToolTip;
+
+                thralls_combobox.Text = thrall_name;
+                customToolTip = new ToolTip
+                {
+                    Content = thrall_name,
+                    Template = FindResource("CustomTooltipTemplate") as ControlTemplate
+                };
+                thralls_combobox.ToolTip = customToolTip;
+
+                distance_to_monster_textbox.Text = "" + distance_to_monster;
+
+                // displaying loadout stats for
+                attack_lvl_textbox.Text = "" + attack_lvl;
+                strength_lvl_textbox.Text = "" + strength_lvl;
+                defence_lvl_textbox.Text = "" + defence_lvl;
+                magic_lvl_textbox.Text = "" + magic_lvl;
+                range_lvl_textbox.Text = "" + range_lvl;
+                hp_lvl_textbox.Text = "" + hp_lvl;
+                prayer_lvl_textbox.Text = "" + prayer_lvl;
+                mining_lvl_textbox.Text = "" + mining_lvl;
+
+                attack_lvl_and_pot_modifier_textbox.Text = "" + attack_lvl_and_pot_modifier;
+                strength_lvl_and_pot_modifier_textbox.Text = "" + strength_lvl_and_pot_modifier;
+                defence_lvl_and_pot_modifier_textbox.Text = "" + defence_lvl_and_pot_modifier;
+                magic_lvl_and_pot_modifier_textbox.Text = "" + magic_lvl_and_pot_modifier;
+                range_lvl_and_pot_modifier_textbox.Text = "" + range_lvl_and_pot_modifier;
+                hp_remaining_textbox.Text = "" + hp_remaining;
+                prayer_remaining_textbox.Text = "" + prayer_remaining;
+
+                attack_lvl_and_pot_textbox.Text = "" + attack_lvl_and_pot + "/" + attack_lvl;
+                strength_lvl_and_pot_textbox.Text = "" + strength_lvl_and_pot + "/" + strength_lvl;
+                defence_lvl_and_pot_textbox.Text = "" + defence_lvl_and_pot + "/" + defence_lvl;
+                magic_lvl_and_pot_textbox.Text = "" + magic_lvl_and_pot + "/" + magic_lvl;
+                range_lvl_and_pot_textbox.Text = "" + range_lvl_and_pot + "/" + range_lvl;
+                hp_remaining_and_lvl_textbox.Text = "" + hp_remaining + "/" + hp_lvl;
+                prayer_remaining_and_lvl_textbox.Text = "" + prayer_remaining + "/" + prayer_lvl;
+
+                true_attack_lvl_textbox.Text = "" + true_attack_lvl;
+                true_str_lvl_textbox.Text = "" + true_strength_lvl;
+                true_defence_lvl_textbox.Text = "" + true_defence_lvl;
+                true_magic_lvl_textbox.Text = "" + true_mage_lvl;
+                true_range_lvl_textbox.Text = "" + true_range_lvl;
+                true_range_str_textbox.Text = "" + true_range_str;
+
+                combat_lvl_textbox.Text = "" + combat_lvl;
+
+                soulreaper_axe_stack_textbox.Text = "" + soulreaper_axe_stack;
+                venator_bow_1st_bounce_def_lvl_textbox.Text = "" + venator_bow_1st_bounce_def_lvl;
+                venator_bow_1st_bounce_range_def_textbox.Text = "" + venator_bow_1st_bounce_range_def;
+                venator_bow_2nd_bounce_def_lvl_textbox.Text = "" + venator_bow_2nd_bounce_def_lvl;
+                venator_bow_2nd_bounce_range_def_textbox.Text = "" + venator_bow_2nd_bounce_range_def;
+
+                // monster stats
+                if (monster_name == "Phosani's Totem" || monster_name == "Totem")
+                {
+                    monster_atk_lvl_textbox.Text = "?? " + monster_reduced_atk_lvl + "/" + monster_boosted_atk_lvl + " ??";
+                    monster_str_lvl_textbox.Text = "?? " + monster_reduced_str_lvl + "/" + monster_boosted_str_lvl + " ??";
+                    monster_def_lvl_textbox.Text = "?? " + monster_reduced_def_lvl + "/" + monster_boosted_def_lvl + " ??";
+                    monster_magic_lvl_textbox.Text = "?? " + monster_reduced_magic_lvl + "/" + monster_boosted_magic_lvl + " ??";
+                    monster_range_lvl_textbox.Text = "?? " + monster_reduced_range_lvl + "/" + monster_boosted_range_lvl + " ??";
+                    monster_hp_lvl_textbox.Text = "" + monster_reduced_hp_lvl + "/" + monster_boosted_hp_lvl;
+
+                    monster_stab_def_textbox.Text = "?? " + monster_defensive_stab + " ??";
+                    monster_slash_def_textbox.Text = "?? " + monster_defensive_slash + " ??";
+                    monster_crush_def_textbox.Text = "?? " + monster_defensive_crush + " ??";
+                    monster_magic_def_textbox.Text = "?? " + monster_defensive_magic + " ??";
+                    monster_range_def_textbox.Text = "?? " + monster_defensive_range + " ??";
+
+                    max_defence_roll_stab_textbox.Text = "?? " + monster_max_defensive_roll_stab + " ??";
+                    max_defence_roll_slash_textbox.Text = "?? " + monster_max_defensive_roll_slash + " ??";
+                    max_defence_roll_crush_textbox.Text = "?? " + monster_max_defensive_roll_crush + " ??";
+                    max_defence_roll_magic_textbox.Text = "?? " + monster_max_defensive_roll_magic + " ??";
+                    max_defence_roll_range_textbox.Text = "?? " + monster_max_defensive_roll_range + " ??";
+                }
+                else
+                {
+                    monster_atk_lvl_textbox.Text = "" + monster_reduced_atk_lvl + "/" + monster_boosted_atk_lvl;
+                    monster_str_lvl_textbox.Text = "" + monster_reduced_str_lvl + "/" + monster_boosted_str_lvl;
+                    monster_def_lvl_textbox.Text = "" + monster_reduced_def_lvl + "/" + monster_boosted_def_lvl;
+                    monster_magic_lvl_textbox.Text = "" + monster_reduced_magic_lvl + "/" + monster_boosted_magic_lvl;
+                    monster_range_lvl_textbox.Text = "" + monster_reduced_range_lvl + "/" + monster_boosted_range_lvl;
+                    monster_hp_lvl_textbox.Text = "" + monster_reduced_hp_lvl + "/" + monster_boosted_hp_lvl;
+
+                    monster_stab_def_textbox.Text = "" + monster_defensive_stab;
+                    monster_slash_def_textbox.Text = "" + monster_defensive_slash;
+                    monster_crush_def_textbox.Text = "" + monster_defensive_crush;
+                    monster_magic_def_textbox.Text = "" + monster_defensive_magic;
+                    monster_range_def_textbox.Text = "" + monster_defensive_range;
+
+                    max_defence_roll_stab_textbox.Text = "" + monster_max_defensive_roll_stab;
+                    max_defence_roll_slash_textbox.Text = "" + monster_max_defensive_roll_slash;
+                    max_defence_roll_crush_textbox.Text = "" + monster_max_defensive_roll_crush;
+                    max_defence_roll_magic_textbox.Text = "" + monster_max_defensive_roll_magic;
+                    max_defence_roll_range_textbox.Text = "" + monster_max_defensive_roll_range;
+
+                }
+
+                monster_aggressive_atk_textbox.Text = "" + monster_aggressive_atk;
+                monster_aggressive_str_textbox.Text = "" + monster_aggressive_str;
+                monster_aggressive_mage_textbox.Text = "" + monster_aggressive_magic;
+                monster_aggressive_mage_dmg_textbox.Text = "" + monster_aggressive_magic_dmg;
+                monster_aggressive_range_textbox.Text = "" + monster_aggressive_range;
+                monster_aggressive_range_str_textbox.Text = "" + monster_aggressive_range_str;
+
+                if (thrall_type == "crush")
+                {
+                    thrall_type = "melee";
+                }
+
+                if (thrall_immune == true && thrall_name != "None")
+                {
+                    thrall_combat_style_textbox.Text = "IMMUNE " + thrall_type;
+                }
+                else
+                {
+                    thrall_combat_style_textbox.Text = "" + thrall_type;
+                }
+                thrall_max_hit_textbox.Text = "Max hit " + thrall_max_hit;
+                thrall_avg_dmg_textbox.Text = "Avg dmg " + thrall_avg_dmg;
+                thrall_dps_textbox.Text = "DPS " + thrall_damage_per_second;
+
+                // multiple cals stuff
+                multiple_calcs_iterations.Text = "Loadouts " + multiple_dps_loadouts_combobox.Items.Count + " | Monsters " + multiple_dps_monster_name_combobox.Items.Count + " | Iterations " + multiple_dps_loadouts_combobox.Items.Count * multiple_dps_monster_name_combobox.Items.Count;
+            }
+
+            // info boxes
+
+            temp_combat_style_textbox_list.Clear();
+            temp_max_hit_textbox_list.Clear();
+            temp_max_attack_roll_textbox_list.Clear();
+            temp_hit_chance_textbox_list.Clear();
+            temp_avg_dmg_textbox_list.Clear();
+            temp_dps_textbox_list.Clear();
+            temp_avg_dmg_overkill_textbox_list.Clear();
+            temp_dps_overkill_textbox_list.Clear();
+            temp_avg_hits_to_kill_textbox_list.Clear();
+            temp_avg_time_to_kill_textbox_list.Clear();
+            temp_extra_info_textbox_list.Clear();
+
+
+            // writing down the stats
+
+            // if multi calc, dont do set 2 check
+            int set_2 = 1;
+            if (multiple_calcs == false)
+            {
+                set_2 = 2;
+            }
+
+            for (int y = 0; y < set_2; y++)
+            {
+                // normal attacks
+                for (int i = 0; i < 4; i++)
+                {
+                    if (weapon_stance_array[i + (y * 4)] != "none" && weapon_type_array[i + (y * 4)] != "none")
+                    {
+                        if (is_immune_array[y] == true)
+                        {
+                            temp_combat_style_textbox_list.Add("IMMUNE " + weapon_stance_array[i + (y * 4)] + " " + weapon_type_array[i + (y * 4)]);
+                        }
+                        else
+                        {
+                            temp_combat_style_textbox_list.Add(weapon_stance_array[i + (y * 4)] + " " + weapon_type_array[i + (y * 4)]);
+                        }
+
+                        if (weapon_stance_array[i + (y * 4)] != "spell")
+                        {
+                            switch (weapon_name_array[y])
+                            {
+                                case "Scythe of vitur":
+                                    if (monster_size == 1)
+                                    {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
+                                    }
+                                    else if (monster_size == 2)
+                                    {
+                                        temp_extra_info_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") " + scythe_hitsplat_1_array[i + (y * 4)] + " | " + scythe_hitsplat_2_array[i + (y * 4)]);
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
+                                    }
+                                    else
+                                    {
+                                        temp_extra_info_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") " + scythe_hitsplat_1_array[i + (y * 4)] + " | " + scythe_hitsplat_2_array[i + (y * 4)] + " | " + scythe_hitsplat_3_array[i + (y * 4)]);
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
+                                    }
+                                    break;
+                                case "Osmumten's fang":
+                                    temp_extra_info_textbox_list.Add("Max hit " + osmumtens_fang_max_hit_array[i + (y * 4)] + " Min hit " + osmumtens_fang_min_hit_array[i + (y * 4)]);
+                                    temp_max_hit_textbox_list.Add("" + osmumtens_fang_max_hit_array[i + (y * 4)]);
+                                    break;
+                                case "Keris":
+                                case "Keris partisan":
+                                case "Keris partisan of breaching":
+                                case "Keris partisan of corruption":
+                                case "Keris partisan of the sun":
+                                    if (monster_is_kaplhite == true)
+                                    {
+                                        temp_extra_info_textbox_list.Add("Crit (" + max_hit_list[i + (y * 8)] * 3 + ") " + max_hit_list[i + (y * 8)]);
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
+                                    }
+                                    else
+                                    {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
+                                    }
+                                    break;
+                                case "Dark bow":
+                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + (y * 8)] + ") | " + max_hit_list[i + (y * 8)] / 2 + " | " + max_hit_list[i + (y * 8)] / 2);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
+                                    break;
+                                default:
+                                    if (weapon_name_array[y].Contains("crossbow") == true && ammo_name_array[y].Contains("bolts (e)") == true)
+                                    {
+                                        temp_extra_info_textbox_list.Add("" + bolt_normal_dmg_array[i + (y * 4)] + "(" + bolt_proc_dmg_array[i + (y * 4)] + " Chance " + bolt_proc_chance_array[i + (y * 4)] + " %)");
+                                        temp_max_hit_textbox_list.Add("" + bolt_normal_dmg_array[i + (y * 4)]);
+                                    }
+                                    else
+                                    {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
+                                    }
+                                    break;
+
+                            }
+                        }
+                        else
+                        {
+                            temp_extra_info_textbox_list.Add("Nothing special");
+                            temp_max_hit_textbox_list.Add("" + max_hit_list[i + (y * 8)]);
+                        }
+                        temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + (y * 8)]);
+                        temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + (y * 8)]);
+                        temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + (y * 8)]);
+                        temp_dps_textbox_list.Add("" + dps_list[i + (y * 8)]);
+                        temp_avg_dmg_overkill_textbox_list.Add("" + overkill_avg_dmg_per_attack_list[i + (y * 8)]);
+                        temp_dps_overkill_textbox_list.Add("" + overkill_dps_list[i + (y * 8)]);
+                        temp_avg_hits_to_kill_textbox_list.Add("" + avg_hits_to_kill_list[i + (y * 8)]);
+                        temp_avg_time_to_kill_textbox_list.Add("" + time_to_kill_list[i + (y * 8)]);
                     }
                     else
                     {
-                        throne_max_hit_cap = 10;
+                        temp_combat_style_textbox_list.Add("No style");
+                        temp_extra_info_textbox_list.Add("Nothing special");
+                        temp_max_hit_textbox_list.Add("0");
+                        temp_max_attack_roll_textbox_list.Add("0");
+                        temp_hit_chance_textbox_list.Add("0");
+                        temp_avg_dmg_textbox_list.Add("0");
+                        temp_dps_textbox_list.Add("0");
+                        temp_avg_dmg_overkill_textbox_list.Add("0");
+                        temp_dps_overkill_textbox_list.Add("0");
+                        temp_avg_hits_to_kill_textbox_list.Add("0");
+                        temp_avg_time_to_kill_textbox_list.Add("0");
                     }
-                    double throne_max_hit_cap_probability = 1 / (throne_max_hit_cap + 1);
-                    for (int i = 0; i < (temp_max_hit + 1); i++)
-                    {
-                        for (int j = 0; j < (throne_max_hit_cap + 1); j++)
-                        {
-                            var_x = Math.Min(i, j);
-                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
-                        }
+                }
 
+                // special attack
+                for (int i = 0; i < 4; i++)
+                {
+                    if (has_special_attack_array[y] == true && spell_name_array[y] == "None")
+                    {
+                        if (weapon_stance_array[i + (y * 4)] != "none" && weapon_type_array[i + (y * 4)] != "none")
+                        {
+
+                            if (special_immune_array[y] == true && special_immune_2_array[y] == true)
+                            {
+                                temp_combat_style_textbox_list.Add("IMMUNE " + weapon_stance_array[i + (y * 4)] + " " + weapon_type_array[i + (y * 4)]);
+                            }
+                            else
+                            {
+                                if ((special_immune_array[y] == true || special_immune_2_array[y] == true) && (weapon_name_array[y] == "Saradomin sword" || weapon_name_array[y] == "Ancient godsword"))
+                                {
+                                    temp_combat_style_textbox_list.Add("IMMUNEN'T " + weapon_stance_array[i + (y * 4)] + " " + weapon_type_array[i + (y * 4)]);
+                                }
+                                else
+                                {
+                                    temp_combat_style_textbox_list.Add("SPECIAL " + weapon_stance_array[i + (y * 4)] + " " + weapon_type_array[i + (y * 4)]);
+                                }
+
+                            }
+
+                            switch (weapon_name_array[y])
+                            {
+                                case "Dragon halberd":
+                                case "Crystal halberd":
+                                    if (monster_size == 1)
+                                    {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    }
+                                    else
+                                    {
+                                        temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    }
+                                    break;
+                                case "Dawnbringer":
+                                case "Osmumten's fang":
+                                case "Voidwaker":
+                                    temp_extra_info_textbox_list.Add("Max hit " + max_hit_list[i + 4 + (y * 8)] + " Min hit " + spec_min_hit_array[i + (y * 4)]);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    break;
+                                case "Granite hammer":
+                                case "Ursine chainmace":
+                                case "Ancient godsword":
+                                    temp_extra_info_textbox_list.Add("" + special_max_hit_1_array[i + (y * 4)] + " (+" + special_max_hit_2_array[i + (y * 4)] + ")");
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    break;
+                                case "Dragon knife":
+                                case "Dragon dagger":
+                                case "Abyssal dagger":
+                                case "Magic shortbow":
+                                case "Magic shortbow (i)":
+                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    break;
+                                case "Webweaver bow":
+                                case "Dragon claws":
+                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)] + " | " + special_max_hit_3_array[i + (y * 4)] + " | " + special_max_hit_3_array[i + (y * 4)]);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    break;
+                                case "Dragon warhammer":
+                                    temp_extra_info_textbox_list.Add("Avg def reduction " + dwh_avg_def_reduction_list[i + (y * 4)]);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    break;
+                                case "Keris partisan of corruption":
+                                    if (monster_is_kaplhite == true)
+                                    {
+                                        temp_extra_info_textbox_list.Add("Crit (" + max_hit_list[i + 4 + (y * 8)] * 3 + ") " + max_hit_list[i + 4 + (y * 8)]);
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    }
+                                    else
+                                    {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    }
+                                    break;
+                                case "Saradomin sword":
+                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + ") " + special_max_hit_1_array[i + (y * 4)] + " | " + special_max_hit_2_array[i + (y * 4)]);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    break;
+                                case "Eldritch nightmare staff":
+                                case "Volatile nightmare staff":
+                                    temp_extra_info_textbox_list.Add("Max hit ±1, Not accurate");
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    break;
+                                case "Dragon crossbow":
+                                case "Armadyl crossbow":
+                                    if (ammo_name_array[y].Contains("bolts (e)") == true)
+                                    {
+                                        temp_extra_info_textbox_list.Add("" + bolt_normal_dmg_array[i + 4 + (y * 8)] + " (" + bolt_proc_dmg_array[i + 4 + (y * 8)] + " Chance " + bolt_proc_chance_array[i + 4 + (y * 8)] + "%)");
+                                        temp_max_hit_textbox_list.Add("" + bolt_normal_dmg_array[i + 4 + (y * 8)]);
+                                    }
+                                    else
+                                    {
+                                        temp_extra_info_textbox_list.Add("Nothing special");
+                                        temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    }
+                                    break;
+                                case "Dark bow":
+                                    temp_extra_info_textbox_list.Add("(" + max_hit_list[i + 4 + (y * 8)] + " Min hit " + spec_min_hit_array[i + (y * 4)] * 2 + ") | " + max_hit_list[i + 4 + (y * 8)] / 2 + " | " + max_hit_list[i + 4 + (y * 8)] / 2);
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    break;
+                                default:
+                                    temp_extra_info_textbox_list.Add("Nothing special");
+                                    temp_max_hit_textbox_list.Add("" + max_hit_list[i + 4 + (y * 8)]);
+                                    break;
+                            }
+                            temp_max_attack_roll_textbox_list.Add("" + max_attack_roll_list[i + 4 + (y * 8)]);
+                            temp_hit_chance_textbox_list.Add("" + hit_chance_list[i + 4 + (y * 8)]);
+                            temp_avg_dmg_textbox_list.Add("" + avg_dmg_per_attack_list[i + 4 + (y * 8)]);
+                            temp_dps_textbox_list.Add("" + dps_list[i + 4 + (y * 8)]);
+                            temp_avg_dmg_overkill_textbox_list.Add("" + overkill_avg_dmg_per_attack_list[i + 4 + (y * 8)]);
+                            temp_dps_overkill_textbox_list.Add("" + overkill_dps_list[i + 4 + (y * 8)]);
+                            temp_avg_hits_to_kill_textbox_list.Add("" + avg_hits_to_kill_list[i + 4 + (y * 8)]);
+                            temp_avg_time_to_kill_textbox_list.Add("" + time_to_kill_list[i + 4 + (y * 8)]);
+                        }
+                        else
+                        {
+                            temp_combat_style_textbox_list.Add("No style");
+                            temp_extra_info_textbox_list.Add("Nothing special");
+                            temp_max_hit_textbox_list.Add("0");
+                            temp_max_attack_roll_textbox_list.Add("0");
+                            temp_hit_chance_textbox_list.Add("0");
+                            temp_avg_dmg_textbox_list.Add("0");
+                            temp_dps_textbox_list.Add("0");
+                            temp_avg_dmg_overkill_textbox_list.Add("0");
+                            temp_dps_overkill_textbox_list.Add("0");
+                            temp_avg_hits_to_kill_textbox_list.Add("0");
+                            temp_avg_time_to_kill_textbox_list.Add("0");
+                        }
                     }
-                    thrall_avg_dmg = Math.Round(expected_min, 7);
-                    break;
-                default:
-                    thrall_avg_dmg = Math.Round(temp_max_hit / 2, 7);
-                    break;
+                    else
+                    {
+                        temp_combat_style_textbox_list.Add("No special");
+                        temp_extra_info_textbox_list.Add("Nothing special");
+                        temp_max_hit_textbox_list.Add("0");
+                        temp_max_attack_roll_textbox_list.Add("0");
+                        temp_hit_chance_textbox_list.Add("0");
+                        temp_avg_dmg_textbox_list.Add("0");
+                        temp_dps_textbox_list.Add("0");
+                        temp_avg_dmg_overkill_textbox_list.Add("0");
+                        temp_dps_overkill_textbox_list.Add("0");
+                        temp_avg_hits_to_kill_textbox_list.Add("0");
+                        temp_avg_time_to_kill_textbox_list.Add("0");
+                    }
+                }
             }
-            if (thrall_immune == true)
+
+
+
+
+            // multiple calcs is false, so update rest of the ui
+            if (multiple_calcs == false)
             {
-                thrall_max_hit = 0;
-                thrall_avg_dmg = 0;
-                thrall_damage_per_second = 0;
+                for (int i = 0; i < 8; i++)
+                {
+                    if (compare_styles_set_1_combobox.Items[i].ToString() != temp_combat_style_textbox_list[i])
+                    {
+                        compare_styles_set_1_combobox.Items[i] = temp_combat_style_textbox_list[i];
+                    }
+
+                    if (compare_styles_set_2_combobox.Items[i].ToString() != temp_combat_style_textbox_list[i + 8])
+                    {
+                        compare_styles_set_2_combobox.Items[i] = temp_combat_style_textbox_list[i + 8];
+                    }
+                }
+
+                int j = 0;
+                if (show_set_2 == true)
+                {
+                    j = 8;
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    // normal
+                    TextBox textBox = (TextBox)FindName($"weapon_combat_style_{i + 1}_textbox");
+                    textBox.Text = temp_combat_style_textbox_list[i + j];
+                    textBox = (TextBox)FindName($"max_hit_combat_style_{i + 1}_textbox");
+                    textBox.Text = temp_max_hit_textbox_list[i + j];
+                    textBox = (TextBox)FindName($"max_attackroll_combat_style_{i + 1}_textbox");
+                    textBox.Text = temp_max_attack_roll_textbox_list[i + j];
+                    textBox = (TextBox)FindName($"hit_chance_combat_style_{i + 1}_textbox");
+                    textBox.Text = temp_hit_chance_textbox_list[i + j] + "%";
+                    textBox = (TextBox)FindName($"avg_dmg_per_attack_combat_style_{i + 1}_textbox");
+                    textBox.Text = temp_avg_dmg_textbox_list[i + j];
+                    textBox = (TextBox)FindName($"dps_combat_style_{i + 1}_textbox");
+                    textBox.Text = temp_dps_textbox_list[i + j];
+                    textBox = (TextBox)FindName($"overkill_avg_dmg_per_attack_style_{i + 1}_textbox");
+                    textBox.Text = temp_avg_dmg_overkill_textbox_list[i + j];
+                    textBox = (TextBox)FindName($"overkill_dps_combat_style_{i + 1}_textbox");
+                    textBox.Text = temp_dps_overkill_textbox_list[i + j];
+                    textBox = (TextBox)FindName($"avg_hits_to_kill_style_{i + 1}_textbox");
+                    textBox.Text = temp_avg_hits_to_kill_textbox_list[i + j];
+                    textBox = (TextBox)FindName($"time_to_kill_style_{i + 1}_textbox");
+                    textBox.Text = temp_avg_time_to_kill_textbox_list[i + j];
+                    textBox = (TextBox)FindName($"extra_info_style_{i + 1}_textbox");
+                    textBox.Text = temp_extra_info_textbox_list[i + j];
+
+                    //special
+                    textBox = (TextBox)FindName($"weapon_combat_style_{i + 1}_special_textbox");
+                    textBox.Text = temp_combat_style_textbox_list[i + 4 + j];
+                    textBox = (TextBox)FindName($"max_hit_combat_style_{i + 1}_special_textbox");
+                    textBox.Text = temp_max_hit_textbox_list[i + 4 + j];
+                    textBox = (TextBox)FindName($"max_attackroll_combat_style_{i + 1}_special_textbox");
+                    textBox.Text = temp_max_attack_roll_textbox_list[i + 4 + j];
+                    textBox = (TextBox)FindName($"hit_chance_combat_style_{i + 1}_special_textbox");
+                    textBox.Text = temp_hit_chance_textbox_list[i + 4 + j] + "%";
+                    textBox = (TextBox)FindName($"avg_dmg_per_attack_combat_style_{i + 1}_special_textbox");
+                    textBox.Text = temp_avg_dmg_textbox_list[i + 4 + j];
+                    textBox = (TextBox)FindName($"dps_combat_style_{i + 1}_special_textbox");
+                    textBox.Text = temp_dps_textbox_list[i + 4 + j];
+                    textBox = (TextBox)FindName($"overkill_avg_dmg_per_attack_style_{i + 1}_special_textbox");
+                    textBox.Text = temp_avg_dmg_overkill_textbox_list[i + 4 + j];
+                    textBox = (TextBox)FindName($"overkill_dps_combat_style_{i + 1}_special_textbox");
+                    textBox.Text = temp_dps_overkill_textbox_list[i + 4 + j];
+                    textBox = (TextBox)FindName($"avg_hits_to_kill_style_{i + 1}_special_textbox");
+                    textBox.Text = temp_avg_hits_to_kill_textbox_list[i + 4 + j];
+                    textBox = (TextBox)FindName($"time_to_kill_style_{i + 1}_special_textbox");
+                    textBox.Text = temp_avg_time_to_kill_textbox_list[i + 4 + j];
+                    textBox = (TextBox)FindName($"extra_info_style_{i + 1}_special_textbox");
+                    textBox.Text = temp_extra_info_textbox_list[i + 4 + j];
+                }
+
+                Dispatcher.Invoke(compare_data);
+            }
+            // multiple calcs data is true
+            else
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    multiple_loadout_name_data_list.Add(loadout_name);
+                    multiple_weapon_name_data_list.Add(weapon_name_array[0]);
+                    multiple_combat_style_data_list.Add(temp_combat_style_textbox_list[i]);
+                    multiple_max_hit_data_list.Add(temp_max_hit_textbox_list[i]);
+                    multiple_max_attack_roll_data_list.Add(temp_max_attack_roll_textbox_list[i]);
+                    multiple_hit_chance_data_list.Add(temp_hit_chance_textbox_list[i]);
+                    multiple_avg_dmg_data_list.Add(temp_avg_dmg_textbox_list[i]);
+                    multiple_dps_data_list.Add(temp_dps_textbox_list[i]);
+                    multiple_avg_dmg_overkill_data_list.Add(temp_avg_dmg_overkill_textbox_list[i]);
+                    multiple_dps_overkill_data_list.Add(temp_dps_overkill_textbox_list[i]);
+                    multiple_avg_hits_to_kill_data_list.Add(temp_avg_hits_to_kill_textbox_list[i]);
+                    multiple_time_to_kill_data_list.Add(temp_avg_time_to_kill_textbox_list[i]);
+                }
+
+                multiple_monsters_stats_data_list.Add(monster_reduced_atk_lvl + "/" + monster_boosted_atk_lvl);
+                multiple_monsters_stats_data_list.Add(monster_reduced_str_lvl + "/" + monster_boosted_str_lvl);
+                multiple_monsters_stats_data_list.Add(monster_reduced_def_lvl + "/" + monster_boosted_def_lvl);
+                multiple_monsters_stats_data_list.Add(monster_reduced_magic_lvl + "/" + monster_boosted_magic_lvl);
+                multiple_monsters_stats_data_list.Add(monster_reduced_range_lvl + "/" + monster_boosted_range_lvl);
+                multiple_monsters_stats_data_list.Add(monster_reduced_hp_lvl + "/" + monster_boosted_hp_lvl);
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_defensive_stab));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_defensive_slash));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_defensive_crush));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_defensive_magic));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_defensive_range));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_max_defensive_roll_stab));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_max_defensive_roll_slash));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_max_defensive_roll_crush));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_max_defensive_roll_magic));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_max_defensive_roll_range));
+
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_atk));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_str));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_magic));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_magic_dmg));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_range));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(monster_aggressive_range_str));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(arclight_hits));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(dwh_hits));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(bgs_dmg));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(dmg_delt));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(team_size));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(toa_raid_lvl));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(toa_path_lvl));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(CM_cox_checkbox.IsChecked));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(slayer_task_checkbox.IsChecked));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(kandarin_diary_checkbox.IsChecked));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(red_keris_spec_checkbox.IsChecked));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(tome_of_water_checkbox.IsChecked));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(vulnerability_checkbox.IsChecked));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(enfeeble_checkbox.IsChecked));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(stun_checkbox.IsChecked));
+                multiple_monsters_stats_data_list.Add(Convert.ToString(accursed_secptre_checkbox.IsChecked));
+
+            }
+        }
+        private void compare_data()
+        {
+
+            if (compare_styles_set_1_combobox.SelectedItem == null)
+            {
+                compare_styles_set_1_combobox.SelectedIndex = 0;
+            }
+
+            if (compare_styles_set_2_combobox.SelectedItem == null)
+            {
+                compare_styles_set_2_combobox.SelectedIndex = 0;
+            }
+
+
+            int i = compare_styles_set_1_combobox.SelectedIndex;
+            int j = compare_styles_set_2_combobox.SelectedIndex + 8;
+            int l = i;
+            int m = j;
+
+            compare_styles_set_1_combobox.Text = Convert.ToString(compare_styles_set_1_combobox.SelectedItem);
+            compare_styles_set_1_combobox.ToolTip = Convert.ToString(compare_styles_set_1_combobox.SelectedItem);
+
+            compare_styles_set_2_combobox.Text = Convert.ToString(compare_styles_set_2_combobox.SelectedItem);
+            compare_styles_set_2_combobox.ToolTip = Convert.ToString(compare_styles_set_2_combobox.SelectedItem);
+
+            compare_maxhit_set_1_textbox.Text = temp_max_hit_textbox_list[i];
+            compare_hit_chance_set_1_textbox.Text = temp_hit_chance_textbox_list[i] + "%";
+            compare_average_dmg_set_1_textbox.Text = temp_avg_dmg_textbox_list[i];
+            compare_dps_set_1_textbox.Text = temp_dps_textbox_list[i];
+            compare_average_dmg_overkill_set_1_textbox.Text = temp_avg_dmg_overkill_textbox_list[i];
+            compare_dps_overkill_set_1_textbox.Text = temp_dps_overkill_textbox_list[i];
+            compare_time_to_kill_set_1_textbox.Text = temp_avg_time_to_kill_textbox_list[i];
+
+            compare_maxhit_set_2_textbox.Text = temp_max_hit_textbox_list[j];
+            compare_hit_chance_set_2_textbox.Text = temp_hit_chance_textbox_list[j] + "%";
+            compare_average_dmg_set_2_textbox.Text = temp_avg_dmg_textbox_list[j];
+            compare_dps_set_2_textbox.Text = temp_dps_textbox_list[j];
+            compare_average_dmg_overkill_set_2_textbox.Text = temp_avg_dmg_overkill_textbox_list[j];
+            compare_dps_overkill_set_2_textbox.Text = temp_dps_overkill_textbox_list[j];
+            compare_time_to_kill_set_2_textbox.Text = temp_avg_time_to_kill_textbox_list[j];
+
+            double temp_compare_max_hit_1;
+            double temp_compare_max_hit_2;
+
+            if (weapon_name_array[0] == "Osmumten's fang" && l < 4)
+            {
+                temp_compare_max_hit_1 = osmumtens_fang_max_hit_array[l];
             }
             else
             {
-                thrall_damage_per_second = Math.Round(thrall_avg_dmg / 2.4, 7);
+                temp_compare_max_hit_1 = max_hit_list[i];
             }
+
+            if (weapon_name_array[1] == "Osmumten's fang" && m < 8)
+            {
+                temp_compare_max_hit_2 = osmumtens_fang_max_hit_array[m];
+            }
+            else
+            {
+                temp_compare_max_hit_2 = max_hit_list[j];
+            }
+
+            compare_maxhit_difference_textbox.Text = Math.Round((Math.Max(temp_compare_max_hit_1, temp_compare_max_hit_2) / Math.Min(temp_compare_max_hit_1, temp_compare_max_hit_2) - 1) * 100, 5) + "%";
+            compare_hit_chance_difference_textbox.Text = Math.Round((Math.Max(hit_chance_list[i], hit_chance_list[j]) / Math.Min(hit_chance_list[i], hit_chance_list[j]) - 1) * 100, 5) + "%";
+            compare_average_dmg_difference_textbox.Text = Math.Round((Math.Max(avg_dmg_per_attack_list[i], avg_dmg_per_attack_list[j]) / Math.Min(avg_dmg_per_attack_list[i], avg_dmg_per_attack_list[j]) - 1) * 100, 5) + "%";
+            compare_dps_difference_textbox.Text = Math.Round((Math.Max(dps_list[i], dps_list[j]) / Math.Min(dps_list[i], dps_list[j]) - 1) * 100, 5) + "%";
+            compare_average_dmg_overkill_difference_textbox.Text = Math.Round((Math.Max(overkill_avg_dmg_per_attack_list[i], overkill_avg_dmg_per_attack_list[j]) / Math.Min(overkill_avg_dmg_per_attack_list[i], overkill_avg_dmg_per_attack_list[j]) - 1) * 100, 5) + "%";
+            compare_dps_overkill_difference_textbox.Text = Math.Round((Math.Max(overkill_dps_list[i], overkill_dps_list[j]) / Math.Min(overkill_dps_list[i], overkill_dps_list[j]) - 1) * 100, 5) + "%";
+            compare_time_to_kill_difference_textbox.Text = Math.Round((Math.Max(time_to_kill_list[i], time_to_kill_list[j]) / Math.Min(time_to_kill_list[i], time_to_kill_list[j]) - 1) * 100, 5) + "%";
+
+            // coloring
+            // max hit
+            if (temp_compare_max_hit_1 == Math.Max(temp_compare_max_hit_1, temp_compare_max_hit_2))
+            {
+                compare_maxhit_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_maxhit_set_2_textbox.BorderBrush = Brushes.DarkRed;
+            }
+            else
+            {
+                compare_maxhit_set_1_textbox.BorderBrush = Brushes.DarkRed;
+                compare_maxhit_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            if (temp_compare_max_hit_1 == temp_compare_max_hit_2)
+            {
+                compare_maxhit_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_maxhit_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            // hit chance
+            if (hit_chance_list[i] == Math.Max(hit_chance_list[i], hit_chance_list[j]))
+            {
+                compare_hit_chance_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_hit_chance_set_2_textbox.BorderBrush = Brushes.DarkRed;
+            }
+            else
+            {
+                compare_hit_chance_set_1_textbox.BorderBrush = Brushes.DarkRed;
+                compare_hit_chance_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            if (hit_chance_list[i] == hit_chance_list[j])
+            {
+                compare_hit_chance_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_hit_chance_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            // avg dmg
+            if (avg_dmg_per_attack_list[i] == Math.Max(avg_dmg_per_attack_list[i], avg_dmg_per_attack_list[j]))
+            {
+                compare_average_dmg_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_average_dmg_set_2_textbox.BorderBrush = Brushes.DarkRed;
+            }
+            else
+            {
+                compare_average_dmg_set_1_textbox.BorderBrush = Brushes.DarkRed;
+                compare_average_dmg_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            if (avg_dmg_per_attack_list[i] == avg_dmg_per_attack_list[j])
+            {
+                compare_average_dmg_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_average_dmg_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            // dps
+            if (dps_list[i] == Math.Max(dps_list[i], dps_list[j]))
+            {
+                compare_dps_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_dps_set_2_textbox.BorderBrush = Brushes.DarkRed;
+            }
+            else
+            {
+                compare_dps_set_1_textbox.BorderBrush = Brushes.DarkRed;
+                compare_dps_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            if (dps_list[i] == dps_list[j])
+            {
+                compare_dps_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_dps_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            // avg dmg overkill
+            if (overkill_avg_dmg_per_attack_list[i] == Math.Max(overkill_avg_dmg_per_attack_list[i], overkill_avg_dmg_per_attack_list[j]))
+            {
+                compare_average_dmg_overkill_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_average_dmg_overkill_set_2_textbox.BorderBrush = Brushes.DarkRed;
+            }
+            else
+            {
+                compare_average_dmg_overkill_set_1_textbox.BorderBrush = Brushes.DarkRed;
+                compare_average_dmg_overkill_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            if (overkill_avg_dmg_per_attack_list[i] == overkill_avg_dmg_per_attack_list[j])
+            {
+                compare_average_dmg_overkill_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_average_dmg_overkill_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            // dps overkill
+            if (overkill_dps_list[i] == Math.Max(overkill_dps_list[i], overkill_dps_list[j]))
+            {
+                compare_dps_overkill_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_dps_overkill_set_2_textbox.BorderBrush = Brushes.DarkRed;
+            }
+            else
+            {
+                compare_dps_overkill_set_1_textbox.BorderBrush = Brushes.DarkRed;
+                compare_dps_overkill_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            if (overkill_dps_list[i] == overkill_dps_list[j])
+            {
+                compare_dps_overkill_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_dps_overkill_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+            // time to kill
+            if (time_to_kill_list[i] == Math.Max(time_to_kill_list[i], time_to_kill_list[j]))
+            {
+                compare_time_to_kill_set_1_textbox.BorderBrush = Brushes.DarkRed;
+                compare_time_to_kill_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+            else
+            {
+                compare_time_to_kill_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_time_to_kill_set_2_textbox.BorderBrush = Brushes.DarkRed;
+            }
+
+            if (time_to_kill_list[i] == time_to_kill_list[j])
+            {
+                compare_time_to_kill_set_1_textbox.BorderBrush = Brushes.Green;
+                compare_time_to_kill_set_2_textbox.BorderBrush = Brushes.Green;
+            }
+
+
         }
         private void coloring_menu()
         {
@@ -5263,2422 +7595,6 @@ namespace Osrs_dps_calculator
                 }
             }
 
-        }
-        private void monster_stat_boosts()
-        {
-            monster_boosted_atk_lvl = monster_combat_atk_lvl;
-            monster_boosted_str_lvl = monster_combat_str_lvl;
-            monster_boosted_def_lvl = monster_combat_def_lvl;
-            monster_boosted_magic_lvl = monster_combat_magic_lvl;
-            monster_boosted_range_lvl = monster_combat_range_lvl;
-            monster_boosted_hp_lvl = monster_combat_hp_lvl;
-
-            double atk_modifier = 1;
-            double str_modifier = 1;
-            double def_modifier = 1;
-            double magic_modifier = 1;
-            double range_modifier = 1;
-            double hp_modifier = 1;
-
-            // tob
-            if (monster_is_in_tob == true && monster_name != "Combat dummy")
-            {
-                if (team_size <= 3)
-                {
-                    hp_modifier = 0.75;
-                }
-                if (team_size == 4)
-                {
-                    hp_modifier = 0.875;
-                }
-                monster_boosted_hp_lvl = Math.Round(monster_combat_hp_lvl * hp_modifier);
-            }
-
-            // toa
-            if (monster_is_in_toa == true && monster_name != "Combat dummy")
-            {
-                // Raid lvl
-                if (monster_name == "Wardens Core")
-                {
-                    hp_modifier = (1 + toa_raid_lvl * 0.001);
-                }
-                else
-                {
-                    hp_modifier = (1 + toa_raid_lvl * 0.004);
-                }
-
-                // Path lvl
-                if (monster_name == "Akkha" || monster_name == "Ba-Ba" || monster_name == "Kephri" || monster_name == "Zebak" || monster_name == "Arcane Scarab" || monster_name == "Spitting Scarab" || monster_name == "Soldier Scarab")
-                {
-                    if (toa_path_lvl > 0)
-                    {
-                        hp_modifier = hp_modifier * (1.03 + 0.05 * toa_path_lvl);
-                    }
-                }
-
-                // Team size
-                if (team_size == 2)
-                {
-                    hp_modifier = hp_modifier * 1.9;
-                }
-                if (team_size == 3)
-                {
-                    hp_modifier = hp_modifier * 2.8;
-                }
-                if (team_size > 3)
-                {
-                    hp_modifier = hp_modifier * (2.8 + 0.6 * (Math.Min(8, team_size) - 3));
-                }
-
-                // odd rounding what ever
-                if (monster_name == "Akkha" || monster_name == "Ba-Ba" || monster_name == "Zebak" || monster_name == "Arcane Scarab" || monster_name == "Spitting Scarab" || monster_name == "Soldier Scarab" || monster_name == "Obelisk" || monster_name == "Wardens Core" || monster_name == "Wardens P3" || monster_name == "Wardens P4")
-                {
-                    monster_boosted_hp_lvl = (Math.Round((monster_combat_hp_lvl * hp_modifier) / 10)) * 10;
-                }
-                else if (monster_name == "Kephri" || monster_name == "Wardens P2" || monster_name == "Akkha's Shadow")
-                {
-                    monster_boosted_hp_lvl = (Math.Floor((monster_combat_hp_lvl * hp_modifier) / 5)) * 5;
-                }
-                // baboons
-                else
-                {
-                    monster_boosted_hp_lvl = Math.Floor(monster_combat_hp_lvl * hp_modifier);
-                }
-            }
-
-            // cox
-            if (monster_is_in_cox == true && monster_name != "Combat dummy")
-            {
-                // mining lvl modifier
-                if (monster_name == "Guardian")
-                {
-                    hp_modifier = monster_combat_hp_lvl - 99 + mining_lvl;
-                    monster_boosted_hp_lvl = Math.Floor(monster_boosted_hp_lvl - (monster_boosted_hp_lvl - hp_modifier));
-                }
-                // combat lvl modifier
-                if (monster_name.Contains("Great olm") == true)
-                {
-                    atk_modifier = 1;
-                    str_modifier = 1;
-                    def_modifier = 1;
-                    magic_modifier = 1;
-                    range_modifier = 1;
-                    hp_modifier = 1;
-                }
-                else
-                {
-                    atk_modifier = ((Math.Floor(hp_lvl * 4 / 9)) + 55) / 99;
-                    str_modifier = atk_modifier;
-                    def_modifier = atk_modifier;
-                    magic_modifier = atk_modifier;
-                    range_modifier = atk_modifier;
-                    hp_modifier = combat_lvl / 126;
-                }
-
-                monster_boosted_atk_lvl = Math.Floor(monster_boosted_atk_lvl * atk_modifier);
-                monster_boosted_str_lvl = Math.Floor(monster_boosted_str_lvl * str_modifier);
-                monster_boosted_def_lvl = Math.Floor(monster_boosted_def_lvl * def_modifier);
-                monster_boosted_magic_lvl = Math.Floor(monster_boosted_magic_lvl * magic_modifier);
-                monster_boosted_range_lvl = Math.Floor(monster_boosted_range_lvl * range_modifier);
-                monster_boosted_hp_lvl = Math.Floor(monster_boosted_hp_lvl * hp_modifier);
-                // party size modifier
-                if (monster_name.Contains("Great olm") == true)
-                {
-                    hp_modifier = (team_size - 3 * Math.Floor(team_size / 8) + 1) / 2;
-                }
-                else if (monster_name == "Scavenger")
-                {
-                    hp_modifier = 1;
-                }
-                else
-                {
-                    hp_modifier = (1 + Math.Floor(team_size / 2));
-                }
-
-                if (monster_name == "Abyssal portal")
-                {
-                    def_modifier = (Math.Floor(Math.Sqrt(team_size - 1)) + Math.Floor((team_size - 1) * 7 / 10) + 100) / 100;
-                    atk_modifier = def_modifier;
-                    str_modifier = def_modifier;
-                    magic_modifier = def_modifier;
-                    range_modifier = def_modifier;
-                }
-                else
-                {
-                    def_modifier = (Math.Floor(Math.Sqrt(team_size - 1)) + Math.Floor((team_size - 1) * 7 / 10) + 100) / 100;
-                    atk_modifier = (Math.Floor(Math.Sqrt(team_size - 1)) * 7 + (team_size - 1) + 100) / 100;
-                    str_modifier = atk_modifier;
-                    magic_modifier = atk_modifier;
-                    range_modifier = atk_modifier;
-                }
-
-                if (monster_boosted_atk_lvl == 1)
-                {
-                    monster_boosted_atk_lvl = 1;
-                }
-                else
-                {
-                    monster_boosted_atk_lvl = Math.Floor(monster_boosted_atk_lvl * atk_modifier);
-                }
-                if (monster_boosted_str_lvl == 1)
-                {
-                    monster_boosted_str_lvl = 1;
-                }
-                else
-                {
-                    monster_boosted_str_lvl = Math.Floor(monster_boosted_str_lvl * str_modifier);
-                }
-                if (monster_boosted_magic_lvl == 1)
-                {
-                    monster_boosted_magic_lvl = 1;
-                }
-                else
-                {
-                    monster_boosted_magic_lvl = Math.Floor(monster_boosted_magic_lvl * magic_modifier);
-                }
-                if (monster_boosted_range_lvl == 1)
-                {
-                    monster_boosted_range_lvl = 1;
-                }
-                else
-                {
-                    monster_boosted_range_lvl = Math.Floor(monster_boosted_range_lvl * range_modifier);
-                }
-                monster_boosted_def_lvl = Math.Floor(monster_boosted_def_lvl * def_modifier);
-                monster_boosted_hp_lvl = Math.Floor(monster_boosted_hp_lvl * hp_modifier);
-                // CM scaling
-                if (CM_cox_checkbox.IsChecked == true)
-                {
-                    if (monster_name.Contains("Great olm") == true || monster_name == "Glowing crystal")
-                    {
-                        hp_modifier = 1;
-                    }
-                    else
-                    {
-
-                        hp_modifier = 1.5;
-                    }
-                    atk_modifier = 1.5;
-                    str_modifier = 1.5;
-                    range_modifier = 1.5;
-                    if (monster_name.Contains("Tekton") == true)
-                    {
-                        magic_modifier = 1.2;
-                    }
-                    else
-                    {
-                        magic_modifier = 1.5;
-                    }
-                    if (monster_name.Contains("Tekton") == true)
-                    {
-                        def_modifier = 1.2;
-                    }
-                    else
-                    {
-                        def_modifier = 1.5;
-                    }
-                    if (monster_name == "Gloving crystal")
-                    {
-                        def_modifier = 1;
-                    }
-
-                    monster_boosted_atk_lvl = Math.Floor(monster_boosted_atk_lvl * atk_modifier);
-                    monster_boosted_str_lvl = Math.Floor(monster_boosted_str_lvl * str_modifier);
-                    monster_boosted_def_lvl = Math.Floor(monster_boosted_def_lvl * def_modifier);
-                    monster_boosted_magic_lvl = Math.Floor(monster_boosted_magic_lvl * magic_modifier);
-                    monster_boosted_range_lvl = Math.Floor(monster_boosted_range_lvl * range_modifier);
-                    monster_boosted_hp_lvl = Math.Floor(monster_boosted_hp_lvl * hp_modifier);
-                }
-            }
-        }
-        private void monster_stat_reduction()
-        {
-            monster_reduced_atk_lvl = monster_boosted_atk_lvl;
-            monster_reduced_str_lvl = monster_boosted_str_lvl;
-            monster_reduced_def_lvl = monster_boosted_def_lvl;
-            monster_reduced_magic_lvl = monster_boosted_magic_lvl;
-            monster_reduced_range_lvl = monster_boosted_range_lvl;
-            monster_reduced_hp_lvl = monster_boosted_hp_lvl;
-
-
-            monster_reduced_hp_lvl = monster_reduced_hp_lvl - dmg_delt;
-            if (monster_reduced_hp_lvl < 0)
-            {
-                monster_reduced_hp_lvl = 0;
-            }
-
-
-            // cant reduce stats and vardovis
-            if (monster_name == "Verzik vitur P1" || monster_name == "Verzik vitur P2" || monster_name == "Verzik vitur P3" || monster_name == "Vardorvis" || monster_name == "Awakened Leviathan" || monster_name == "Awakened Vardorvis" || monster_name == "Awakened Duke Sucellus" || monster_name == "Awakened Whisperer")
-            {
-                monster_reduced_atk_lvl = monster_boosted_atk_lvl;
-                monster_reduced_str_lvl = monster_boosted_str_lvl;
-                monster_reduced_def_lvl = monster_boosted_def_lvl;
-                monster_reduced_magic_lvl = monster_boosted_magic_lvl;
-                monster_reduced_range_lvl = monster_boosted_range_lvl;
-                if (monster_name == "Vardorvis")
-                {
-                    monster_reduced_def_lvl = monster_boosted_def_lvl - Math.Floor((monster_boosted_hp_lvl - monster_reduced_hp_lvl) / 10.0); // 1 def lost for 10 hp
-                    monster_reduced_str_lvl = monster_boosted_str_lvl + Math.Floor((monster_boosted_hp_lvl - monster_reduced_hp_lvl) / (70.0/9.0));  // 1 str gained for 7,7 hp
-                }
-                if (monster_name == "Awakened Vardorvis")
-                {
-                    monster_reduced_def_lvl = monster_boosted_def_lvl - Math.Floor((monster_boosted_hp_lvl - monster_reduced_hp_lvl) / (1400.0 / 87.0)); // 1 def lost for 16 hp
-                    monster_reduced_str_lvl = monster_boosted_str_lvl + Math.Floor((monster_boosted_hp_lvl - monster_reduced_hp_lvl) / (1400.0 / 131.0)); // 1 str gained for 10,6 hp
-                }
-
-            }
-            // normal stat reduction
-            else
-            {
-                double curse_spell_effectiviness = 0.1;
-                if (tome_of_water_checkbox.IsChecked == true)
-                {
-                    curse_spell_effectiviness = 0.15;
-                }
-                // vulnerability
-                if (vulnerability_checkbox.IsChecked == true)
-                {
-                    monster_reduced_def_lvl = monster_reduced_def_lvl - Math.Floor(monster_reduced_def_lvl * curse_spell_effectiviness);
-                }
-                // enfeeble
-                if (enfeeble_checkbox.IsChecked == true)
-                {
-                    monster_reduced_str_lvl = monster_reduced_str_lvl - Math.Floor(monster_reduced_str_lvl * curse_spell_effectiviness);
-                }
-                // stun
-                if (stun_checkbox.IsChecked == true)
-                {
-                    monster_reduced_atk_lvl = monster_reduced_atk_lvl - Math.Floor(monster_reduced_atk_lvl * curse_spell_effectiviness);
-                }
-
-                // accused secptre
-                if (accursed_secptre_checkbox.IsChecked == true)
-                {
-                    monster_reduced_def_lvl = monster_boosted_def_lvl - Math.Floor(monster_boosted_def_lvl * 0.15);
-                    monster_reduced_magic_lvl = monster_boosted_magic_lvl - Math.Floor(monster_boosted_magic_lvl * 0.15);
-                }
-
-                // arlicht hits
-                if (monster_is_demon == true)
-                {
-                    monster_reduced_atk_lvl = monster_reduced_atk_lvl - Math.Floor((monster_boosted_atk_lvl * 0.1) * arclight_hits);
-                    monster_reduced_str_lvl = monster_reduced_str_lvl - Math.Floor((monster_boosted_str_lvl * 0.1) * arclight_hits);
-                    monster_reduced_def_lvl = monster_reduced_def_lvl - Math.Floor((monster_boosted_def_lvl * 0.1) * arclight_hits);
-                }
-                else
-                {
-                    monster_reduced_atk_lvl = monster_reduced_atk_lvl - Math.Floor((monster_boosted_atk_lvl * 0.05) * arclight_hits);
-                    monster_reduced_str_lvl = monster_reduced_str_lvl - Math.Floor((monster_boosted_str_lvl * 0.05) * arclight_hits);
-                    monster_reduced_def_lvl = monster_reduced_def_lvl - Math.Floor((monster_boosted_def_lvl * 0.05) * arclight_hits);
-                }
-
-                if (monster_reduced_atk_lvl < 1)
-                {
-                    monster_reduced_atk_lvl = 0;
-                }
-                if (monster_reduced_str_lvl < 1)
-                {
-                    monster_reduced_str_lvl = 0;
-                }
-                if (monster_reduced_def_lvl < 1)
-                {
-                    monster_reduced_def_lvl = 0;
-                }
-
-                // dwh hits
-                if (dwh_hits != 0)
-                {
-                    for (int i = 0; i < dwh_hits; i++)
-                    {
-                        monster_reduced_def_lvl = monster_reduced_def_lvl - Math.Floor(monster_reduced_def_lvl * 0.3);
-                    }
-                }
-
-                // bgs dmg
-                double temp_monster_reduced_lvl;
-                double temp_bgs_dmg = bgs_dmg;
-                // defence
-                temp_monster_reduced_lvl = monster_reduced_def_lvl;
-                monster_reduced_def_lvl = monster_reduced_def_lvl - temp_bgs_dmg;
-
-                // minimum defence
-                if (monster_reduced_def_lvl < monster_defence_cap)
-                {
-                    monster_reduced_def_lvl = monster_defence_cap;
-                }
-
-                // strength
-                if (monster_reduced_def_lvl < 1)
-                {
-                    monster_reduced_def_lvl = 0;
-                    temp_bgs_dmg = temp_bgs_dmg - temp_monster_reduced_lvl;
-
-                    temp_monster_reduced_lvl = monster_reduced_str_lvl;
-                    monster_reduced_str_lvl = monster_reduced_str_lvl - temp_bgs_dmg;
-                    // attack
-                    if (monster_reduced_str_lvl < 0)
-                    {
-                        monster_reduced_str_lvl = 0;
-                        temp_bgs_dmg = temp_bgs_dmg - temp_monster_reduced_lvl;
-
-                        temp_monster_reduced_lvl = monster_reduced_atk_lvl;
-                        monster_reduced_atk_lvl = monster_reduced_atk_lvl - temp_bgs_dmg;
-                        // magic
-                        if (monster_reduced_atk_lvl < 0)
-                        {
-                            monster_reduced_atk_lvl = 0;
-                            temp_bgs_dmg = temp_bgs_dmg - temp_monster_reduced_lvl;
-
-                            temp_monster_reduced_lvl = monster_reduced_magic_lvl;
-                            monster_reduced_magic_lvl = monster_reduced_magic_lvl - temp_bgs_dmg;
-                            // range
-                            if (monster_reduced_magic_lvl < 0)
-                            {
-                                monster_reduced_magic_lvl = 0;
-                                temp_bgs_dmg = temp_bgs_dmg - temp_monster_reduced_lvl;
-
-                                monster_reduced_range_lvl = monster_reduced_range_lvl - temp_bgs_dmg;
-                                if (monster_reduced_range_lvl < 0)
-                                {
-                                    monster_reduced_range_lvl = 0;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-    
-        }
-        private void monster_max_defence_roll()
-        {
-            monster_max_defensive_roll_stab = (monster_reduced_def_lvl + 9) * (monster_defensive_stab + 64);
-            monster_max_defensive_roll_slash = (monster_reduced_def_lvl + 9) * (monster_defensive_slash + 64);
-            monster_max_defensive_roll_crush = (monster_reduced_def_lvl + 9) * (monster_defensive_crush + 64);
-            monster_max_defensive_roll_magic = (monster_reduced_magic_lvl + 9) * (monster_defensive_magic + 64);
-            monster_max_defensive_roll_range = (monster_reduced_def_lvl + 9) * (monster_defensive_range + 64);
-
-            if (monster_is_in_toa == true)
-            {
-                monster_max_defensive_roll_stab = Math.Floor(monster_max_defensive_roll_stab * (1 + toa_raid_lvl * 0.004));
-                monster_max_defensive_roll_slash = Math.Floor(monster_max_defensive_roll_slash * (1 + toa_raid_lvl * 0.004));
-                monster_max_defensive_roll_crush = Math.Floor(monster_max_defensive_roll_crush * (1 + toa_raid_lvl * 0.004));
-                monster_max_defensive_roll_magic = Math.Floor(monster_max_defensive_roll_magic * (1 + toa_raid_lvl * 0.004));
-                monster_max_defensive_roll_range = Math.Floor(monster_max_defensive_roll_range * (1 + toa_raid_lvl * 0.004));
-            }
-
-            // the odd "mage" defence rolls
-            if (monster_name == "Ice demon" || monster_name == "Verzik vitur P1" || monster_name == "Verzik vitur P2" || monster_name == "Verzik vitur P3" || monster_name == "Baboon Brawler (small)" || monster_name == "Baboon Brawler (big)")
-            {
-                monster_max_defensive_roll_magic = (monster_reduced_def_lvl + 9) * (monster_defensive_magic + 64);
-            }
-
-        }
-        private void monster_dmg_dealing_calc()
-        {
-
-            // max hits and attack rolls 1st for all styles, afterwards hit chance and avg dmg
-            // set 1
-            monster_max_hit_array[0] = Math.Floor((((monster_reduced_str_lvl + 9) * (monster_aggressive_str + 64)) + 320) / 640.0);
-            monster_max_hit_array[1] = monster_max_hit_array[0];
-            monster_max_hit_array[2] = monster_max_hit_array[0];
-            monster_max_hit_array[3] = Math.Floor(((monster_boosted_magic_lvl + 9) * (monster_aggressive_magic_dmg + 64) / 640.0) + 0.5); // gets max hit from "base" mage lvl before reductions
-            monster_max_hit_array[4] = Math.Floor(((monster_reduced_range_lvl + 9) * (monster_aggressive_range_str + 64) / 640.0) + 0.5);
-
-            monster_attack_roll_array[0] = (monster_reduced_atk_lvl + 9) * (monster_aggressive_atk + 64);
-            monster_attack_roll_array[1] = monster_attack_roll_array[0];
-            monster_attack_roll_array[2] = monster_attack_roll_array[0];
-            monster_attack_roll_array[4] = (monster_reduced_magic_lvl + 9) * (monster_aggressive_magic + 64);
-            monster_attack_roll_array[3] = (monster_reduced_range_lvl + 9) * (monster_aggressive_range + 64);
-
-            // set 2
-            monster_max_hit_array[5] = monster_max_hit_array[0];
-            monster_max_hit_array[6] = monster_max_hit_array[0];
-            monster_max_hit_array[7] = monster_max_hit_array[0];
-            monster_max_hit_array[8] = monster_max_hit_array[3];
-            monster_max_hit_array[9] = monster_max_hit_array[4];
-
-            monster_attack_roll_array[5] = monster_attack_roll_array[0];
-            monster_attack_roll_array[6] = monster_attack_roll_array[0];
-            monster_attack_roll_array[7] = monster_attack_roll_array[0];
-            monster_attack_roll_array[8] = monster_attack_roll_array[3];
-            monster_attack_roll_array[9] = monster_attack_roll_array[4];
-
-            // toa scaling
-            if (monster_is_in_toa == true)
-            {
-                double max_hit_modifier = 1 + toa_raid_lvl * 0.004;
-                double attack_roll_modifier = 1 + toa_raid_lvl * 0.004;
-
-                if (toa_path_lvl > 0)
-                {
-                    max_hit_modifier = max_hit_modifier * (1.03 + 0.05 * toa_path_lvl);
-                }
-
-                for (int i = 0; i < 10; i++)
-                {
-                    monster_max_hit_array[i] = Math.Floor(monster_max_hit_array[i] * Math.Min(max_hit_modifier, 2.5));
-                    monster_attack_roll_array[i] = Math.Floor(monster_attack_roll_array[i] * attack_roll_modifier);
-                }
-            }
-
-            // player defence roll and justiciar armour set dmg reduction 
-
-            int j = 0;
-
-            for (int i = 0; i < 10; i++)
-            {
-                if (i > 4)
-                {
-                    j = 1;
-                }
-
-                switch (i)
-                {
-                    case 0:
-                    case 5:
-                        player_def_roll_array[i] = (true_defence_lvl + 8 + 0) * (total_stab_def_array[j] + 64);
-                        if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
-                        {
-                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_stab_def_array[j] / 3000.0,0));
-                        }
-                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
-                        break;
-                    case 1:
-                    case 6:
-                        player_def_roll_array[i] = (true_defence_lvl + 8 + 0) * (total_slash_def_array[j] + 64);
-                        if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
-                        {
-                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_slash_def_array[j] / 3000.0,0));
-                        }
-                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
-                        break;
-                    case 2:
-                    case 7:
-                        player_def_roll_array[i] = (true_defence_lvl + 8 + 0) * (total_crush_def_array[j] + 64);
-                        if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
-                        {
-                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_crush_def_array[j] / 3000.0,0));
-                        }
-                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
-                        break;
-                    case 3:
-                    case 8:
-                        player_def_roll_array[i] = Math.Floor(true_defence_lvl * 0.30 + true_mage_lvl * 0.70 + 8 + 0) * (total_magic_def_array[j] + 64);
-                        if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
-                        {
-                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_magic_def_array[j] / 3000.0,0));
-                        }
-                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * mage_prayer_effectiviness / 100.0);
-                        break;
-                    case 4:
-                    case 9:
-                        player_def_roll_array[i] = (true_defence_lvl + 8 + 0) * (total_range_def_array[j] + 64);
-                        if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
-                        {
-                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_range_def_array[j] / 3000.0, 0));
-                        }
-                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * range_prayer_effectiviness / 100.0);
-                        break;
-                }
-            }
-
-            // hit chance and avg dmg for all styles
-
-            for (int i = 0; i < 10; i++)
-            {
-
-                if (monster_attack_roll_array[i] > player_def_roll_array[i])
-                {
-                    monster_hit_chance_array[i] = Math.Round(1 - (player_def_roll_array[i] + 2) / (2 * (monster_attack_roll_array[i] + 1)),5);
-                }
-                else
-                {
-                    monster_hit_chance_array[i] = Math.Round(monster_attack_roll_array[i] / (2 * (player_def_roll_array[i] + 1)),5);
-                }
-
-                monster_avg_dmg_array[i] = Math.Round((monster_max_hit_array[i] * monster_hit_chance_array[i]) / 2.0,5);
-            }
-        }
-        private void hit_chance()
-        {
-            int i = 0;
-            if (gear_set_2 == true)
-            {
-                i = 1;
-            }
-
-            bool ignores_accuracy = false;
-            if (monster_name == "Wardens Core" && (temp_weapon_type == "stab" || temp_weapon_type == "slash" || temp_weapon_type == "crush"))
-            {
-                ignores_accuracy = true;
-            }
-            if (monster_name == "Verzik vitur P1" && weapon_name_array[i] == "Dawnbringer" && spell_name_array[i] == "none")
-            {
-                ignores_accuracy = true;
-            }
-
-            if ((monster_name == "Totem" || monster_name == "Phosani's Totem") && (temp_weapon_type == "magic" || temp_weapon_stance == "spell"))
-            {
-                ignores_accuracy = true;
-            }
-
-            if (monster_name == "Sleepwalker")
-            {
-                ignores_accuracy = true;
-            }
-
-            if (temp_weapon_type == "crush" && (monster_name == "Phosani's Husk (range)" || monster_name == "Phosani's Husk (mage)" || monster_name == "Phosani's Parasite (weakened)"))
-            {
-                ignores_accuracy = true;
-            }
-
-            if (monster_name == "Nylocas Matomenos (maiden)" && spell_name_array[i].Contains("Ice") == true && temp_max_attack_roll > 21999)
-            {
-                ignores_accuracy = true;
-            }
-
-            if (monster_name == "Zombified Spawn" && spell_name_array[i] == "Crumble Undead" && total_magic_atk_array[i] > -64)
-            {
-                ignores_accuracy = true;
-            }
-
-            if (ignores_accuracy == false)
-            {
-                if (temp_max_attack_roll > 0)
-                {
-                    switch (temp_weapon_type)
-                    {
-                        case "stab":
-                            temp_monster_max_defensive_roll = monster_max_defensive_roll_stab;
-                            break;
-                        case "slash":
-                            temp_monster_max_defensive_roll = monster_max_defensive_roll_slash;
-                            break;
-                        case "crush":
-                            temp_monster_max_defensive_roll = monster_max_defensive_roll_crush;
-                            break;
-                        case "ranged":
-                            temp_monster_max_defensive_roll = monster_max_defensive_roll_range;
-                            break;
-                        case "magic":
-                            if (ring_name_array[i] == "Brimstone ring")
-                            {
-                                temp_monster_max_defensive_roll = Math.Floor(monster_max_defensive_roll_magic * 0.975);
-                            }
-                            else
-                            {
-                                temp_monster_max_defensive_roll = monster_max_defensive_roll_magic;
-                            }
-                            break;
-                        case "cast":
-                        case "cast accurate":
-                        case "cast longrange":
-                            if (ring_name_array[i] == "Brimstone ring")
-                            {
-                                temp_monster_max_defensive_roll = Math.Floor(monster_max_defensive_roll_magic * 0.975);
-                            }
-                            else
-                            {
-                                temp_monster_max_defensive_roll = monster_max_defensive_roll_magic;
-                            }
-                            break;
-                    }
-                    if (spell_name_array[i] != "none")
-                    {
-                        switch (weapon_name_array[i])
-                        {
-                            case "Osmumten's fang":
-                                if (monster_is_in_toa == true)
-                                {
-                                    if (temp_max_attack_roll > temp_monster_max_defensive_roll)
-                                    {
-                                        temp_hit_chance = 1 - (temp_monster_max_defensive_roll + 2) / (2 * (temp_max_attack_roll + 1));
-                                        temp_hit_chance = temp_hit_chance + (1 - temp_hit_chance) * temp_hit_chance;
-                                    }
-                                    else
-                                    {
-                                        temp_hit_chance = temp_max_attack_roll / (2 * (temp_monster_max_defensive_roll + 1));
-                                        temp_hit_chance = temp_hit_chance + (1 - temp_hit_chance) * temp_hit_chance;
-                                    }
-                                }
-                                else
-                                {
-                                    if (temp_max_attack_roll > temp_monster_max_defensive_roll)
-                                    {
-                                        temp_hit_chance = (1 - (((temp_monster_max_defensive_roll + 2) * (2 * temp_monster_max_defensive_roll + 3)) / (6 * Math.Pow(temp_max_attack_roll + 1, 2))));
-                                    }
-                                    else
-                                    {
-                                        temp_hit_chance = (temp_max_attack_roll * (4 * temp_max_attack_roll + 5)) / (6 * (temp_max_attack_roll + 1) * (temp_monster_max_defensive_roll + 1));
-                                    }
-                                }
-                                break;
-                            default:
-                                if (temp_max_attack_roll > temp_monster_max_defensive_roll)
-                                {
-                                    temp_hit_chance = 1 - (temp_monster_max_defensive_roll + 2) / (2 * (temp_max_attack_roll + 1));
-                                }
-                                else
-                                {
-                                    temp_hit_chance = temp_max_attack_roll / (2 * (temp_monster_max_defensive_roll + 1));
-                                }
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        if (temp_max_attack_roll > temp_monster_max_defensive_roll)
-                        {
-                            temp_hit_chance = 1 - (temp_monster_max_defensive_roll + 2) / (2 * (temp_max_attack_roll + 1));
-                        }
-                        else
-                        {
-                            temp_hit_chance = temp_max_attack_roll / (2 * (temp_monster_max_defensive_roll + 1));
-                        }
-                    }
-
-                }
-                else
-                {
-                    temp_hit_chance = 0;
-                }
-            }
-            else
-            {
-                temp_hit_chance = 1;
-            }
-
-           
-
-        }
-        private void immunities_and_resistances()
-        {
-            int i = 0;
-            if (gear_set_2 == true)
-            {
-                i = 1;
-            }
-            // and few damage boosts (guardians and ice demon)
-
-            temp_immune = false;
-
-
-            if (immune_to_melee == true)
-            {
-                if (temp_weapon_type == "stab" || temp_weapon_type == "slash" || temp_weapon_stance == "crush")
-                {
-                    temp_immune = true;
-                }
-            }
-
-            if (immune_to_range == true)
-            {
-                if (temp_weapon_type == "ranged")
-                {
-                    temp_immune = true;
-                }
-            }
-
-            if (immune_to_mage == true)
-            {
-                if (temp_weapon_type == "magic" || temp_weapon_stance == "cast")
-                {
-                    temp_immune = true;
-                }
-            }
-
-
-            // pickaxe
-            if (monster_name == "Guardian")
-            {
-                if (weapon_name_array[i].Contains("Pickaxe") == false)
-                {
-                    temp_immune = true;
-                }
-            }
-
-            // other dmg modifiers
-
-            if (monster_name == "Alchemical Hydra (not weakened)")
-            {
-                temp_max_hit = Math.Floor(temp_max_hit * 0.25);
-            }
-
-            if (monster_name == "Pestilent Bloat (moving)" || monster_name == "Hard mode Pestilent Bloat (moving)")
-            {
-                temp_max_hit = Math.Floor(temp_max_hit * 0.5);
-            }
-
-            if (monster_name == "Vorkath (Quickfire Barrage)")
-            {
-                temp_max_hit = Math.Floor(temp_max_hit * 0.5);
-            }
-
-            if (monster_name == "The Leviathan (Special)" || monster_name == "Awakened Leviathan (Special)")
-            {
-                temp_max_hit = Math.Floor(temp_max_hit * 0.6666666666666);
-            }
-
-            if (monster_name == "Corporeal Beast")
-            {
-                if (temp_weapon_type == "magic" || temp_weapon_stance == "spell")
-                {
-                    // do nothing, janky but works
-                }
-                else if ((weapon_name_array[i].Contains("spear") == true || weapon_name_array[i].Contains("halberd") == true || weapon_name_array[i] == "Osmumten's fang") && temp_weapon_type == "stab")
-                {
-                    // do nothing, janky but works
-                }
-                else
-                {
-                    temp_max_hit = Math.Floor(temp_max_hit * 0.5);
-                }
-            }
-
-            // cox
-            if ((monster_name == "Tekton" || monster_name == "Tekton (enraged)") && (temp_weapon_type == "magic" || temp_weapon_stance == "spell"))
-            {
-                temp_max_hit = Math.Floor(temp_max_hit * 0.2);
-            }
-            if (monster_name == "Ice demon")
-            {
-                if (spell_name_array[i].Contains("Fire") == true)
-                {
-                    temp_max_hit = Math.Floor(temp_max_hit * 1.5);
-                }
-                else
-                {
-                    temp_max_hit = Math.Floor(temp_max_hit * 0.3333333333);
-                }
-            }
-            if (monster_name == "Glowing crystal" && (temp_weapon_type == "magic" || temp_weapon_stance == "spell"))
-            {
-                temp_max_hit = Math.Floor(temp_max_hit * 0.3333333333);
-            }
-            if (monster_name == "Great olm (melee claw)" && (temp_weapon_type == "magic" || temp_weapon_type == "ranged" || temp_weapon_stance == "spell"))
-            {
-                temp_max_hit = Math.Floor(temp_max_hit * 0.3333333333);
-            }
-            if (monster_name == "Great olm (mage claw)" && (temp_weapon_type != "magic" || temp_weapon_stance == "spell"))
-            {
-                temp_max_hit = Math.Floor(temp_max_hit * 0.3333333333);
-            }
-            if (monster_name == "Great olm (head)" && temp_weapon_type != "ranged")
-            {
-                temp_max_hit = Math.Floor(temp_max_hit * 0.3333333333);
-            }
-            if (monster_name == "Guardian" && weapon_name_array[i].Contains("Pickaxe") == true)
-            {
-                if (dragon_picaxe_spec_checkbox.IsChecked == true)
-                {
-                    temp_max_hit = Math.Floor(temp_max_hit * ((50 + mining_lvl + 3 + mining_lvl_req_array[i]) / 150));
-                }
-                else
-                {
-                    temp_max_hit = Math.Floor(temp_max_hit * ((50 + mining_lvl + mining_lvl_req_array[i]) / 150));
-                }
-            }
-            // verzik vitur p1 dmg modifier in average_dmg method
-        }
-        private void average_dmg()
-        {
-            int x = 0;
-            if (gear_set_2 == true)
-            {
-                x = 1;
-            }
-
-            if (monster_name == "Verzik vitur P1" && (weapon_name_array[x] != "Dawnbringer" || temp_weapon_stance == "spell"))
-            {
-                if (weapon_name_array[x] == "Scythe of vitur" && spell_name_array[x] == "None")
-                {
-                    scythe_hitsplat_1 = temp_max_hit;
-                    scythe_hitsplat_2 = Math.Floor(temp_max_hit * 0.5);
-                    scythe_hitsplat_3 = Math.Floor(temp_max_hit * 0.25);
-                    double max_hit_probability = 1 / (scythe_hitsplat_1 + 1);
-                    double throne_max_hit_cap_probability = 0.090909090909090909;
-                    double expected_min = 0;
-                    double var_x;
-
-                    for (int i = 0; i < (scythe_hitsplat_1 + 1); i++)
-                    {
-                        for (int j = 0; j < (11); j++)
-                        {
-                            var_x = Math.Min(i, j);
-                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
-                        }
-
-                    }
-                    temp_avg_dmg_per_attack = expected_min * temp_hit_chance;
-                    expected_min = 0;
-                    max_hit_probability = 1 / (scythe_hitsplat_2 + 1);
-                    for (int i = 0; i < (scythe_hitsplat_2 + 1); i++)
-                    {
-                        for (int j = 0; j < (11); j++)
-                        {
-                            var_x = Math.Min(i, j);
-                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
-                        }
-
-                    }
-                    temp_avg_dmg_per_attack += expected_min * temp_hit_chance;
-                    expected_min = 0;
-                    max_hit_probability = 1 / (scythe_hitsplat_3 + 1);
-                    for (int i = 0; i < (scythe_hitsplat_3 + 1); i++)
-                    {
-                        for (int j = 0; j < (11); j++)
-                        {
-                            var_x = Math.Min(i, j);
-                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
-                        }
-
-                    }
-                    temp_avg_dmg_per_attack += expected_min * temp_hit_chance;
-
-                    if (temp_max_hit > 10)
-                    {
-                        temp_max_hit = 10;
-                    }
-                    if (scythe_hitsplat_1 > 10)
-                    {
-                        scythe_hitsplat_1 = 10;
-                    }
-                    if (scythe_hitsplat_2 > 10)
-                    {
-                        scythe_hitsplat_2 = 10;
-                    }
-                    if (scythe_hitsplat_3 > 10)
-                    {
-                        scythe_hitsplat_3 = 10;
-                    }
-
-
-                }
-                else if (weapon_name_array[x] == "Osmumten's fang" && spell_name_array[x] == "None")
-                {
-                    osmumtens_fang_min_hit = Math.Floor(temp_max_hit * 0.15);
-                    if (special_attack_fix == true)
-                    {
-                        osmumtens_fang_max_hit = temp_max_hit;
-                    }
-                    else
-                    {
-                        osmumtens_fang_max_hit = temp_max_hit - osmumtens_fang_min_hit;
-                    }
-                    double max_hit_probability = 1 / (osmumtens_fang_max_hit - osmumtens_fang_min_hit + 1);
-                    double throne_max_hit_cap_probability = 0.090909090909090909;
-                    double expected_min = 0;
-                    double var_x;
-
-                    for (double i = osmumtens_fang_min_hit; i < (osmumtens_fang_max_hit + 1); i++)
-                    {
-                        for (int j = 0; j < (11); j++)
-                        {
-                            var_x = Math.Min(i, j);
-                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
-                        }
-
-                    }
-                    temp_avg_dmg_per_attack = expected_min * temp_hit_chance;
-                    if (temp_max_hit > 10)
-                    {
-                        temp_max_hit = 10;
-                    }
-                    if (osmumtens_fang_max_hit > 10)
-                    {
-                        osmumtens_fang_max_hit = 10;
-                    }
-                    if (osmumtens_fang_min_hit > 10)
-                    {
-                        osmumtens_fang_min_hit = 10;
-                    }
-                }
-                else
-                {
-                    double max_hit_probability = 1 / (temp_max_hit + 1);
-                    double throne_max_hit_cap;
-                    double expected_min = 0;
-                    double var_x;
-                    if (temp_weapon_type == "magic" || temp_weapon_type == "ranged" || temp_weapon_stance == "spell")
-                    {
-                        throne_max_hit_cap = 3;
-                    }
-                    else
-                    {
-                        throne_max_hit_cap = 10;
-                    }
-                    double throne_max_hit_cap_probability = 1 / (throne_max_hit_cap + 1);
-                    for (int i = 0; i < (temp_max_hit + 1); i++)
-                    {
-                        for (int j = 0; j < (throne_max_hit_cap + 1); j++)
-                        {
-                            var_x = Math.Min(i, j);
-                            expected_min += max_hit_probability * throne_max_hit_cap_probability * var_x;
-                        }
-
-                    }
-                    temp_avg_dmg_per_attack = expected_min * temp_hit_chance;
-
-                    if (temp_weapon_type == "magic" || temp_weapon_type == "ranged" || temp_weapon_stance == "spell")
-                    {
-                        if (temp_max_hit > 3)
-                        {
-                            temp_max_hit = 3;
-                        }
-                    }
-                    else
-                    {
-                        if (temp_max_hit > 10)
-                        {
-                            temp_max_hit = 10;
-                        }
-                    }
-
-                   
-                }
-
-
-            }
-            else
-            {
-                if (weapon_name_array[x] == "Scythe of vitur" && spell_name_array[x] == "None")
-                {
-                    if (monster_size == 1)
-                    {
-                        scythe_hitsplat_1 = temp_max_hit;
-                    }
-                    else if (monster_size == 2)
-                    {
-                        scythe_hitsplat_1 = temp_max_hit;
-                        scythe_hitsplat_2 = Math.Floor(temp_max_hit * 0.5);
-                        temp_max_hit = scythe_hitsplat_1 + scythe_hitsplat_2;
-                    }
-                    else
-                    {
-                        scythe_hitsplat_1 = temp_max_hit;
-                        scythe_hitsplat_2 = Math.Floor(temp_max_hit * 0.5);
-                        scythe_hitsplat_3 = Math.Floor(temp_max_hit * 0.25);
-                        temp_max_hit = scythe_hitsplat_1 + scythe_hitsplat_2 + scythe_hitsplat_3;
-                    }
-                    temp_avg_dmg_per_attack = (temp_max_hit * temp_hit_chance) / 2;
-                }
-                else if (weapon_name_array[x] == "Osmumten's fang" && spell_name_array[x] == "None")
-                {
-                    osmumtens_fang_min_hit = Math.Floor(temp_max_hit * 0.15);
-                    if (special_attack_fix == true)
-                    {
-                        osmumtens_fang_max_hit = temp_max_hit;
-                    }
-                    else
-                    {
-                        osmumtens_fang_max_hit = temp_max_hit - osmumtens_fang_min_hit;
-                    }
-                    if (monster_name == "Wardens Core")
-                    {
-                        temp_max_hit = osmumtens_fang_max_hit;
-                    }
-                    temp_avg_dmg_per_attack = ((osmumtens_fang_min_hit + osmumtens_fang_max_hit) * temp_hit_chance) / 2;
-                }
-                else if (weapon_name_array[x] == "Venator bow")
-                {
-                    temp_avg_dmg_per_attack = (temp_max_hit * temp_hit_chance) / 2;
-                    double temp_max_def_roll;
-                    double temp_temp_hit_chance;
-                    if (venator_1st_bounce_checkbox.IsChecked == true)
-                    {
-                        temp_max_def_roll = (venator_bow_1st_bounce_def_lvl + 9) * (venator_bow_1st_bounce_range_def + 64);
-                        if (temp_max_attack_roll > temp_max_def_roll)
-                        {
-                            temp_temp_hit_chance = 1 - (temp_max_def_roll + 2) / (2 * (temp_max_attack_roll + 1));
-                        }
-                        else
-                        {
-                            temp_temp_hit_chance = temp_max_attack_roll / (2 * (temp_max_def_roll + 1));
-                        }
-
-                        temp_avg_dmg_per_attack += Math.Floor(temp_max_hit/100.0 * 66) * temp_temp_hit_chance / 2;
-                    }
-                    if (venator_2nd_bounce_checkbox.IsChecked == true)
-                    {
-                        temp_max_def_roll = (venator_bow_2nd_bounce_def_lvl + 9) * (venator_bow_2nd_bounce_range_def + 64);
-                        if (temp_max_attack_roll > temp_max_def_roll)
-                        {
-                            temp_temp_hit_chance = 1 - (temp_max_def_roll + 2) / (2 * (temp_max_attack_roll + 1));
-                        }
-                        else
-                        {
-                            temp_temp_hit_chance = temp_max_attack_roll / (2 * (temp_max_def_roll + 1));
-                        }
-
-                        temp_avg_dmg_per_attack += Math.Floor(temp_max_hit / 100.0 * 66) * temp_temp_hit_chance / 2;
-                    }
-
-                }
-                else if (weapon_name_array[x].Contains("Keris") == true && monster_is_kaplhite == true && spell_name_array[x] == "None")
-                {
-                    temp_avg_dmg_per_attack = ((temp_max_hit + (temp_max_hit * 3 * (1.0/51.0))) * temp_hit_chance) / 2;
-                }
-                else
-                {
-                    temp_avg_dmg_per_attack = (temp_max_hit * temp_hit_chance) / 2;
-                }
-                
-            }
-
-            // zulrah dmg cap
-            if (monster_name.Contains("Zulrah") == true && temp_max_hit > 50)
-            {
-                double[] zulrah_dmg_dist = new double[Convert.ToInt32(temp_max_hit + 1)];
-                zulrah_dmg_dist[0] = 1 - temp_hit_chance;
-                for (int i = 1; i < temp_max_hit + 1; i++)
-                {
-                    if (i < 51)
-                    {
-                        zulrah_dmg_dist[i] = i * temp_hit_chance;
-                    }
-                    else
-                    {
-                        zulrah_dmg_dist[i] = 47.5 * temp_hit_chance;
-                    }
-                }
-                temp_max_hit = 50;
-                temp_avg_dmg_per_attack = (zulrah_dmg_dist.Sum() / zulrah_dmg_dist.Length);
-            }
-
-            if (weapon_name_array[x].Contains("crossbow") == true && (ammo_name_array[x] == "Ruby dragon bolts (e)" || ammo_name_array[x] == "Ruby bolts (e)"))
-            {
-                temp_avg_dmg_per_attack = temp_max_hit * temp_hit_chance;
-            }
-
-            if (monster_name == "Sleepwalker")
-            {
-                temp_avg_dmg_per_attack = temp_max_hit;
-            }
-
-            if (temp_weapon_type == "crush" && (monster_name == "Phosani's Husk (range)" || monster_name == "Phosani's Husk (mage)" || monster_name == "Phosani's Parasite (weakened)" ))
-            {
-                temp_avg_dmg_per_attack = temp_max_hit;
-            }
-
-            if (monster_name == "Wardens Core" && (temp_weapon_type == "stab" || temp_weapon_type == "slash" || temp_weapon_type == "crush"))
-            {
-                temp_avg_dmg_per_attack = temp_max_hit;
-            }
-
-            if (monster_name == "Zombified Spawn" && spell_name_array[x] == "Crumble Undead" && total_magic_atk_array[x] > -64)
-            {
-                temp_max_hit = monster_reduced_hp_lvl;
-                temp_avg_dmg_per_attack = temp_max_hit;
-            }
-        }
-        private void max_hit_and_attack_roll()
-        {
-            int i = 0;
-            int j = 0;
-            if (gear_set_2 == true)
-            {
-                i = 1;
-                j = 11;
-            }
-
-            double gear_bonus_melee = 1;
-            double gear_bonus_range_and_mage = 1;
-            if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
-            {
-                gear_bonus_melee = 7.0/6.0;
-                gear_bonus_range_and_mage = 1.15;
-            }
-            if (amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true)
-            {
-                gear_bonus_melee = 1.2;
-                gear_bonus_range_and_mage = 1.2;
-            }
-            if (weapon_name_array[i] == "Dragon hunter lance" && monster_is_dragon == true)
-            {
-                gear_bonus_melee += 0.2;
-            }
-
-            bool elite_void = false;
-            bool normal_void = false;
-            if (helmet_name_array[i] == "Void helmet" && body_name_array[i] == "Elite void top" && legs_name_array[i] == "Elite void robe" && gloves_name_array[i] == "Void gloves")
-            {
-                elite_void = true;
-            }
-            if (helmet_name_array[i] == "Void helmet" && (body_name_array[i] == "Void top" || body_name_array[i] == "Elite void top") && (legs_name_array[i] == "Void robe" || legs_name_array[i] == "Elite void robe") && gloves_name_array[i] == "Void gloves" && elite_void == false)
-            {
-                normal_void = true;
-            }
-
-            switch (temp_weapon_type)
-            {
-                case "ranged":
-                    double temp_ranged_str = total_range_str_array[i];
-                    if (weapon_name_array[i] == "Bow of faerdhinen" || weapon_name_array[i] == "Crystal bow" || weapon_name_array[i] == "Webweaver bow" || weapon_name_array[i] == "Craw's bow" || weapon_name_array[i].Contains("chinchompa") == true || weapon_name_array[i].Contains("dart") == true || weapon_name_array[i].Contains("knife") == true || weapon_name_array[i].Contains("thrownaxe") == true)
-                    {
-                        temp_ranged_str = total_range_str_array[i] - range_str_array[j + 3];
-                    }
-
-                    switch (weapon_name_array[i])
-                    {
-                        case "Twisted bow":
-                            double twisted_bow_modifier = Math.Max(monster_reduced_magic_lvl, monster_aggressive_magic);
-                            double twisted_bow_dmg_modifier = 0;
-                            double twisted_bow_accuracy_modifier = 0;
-                            if (monster_is_in_cox == true)
-                            {
-                                if (twisted_bow_modifier > 350)
-                                {
-                                    twisted_bow_modifier = 350;
-                                }
-                            }
-                            else
-                            {
-                                if (twisted_bow_modifier > 250)
-                                {
-                                    twisted_bow_modifier = 250;
-                                }
-
-                            }
-
-                            twisted_bow_accuracy_modifier = Math.Floor((140 + ((30 * twisted_bow_modifier / 10) - 10) / 100) - ((Math.Pow((3 * twisted_bow_modifier / 10) - 100, 2)) / 100));
-                            if (twisted_bow_accuracy_modifier > 140)
-                            {
-                                twisted_bow_accuracy_modifier = 140;
-                            }
-                            twisted_bow_dmg_modifier = Math.Floor((250 + ((30 * twisted_bow_modifier / 10) - 14) / 100) - ((Math.Pow((3 * twisted_bow_modifier / 10) - 140, 2)) / 100));
-                            if (twisted_bow_dmg_modifier > 250)
-                            {
-                                twisted_bow_dmg_modifier = 250;
-                            }
-
-                            temp_effective_range_str = temp_effective_range_lvl;
-                            temp_effective_range_str = temp_effective_range_str + true_range_str + 8;
-                            if (elite_void == true)
-                            {
-                                temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.125);
-                            }
-                            if (normal_void == true)
-                            {
-                                temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.1);
-                            }
-                            temp_max_hit = ((temp_effective_range_str * (temp_ranged_str + 64)) / 640) + 0.5;
-                            temp_max_hit = Math.Floor(temp_max_hit);
-                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
-                            temp_max_hit = Math.Floor(temp_max_hit * (twisted_bow_dmg_modifier / 100));
-
-                            temp_effective_range_lvl = temp_effective_range_lvl + true_range_lvl + 8;
-                            if (elite_void == true || normal_void == true)
-                            {
-                                temp_effective_range_lvl = Math.Floor(temp_effective_range_lvl * 1.1);
-                            }
-                            temp_max_attack_roll = temp_effective_range_lvl * (total_range_atk_array[i] + 64);
-                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * gear_bonus_range_and_mage);
-                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * (twisted_bow_accuracy_modifier / 100));
-                            break;
-                        case "Bow of faerdhinen":
-                            double crystal_bonus_dmg = 1;
-                            double crystal_bonus_accuracy = 1;
-                            if (helmet_name_array[i] == "Crystal helm")
-                            {
-                                crystal_bonus_dmg = crystal_bonus_dmg + 0.025;
-                                crystal_bonus_accuracy = crystal_bonus_accuracy + 0.05;
-                            }
-                            if (body_name_array[i] == "Crystal body")
-                            {
-                                crystal_bonus_dmg = crystal_bonus_dmg + 0.075;
-                                crystal_bonus_accuracy = crystal_bonus_accuracy + 0.15;
-                            }
-                            if (legs_name_array[i] == "Crystal legs")
-                            {
-                                crystal_bonus_dmg = crystal_bonus_dmg + 0.05;
-                                crystal_bonus_accuracy = crystal_bonus_accuracy + 0.1;
-                            }
-                            temp_effective_range_str = temp_effective_range_lvl;
-                            temp_effective_range_str = temp_effective_range_str + true_range_str + 8;
-                            if (elite_void == true)
-                            {
-                                temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.125);
-                            }
-                            if (normal_void == true)
-                            {
-                                temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.1);
-                            }
-                            temp_max_hit = ((temp_effective_range_str * (temp_ranged_str + 64)) / 640) + 0.5;
-                            temp_max_hit = Math.Floor(temp_max_hit);
-                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage * crystal_bonus_dmg);
-
-                            temp_effective_range_lvl = temp_effective_range_lvl + true_range_lvl + 8;
-                            if (elite_void == true || normal_void == true)
-                            {
-                                temp_effective_range_lvl = Math.Floor(temp_effective_range_lvl * 1.1);
-                            }
-                            temp_max_attack_roll = temp_effective_range_lvl * (total_range_atk_array[i] + 64);
-                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * gear_bonus_range_and_mage * crystal_bonus_accuracy);
-                            break;
-                        case "Dragon hunter crossbow":
-                            temp_effective_range_str = temp_effective_range_lvl;
-                            temp_effective_range_str = temp_effective_range_str + true_range_str + 8;
-                            if (elite_void == true)
-                            {
-                                temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.125);
-                            }
-                            if (normal_void == true)
-                            {
-                                temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.1);
-                            }
-                            temp_max_hit = ((temp_effective_range_str * (temp_ranged_str + 64)) / 640) + 0.5;
-                            temp_max_hit = Math.Floor(temp_max_hit);
-
-                            temp_effective_range_lvl = temp_effective_range_lvl + true_range_lvl + 8;
-                            if (elite_void == true || normal_void == true)
-                            {
-                                temp_effective_range_lvl = Math.Floor(temp_effective_range_lvl * 1.1);
-                            }
-                            temp_max_attack_roll = temp_effective_range_lvl * (total_range_atk_array[i] + 64);
-
-                            if (monster_is_dragon == true)
-                            {
-                                temp_max_hit = Math.Floor(temp_max_hit * (gear_bonus_range_and_mage + 0.25));
-                                temp_max_attack_roll = Math.Floor(temp_max_attack_roll * (gear_bonus_range_and_mage + 0.3));
-                            }
-                            else
-                            {
-                                temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
-                                temp_max_attack_roll = Math.Floor(temp_max_attack_roll * gear_bonus_range_and_mage);
-                            }
-                            break;
-                        case "Black chinchompa":
-                        case "Red chinchompa":
-                        case "Grey chinchompa":
-                            temp_effective_range_str = temp_effective_range_lvl;
-                            temp_effective_range_str = temp_effective_range_str + true_range_str + 8;
-                            if (elite_void == true)
-                            {
-                                temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.125);
-                            }
-                            if (normal_void == true)
-                            {
-                                temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.1);
-                            }
-                            temp_max_hit = ((temp_effective_range_str * (temp_ranged_str + 64)) / 640) + 0.5;
-                            temp_max_hit = Math.Floor(temp_max_hit);
-                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
-
-                            temp_effective_range_lvl = temp_effective_range_lvl + true_range_lvl + 8;
-                            if (elite_void == true || normal_void == true)
-                            {
-                                temp_effective_range_lvl = Math.Floor(temp_effective_range_lvl * 1.1);
-                            }
-                            temp_max_attack_roll = temp_effective_range_lvl * (total_range_atk_array[i] + 64);
-                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * gear_bonus_range_and_mage);
-
-                            double chin_accuracy_modifier = 1;
-                            switch (temp_weapon_stance)
-                            {
-                                case "short fuse":
-                                    if (distance_to_monster > 3)
-                                    {
-                                        chin_accuracy_modifier = 0.75;
-                                    }
-                                    if (distance_to_monster > 6)
-                                    {
-                                        chin_accuracy_modifier = 0.50;
-                                    }
-                                    break;
-                                case "medium fuse":
-                                    if (distance_to_monster < 4 || distance_to_monster > 6)
-                                    {
-                                        chin_accuracy_modifier = 0.75;
-                                    }
-                                    break;
-                                case "long fuse":
-                                    if (distance_to_monster < 7)
-                                    {
-                                        chin_accuracy_modifier = 0.75;
-                                    }
-                                    if (distance_to_monster < 4)
-                                    {
-                                        chin_accuracy_modifier = 0.50;
-                                    }
-                                    break;
-                            }
-                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * chin_accuracy_modifier);
-
-                            break;
-                        default:
-                            temp_effective_range_str = temp_effective_range_lvl;
-                            temp_effective_range_str = temp_effective_range_str + true_range_str + 8;
-                            if (elite_void == true)
-                            {
-                                temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.125);
-                            }
-                            if (normal_void == true)
-                            {
-                                temp_effective_range_str = Math.Floor(temp_effective_range_str * 1.1);
-                            }
-                            temp_max_hit = ((temp_effective_range_str * (temp_ranged_str + 64)) / 640) + 0.5;
-                            temp_max_hit = Math.Floor(temp_max_hit);
-                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
-
-                            temp_effective_range_lvl = temp_effective_range_lvl + true_range_lvl + 8;
-                            if (elite_void == true || normal_void == true)
-                            {
-                                temp_effective_range_lvl = Math.Floor(temp_effective_range_lvl * 1.1);
-                            }
-                            temp_max_attack_roll = temp_effective_range_lvl * (total_range_atk_array[i] + 64);
-                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * gear_bonus_range_and_mage);
-                            break;
-                    }
-                    break;
-                case "magic":
-                    // welcome to magical spaghetti zone
-
-                    Dispatcher.Invoke(mage_staff_max_hit);
-                    double shadow_multiplier = 3;
-                    if (monster_is_in_toa == true)
-                    {
-                        shadow_multiplier = 4;
-                    }
-                    double temp_magic_dmg = 0;
-                    if (amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true)
-                    {
-                        temp_magic_dmg += 20;
-                    }
-                    if (elite_void == true)
-                    {
-                        temp_magic_dmg += 2.5;
-                    }
-                    if (total_magic_dmg_array[i] != 0 || temp_magic_dmg != 0)
-                    {
-                        // shadow calcs as its odd for some magic dmg bonuses
-                        if (weapon_name_array[i] == "Tumeken's shadow")
-                        {
-                            if (total_magic_dmg_array[i] != 0)
-                            {
-                                // slayer helmet wont affect as either salve or void is overwriting it
-                                if ((amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true) || elite_void == true)
-                                {
-                                    temp_max_hit = staff_base_max_hit * (1 + (((total_magic_dmg_array[i] / 100) * shadow_multiplier) + (temp_magic_dmg / 100)));
-                                    temp_max_hit = Math.Floor(temp_max_hit);
-                                }
-                                // salve and void check just happened, so only counting for slayer helmet
-                                else
-                                {
-                                    temp_max_hit = staff_base_max_hit * (1 + ((total_magic_dmg_array[i] / 100) * shadow_multiplier));
-                                    temp_max_hit = Math.Floor(temp_max_hit);
-                                    if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
-                                    {
-                                        temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                // magic dmg needs to be 0 to get here, so either salve or void must be equipped
-                                // and both would overwire slayer helmet
-                                temp_max_hit = staff_base_max_hit * (1 + (temp_magic_dmg / 100));
-                                temp_max_hit = Math.Floor(temp_max_hit);
-                            }
-                        }
-                        // other staff mage dmg calcs
-                        else
-                        {
-                            if (total_magic_dmg_array[i] != 0)
-                            {
-                                // slayer helmet wont affect as either salve or void is overwriting it
-                                if ((amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true) || elite_void == true)
-                                {
-                                    temp_max_hit = staff_base_max_hit * (1 + ((total_magic_dmg_array[i] + temp_magic_dmg) / 100));
-                                    temp_max_hit = Math.Floor(temp_max_hit);
-                                }
-                                // salve and void check just happened, so only counting for slayer helmet
-                                else
-                                {
-                                    temp_max_hit = staff_base_max_hit * (1 + (total_magic_dmg_array[i] / 100));
-                                    temp_max_hit = Math.Floor(temp_max_hit);
-                                    if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
-                                    {
-                                        temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                // magic dmg needs to be 0 to get here, so either salve or void must be equipped
-                                // and both would overwire slayer helmet
-                                temp_max_hit = staff_base_max_hit * (1 + (temp_magic_dmg / 100));
-                                temp_max_hit = Math.Floor(temp_max_hit);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // cant have salve nor void as both temp_mage_dmg and mage_dmg are 0
-                        // can have slayer helmet bonus still tho
-                        temp_max_hit = staff_base_max_hit;
-                        if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
-                        {
-                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
-                        }
-                    }
-
-                    // also dawnbringer is its own thing for being odd
-                    if (weapon_name_array[i] == "Dawnbringer")
-                    {
-                        temp_max_hit = Math.Floor(magic_lvl_and_pot * (1 + ((temp_magic_dmg + total_magic_dmg_array[i]) / 100))) / 6 - 1;
-                        temp_max_hit = Math.Floor(temp_max_hit);
-                        if ((helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true) && !(amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true))
-                        {
-                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
-                        }
-                    }
-
-                    // why jamflex mage void works differently from range/mage void with the +8???? and its +9???? and style bonus????
-                    if (elite_void == true || normal_void == true)
-                    {
-                        temp_effective_mage_lvl = temp_effective_mage_lvl + Math.Floor(true_mage_lvl * 1.45) + 9;
-                    }
-                    else
-                    {
-                        temp_effective_mage_lvl = temp_effective_mage_lvl + true_mage_lvl + 9;
-                    }
-                    switch (weapon_name_array[i])
-                    {
-                        case "Tumeken's shadow":
-                            temp_max_attack_roll = (temp_effective_mage_lvl * ((total_magic_atk_array[i] * shadow_multiplier) + 64) * gear_bonus_range_and_mage);
-                            break;
-                        default:
-                            temp_max_attack_roll = (temp_effective_mage_lvl * (total_magic_atk_array[i] + 64) * gear_bonus_range_and_mage);
-                            break;
-                    }
-                    temp_max_attack_roll = Math.Floor(temp_max_attack_roll);
-
-                    if (weapon_name_array[i] == "Dawnbringer")
-                    {
-                        if (monster_name != "Verzik vitur P1" || monster_name == "Combat dummy")
-                        {
-                            temp_max_hit = 0;
-                            temp_max_attack_roll = 0;
-                        }
-                    }
-                    break;
-                case "cast":
-                case "cast accurate":
-                case "cast longrange":
-                    // welcome to magical spaghetti zone 2.0 electric boogaloo
-
-                    Dispatcher.Invoke(spells_max_hit);
-                    temp_magic_dmg = 0;
-                    if (amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true)
-                    {
-                        temp_magic_dmg += 20;
-                    }
-                    if (elite_void == true)
-                    {
-                        temp_magic_dmg += 2.5;
-                    }
-
-                    if (total_magic_dmg_array[i] != 0 || temp_magic_dmg != 0)
-                    {
-                        // slayer helmet wont affect as either salve or void is overwriting it
-                        if ((amulet_name_array[i] == "Salve amulet (ei)" && monster_is_undead == true) || elite_void == true)
-                        {
-                            temp_max_hit = Math.Floor(spell_base_max_hit * (1 + ((total_magic_dmg_array[i] + temp_magic_dmg) / 100)));
-                        }
-                        // salve and void check just happened, so only counting for slayer helmet
-                        else
-                        {
-                            temp_max_hit = Math.Floor(spell_base_max_hit * (1 + ((total_magic_dmg_array[i] + temp_magic_dmg) / 100)));
-                            if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
-                            {
-                                temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
-                            }
-                        }
-
-
-                    }
-                    else
-                    {
-                        // cant have salve nor void as both temp_mage_dmg and mage_dmg are 0
-                        // can have slayer helmet bonus still tho
-                        temp_max_hit = spell_base_max_hit;
-                        if (helmet_name_array[i] == "Slayer helmet (i)" && slayer_task_checkbox.IsChecked == true)
-                        {
-                            temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_range_and_mage);
-                        }
-                    }
-
-                    if (off_hand_name_array[i] == "Tome of fire" && spell_name_array[i].Contains("Fire") == true)
-                    {
-                        temp_max_hit = Math.Floor(temp_max_hit * 1.5);
-                    }
-
-                    if (off_hand_name_array[i] == "Tome of water" && spell_name_array[i].Contains("Water") == true)
-                    {
-                        temp_max_hit = Math.Floor(temp_max_hit * 1.2);
-                    }
-
-                    // why jamflex mage void works differently from range/mage void with the +9???? also why mage is +9??? and style bonus????
-                    if (elite_void == true || normal_void == true)
-                    {
-                        temp_effective_mage_lvl = temp_effective_mage_lvl + Math.Floor(true_mage_lvl * 1.45) + 9;
-                    }
-                    else
-                    {
-                        temp_effective_mage_lvl = temp_effective_mage_lvl + true_mage_lvl + 9;
-                    }
-
-                    temp_max_attack_roll = Math.Floor((temp_effective_mage_lvl * (total_magic_atk_array[i] + 64) * gear_bonus_range_and_mage));
-
-                    if (off_hand_name_array[i] == "Tome of water" && (spell_name_array[i].Contains("Water") == true || spell_book_array[i] == "Curse"))
-                    {
-                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.2);
-                    }
-
-                    if (weapon_name_array[i] == "Ice ancient sceptre" && spell_name_array[i].Contains("Ice") == true)
-                    {
-                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.1);
-                    }
-                    break;
-                case "slash":
-                case "stab":
-                case "crush":
-                    if (weapon_name_array[i] == "Soulreaper axe")
-                    {
-                        temp_effective_strength_lvl = temp_effective_strength_lvl + Math.Floor(strength_lvl_and_pot * (strenght_prayer + 0.06 * soulreaper_axe_stack)) + 8;
-                    }
-                    else
-                    {
-                        temp_effective_strength_lvl = temp_effective_strength_lvl + true_strength_lvl + 8;
-                    }
-
-                    if (elite_void == true || normal_void == true)
-                    {
-                        temp_effective_strength_lvl = Math.Floor(temp_effective_strength_lvl * 1.1);
-                    }
-                    temp_max_hit = ((temp_effective_strength_lvl * (total_melee_str_array[i] + 64)) + 320) / 640;
-                    temp_max_hit = Math.Floor(temp_max_hit);
-                    temp_max_hit = Math.Floor(temp_max_hit * gear_bonus_melee);
-
-                    temp_effective_attack_lvl = temp_effective_attack_lvl + true_attack_lvl + 8;
-                    if (elite_void == true || normal_void == true)
-                    {
-                        temp_effective_attack_lvl = Math.Floor(temp_effective_attack_lvl * 1.1);
-                    }
-
-                    if (temp_weapon_type == "stab")
-                    {
-                        temp_max_attack_roll = temp_effective_attack_lvl * (total_stab_atk_array[i] + 64);
-                        temp_max_attack_roll = (temp_max_attack_roll * gear_bonus_melee);
-                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll);
-
-                    }
-                    else if (temp_weapon_type == "slash")
-                    {
-                        temp_max_attack_roll = temp_effective_attack_lvl * (total_slash_atk_array[i] + 64);
-                        temp_max_attack_roll = (temp_max_attack_roll * gear_bonus_melee);
-                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll);
-                    }
-                    else if (temp_weapon_type == "crush")
-                    {
-                        double inq_bonus = 1;
-                        if (helmet_name_array[i] == "Inquisitor's great helm")
-                        {
-                            inq_bonus = inq_bonus + 0.005;
-                        }
-                        if (body_name_array[i] == "Inquisitor's hauberk")
-                        {
-                            inq_bonus = inq_bonus + 0.005;
-                        }
-                        if (legs_name_array[i] == "Inquisitor's plateskirt")
-                        {
-                            inq_bonus = inq_bonus + 0.005;
-                        }
-                        if (helmet_name_array[i] == "Inquisitor's great helm" && body_name_array[i] == "Inquisitor's hauberk" && legs_name_array[i] == "Inquisitor's plateskirt")
-                        {
-                            inq_bonus = inq_bonus + 0.01;
-                        }
-                        temp_max_attack_roll = temp_effective_attack_lvl * (total_crush_atk_array[i] + 64);
-                        temp_max_attack_roll = (temp_max_attack_roll * gear_bonus_melee);
-                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll);
-
-                        temp_max_attack_roll = Math.Floor(temp_max_attack_roll * inq_bonus);
-                        temp_max_hit = Math.Floor(temp_max_hit * inq_bonus);
-                    }
-
-                    if (weapon_name_array[i] == "Arclight" && monster_is_demon == true)
-                    {
-                        if (monster_name == "Duke Sucellus")
-                        {
-                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.49);
-                            temp_max_hit = Math.Floor(temp_max_hit * 1.49);
-                        }
-                        else
-                        {
-                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.7);
-                            temp_max_hit = Math.Floor(temp_max_hit * 1.7);
-                        }
-                    }
-
-                    if (weapon_name_array[i].Contains("Keris") == true && monster_is_kaplhite == true)
-                    {
-                        temp_max_hit = Math.Floor(temp_max_hit * 1.33);
-                        if (weapon_name_array[i] == "Keris partisan of breaching")
-                        {
-                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.33);
-                        }
-                    }
-
-                    if (weapon_name_array[i] == "Keris partisan of the sun" && monster_is_in_toa == true)
-                    {
-                        if (monster_reduced_hp_lvl < monster_boosted_hp_lvl * 0.25)
-                        {
-                            temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.25);
-                        }
-
-                    }
-                    break;
-            }
-
-            if (red_keris_spec_checkbox.IsChecked == true && monster_is_in_toa == true)
-            {
-                temp_max_hit = Math.Floor(temp_max_hit * 1.25);
-            }
-
-            if (monster_is_in_wilderness == true && (weapon_name_array[i] == "Craw's bow" || weapon_name_array[i] == "Webweaver bow" || weapon_name_array[i] == "Thammaron's sceptre" || weapon_name_array[i] == "Accursed sceptre" || weapon_name_array[i] == "Viggora's chainmace" || weapon_name_array[i] == "Ursine chainmace"))
-            {
-                temp_max_hit = Math.Floor(temp_max_hit * 1.5);
-                temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.5);
-            }
-
-            if ((monster_name == "Totem" || monster_name == "Phosani's Totem") && (temp_weapon_type == "magic" || temp_weapon_stance == "spell"))
-            {
-                temp_max_hit = temp_max_hit * 2;
-            }
-
-            if (monster_name == "Wardens Core")
-            {
-                temp_max_hit = temp_max_hit * 5;
-            }
-
-            if (temp_max_hit < 0)
-            {
-                temp_max_hit = 0;
-            }
-        }
-        private void mage_staff_max_hit()
-        {
-            int i = 0;
-            if (gear_set_2 == true)
-            {
-                i = 1;
-            }
-            switch (weapon_name_array[i])
-            {
-                case "Tumeken's shadow":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 + 1;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
-                    if (staff_base_max_hit < 1)
-                    {
-                        staff_base_max_hit = 1;
-                    }
-                    break;
-                case "Sanguinesti staff":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 - 1;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
-                    if (staff_base_max_hit < 5)
-                    {
-                        staff_base_max_hit = 5;
-                    }
-                    break;
-                case "Trident of the swamp":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 - 2;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
-                    if (staff_base_max_hit < 4)
-                    {
-                        staff_base_max_hit = 4;
-                    }
-                    break;
-                case "Trident of the seas":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 - 5;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
-                    if (staff_base_max_hit < 1)
-                    {
-                        staff_base_max_hit = 1;
-                    }
-                    break;
-                case "Accursed sceptre":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 - 6;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
-                    if (staff_base_max_hit < 0)
-                    {
-                        staff_base_max_hit = 0;
-                    }
-                    break;
-                case "Thammaron's sceptre":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 - 8;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
-                    if (staff_base_max_hit < 0)
-                    {
-                        staff_base_max_hit = 0;
-                    }
-                    break;
-                    // dawnbringer is calced in max_hits_and_attack_rolls method
-            }
-
-        }
-        private void spells_max_hit()
-        {
-            int i = 0;
-            if (gear_set_2 == true)
-            {
-                i = 1;
-            }
-            switch (spell_name_array[i])
-            {
-                case "None":
-                    spell_base_max_hit = 0;
-                    break;
-                case "Fire Surge":
-                    spell_base_max_hit = 24;
-                    break;
-                case "Earth Surge":
-                    spell_base_max_hit = 23;
-                    break;
-                case "Water Surge":
-                    spell_base_max_hit = 22;
-                    break;
-                case "Wind Surge":
-                    spell_base_max_hit = 21;
-                    break;
-                case "Fire Wave":
-                    spell_base_max_hit = 20;
-                    break;
-                case "Earth Wave":
-                    spell_base_max_hit = 19;
-                    break;
-                case "Water Wave":
-                    spell_base_max_hit = 18;
-                    break;
-                case "Wind Wave":
-                    spell_base_max_hit = 17;
-                    break;
-                case "Fire Blast":
-                    spell_base_max_hit = 16;
-                    break;
-                case "Earth Blast":
-                    spell_base_max_hit = 15;
-                    break;
-                case "Water Blast":
-                    spell_base_max_hit = 14;
-                    break;
-                case "Wind Blast":
-                    spell_base_max_hit = 13;
-                    break;
-                case "Fire Bolt":
-                    spell_base_max_hit = 12;
-                    break;
-                case "Earth Bolt":
-                    spell_base_max_hit = 11;
-                    break;
-                case "Water Bolt":
-                    spell_base_max_hit = 10;
-                    break;
-                case "Wind Bolt":
-                    spell_base_max_hit = 9;
-                    break;
-                case "Fire Strike":
-                    spell_base_max_hit = 8;
-                    break;
-                case "Earth Strike":
-                    spell_base_max_hit = 6;
-                    break;
-                case "Water Strike":
-                    spell_base_max_hit = 4;
-                    break;
-                case "Wind Strike":
-                    spell_base_max_hit = 2;
-                    break;
-                case "Crumble Undead":
-                    spell_base_max_hit = 15;
-                    break;
-                case "God Spell":
-                    spell_base_max_hit = 20;
-                    break;
-                case "God Spell (charged)":
-                    spell_base_max_hit = 30;
-                    break;
-                case "Iban Blast":
-                    spell_base_max_hit = 25;
-                    break;
-                case "Magic Dart":
-                    spell_base_max_hit = (Math.Floor((magic_lvl_and_pot + magic_lvl_and_pot_modifier) / 10) + 10);
-                    break;
-                // curses
-                case "Snare":
-                    spell_base_max_hit = 3;
-                    break;
-                case "Entangle":
-                    spell_base_max_hit = 5;
-                    break;
-                // ancients
-                case "Ice Barrage":
-                    spell_base_max_hit = 30;
-                    break;
-                case "Blood Barrage":
-                    spell_base_max_hit = 29;
-                    break;
-                case "Shadow Brrage":
-                    spell_base_max_hit = 28;
-                    break;
-                case "Smoke Barrage":
-                    spell_base_max_hit = 27;
-                    break;
-                case "Ice Blitz":
-                    spell_base_max_hit = 26;
-                    break;
-                case "Blood Blitz":
-                    spell_base_max_hit = 25;
-                    break;
-                case "Shadow Blitz":
-                    spell_base_max_hit = 24;
-                    break;
-                case "Smoke Blitz":
-                    spell_base_max_hit = 23;
-                    break;
-                case "Ice Burst":
-                    spell_base_max_hit = 22;
-                    break;
-                case "Blood Burst":
-                    spell_base_max_hit = 21;
-                    break;
-                case "Shadow Burst":
-                    spell_base_max_hit = 18;
-                    break;
-                case "Smoke Burst":
-                    spell_base_max_hit = 17;
-                    break;
-                case "Ice Rush":
-                    spell_base_max_hit = 16;
-                    break;
-                case "Blood Rush":
-                    spell_base_max_hit = 15;
-                    break;
-                case "Shadow Rush":
-                    spell_base_max_hit = 14;
-                    break;
-                case "Smoke Rush":
-                    spell_base_max_hit = 13;
-                    break;
-                // arceus
-                case "Dark Demonbane":
-                    spell_base_max_hit = 30;
-                    break;
-                case "Superior Demonbane":
-                    spell_base_max_hit = 23;
-                    break;
-                case "Inferior Demonbane":
-                    spell_base_max_hit = 16;
-                    break;
-                case "Undead Grasp":
-                    spell_base_max_hit = 24;
-                    break;
-                case "Skeletal Grasp":
-                    spell_base_max_hit = 17;
-                    break;
-                case "Ghostly Grasp":
-                    spell_base_max_hit = 12;
-                    break;
-                default:
-                    spell_base_max_hit = 0;
-                    break;
-
-            }
-        }
-        private void bolt_proc_effects()
-        {
-            int i = 0;
-            if (gear_set_2 == true)
-            {
-                i = 1;
-            }
-
-            bolt_proc_kandarin_bonus = 1;
-            if (kandarin_diary_checkbox.IsChecked == true)
-            {
-                bolt_proc_kandarin_bonus = 1.1;
-            }
-            switch (ammo_name_array[i])
-            {
-                case "Ruby dragon bolts (e)":
-                case "Ruby bolts (e)": // bypass accuracy roll
-                    bolt_proc_chance = 6 * bolt_proc_kandarin_bonus;
-                    bolt_proc_chance_acb_spec = bolt_proc_chance + 6;
-                    if (weapon_name_array[i] == "Zaryte crossbow")
-                    {
-                        bolt_proc_dmg = Math.Floor(monster_reduced_hp_lvl * 0.22);
-                        bolt_proc_dmg = Math.Min(bolt_proc_dmg, 110);
-                    }
-                    else
-                    {
-                        bolt_proc_dmg = Math.Floor(monster_reduced_hp_lvl * 0.2);
-                        bolt_proc_dmg = Math.Min(bolt_proc_dmg, 100);
-                    }                    
-                    break;
-                case "Opal dragon bolts (e)":
-                case "Opal bolts (e)": // bypass accuracy roll
-                    bolt_proc_chance = 5 * bolt_proc_kandarin_bonus;
-                    bolt_proc_chance_acb_spec = bolt_proc_chance + 5;
-                    if (weapon_name_array[i] == "Zaryte crossbow")
-                    {
-                        bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 9);
-                    }
-                    else
-                    {
-                        bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 10);
-                    }
-                    break;
-                case "Dragonstone dragon bolts (e)":
-                case "Dragonstone bolts (e)":
-                    // If the target is immune to dragonfire, the special effect will not activate. maybe someday added
-                    bolt_proc_chance = 6 * bolt_proc_kandarin_bonus;
-                    bolt_proc_chance_acb_spec = bolt_proc_chance + 6;
-                    if (weapon_name_array[i] == "Zaryte crossbow")
-                    {
-                        bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 4.5454545454545454545454545454545);
-                    }
-                    else
-                    {
-                        bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 5);
-                    }
-                    break;
-                case "Pearl dragon bolts (e)":
-                case "Pearl bolts (e)": // bypass accuracy roll
-                    // seems like zcb has no extra bonus??
-                    bolt_proc_chance = 6 * bolt_proc_kandarin_bonus;
-                    bolt_proc_chance_acb_spec = bolt_proc_chance + 6;
-                    bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 20);
-                    // sorry cbad adding "fiery" type
-                    if (monster_name == "King Black Dragon" || monster_name == "Vorkath")
-                    {
-                        bolt_proc_dmg = temp_max_hit + Math.Floor(range_lvl_and_pot / 15);
-                    }
-                    break;
-                case "Diamond dragon bolts (e)":
-                case "Diamond bolts (e)": // bypass accuracy roll
-                    bolt_proc_chance = 10 * bolt_proc_kandarin_bonus;
-                    bolt_proc_chance_acb_spec = bolt_proc_chance + 10;
-                    if (weapon_name_array[i] == "Zaryte crossbow")
-                    {
-                        bolt_proc_dmg = Math.Floor(temp_max_hit * 1.25);
-                    }
-                    else
-                    {
-                        bolt_proc_dmg = Math.Floor(temp_max_hit * 1.15);
-                    }                   
-                    break;
-                case "Onyx dragon bolts (e)":
-                case "Onyx bolts (e)":
-                    // undead immune to bonus dmg or just lifesteal??
-                    bolt_proc_chance = 11 * bolt_proc_kandarin_bonus;
-                    bolt_proc_chance_acb_spec = bolt_proc_chance + 11;
-                    if (weapon_name_array[i] == "Zaryte crossbow")
-                    {
-                        bolt_proc_dmg = Math.Floor(temp_max_hit * 1.30);
-                    }
-                    else
-                    {
-                        bolt_proc_dmg = Math.Floor(temp_max_hit * 1.20);
-                    } 
-                    break;
-            }
-        }
-        private void attack_styles()
-        {
-            switch (temp_weapon_type)
-            {
-                case "ranged":
-                    switch (temp_weapon_stance)
-                    {
-                        case "short fuse":
-                        case "accurate":
-                            temp_effective_attack_lvl = 0;
-                            temp_effective_strength_lvl = 0;
-                            //temp_effective_defence_lvl = 0;
-                            temp_effective_mage_lvl = 0;
-                            temp_effective_range_lvl = 3;
-                            break;
-                        case "medium fuse":
-                        case "rapid":
-                            temp_effective_attack_lvl = 0;
-                            temp_effective_strength_lvl = 0;
-                            //temp_effective_defence_lvl = 0;
-                            temp_effective_mage_lvl = 0;
-                            temp_effective_range_lvl = 0;
-                            break;
-                        case "long fuse":
-                        case "longrange":
-                            temp_effective_attack_lvl = 0;
-                            temp_effective_strength_lvl = 0;
-                            //temp_effective_defence_lvl = 3;
-                            temp_effective_mage_lvl = 0;
-                            temp_effective_range_lvl = 0;
-                            break;
-                        default:
-                            MessageBox.Show("Incorrect weapon stance range, gl");
-                            break;
-                    }    
-                    break;
-                case "magic":
-                    switch (temp_weapon_stance)
-                    {
-                        case "accurate":
-                            temp_effective_attack_lvl = 0;
-                            temp_effective_strength_lvl = 0;
-                            //temp_effective_defence_lvl = 0;
-                            temp_effective_mage_lvl = 2;
-                            temp_effective_range_lvl = 0;
-                            break;
-                        case "longrange":
-                            temp_effective_attack_lvl = 0;
-                            temp_effective_strength_lvl = 0;
-                            //temp_effective_defence_lvl = 3;
-                            temp_effective_mage_lvl = 0;
-                            temp_effective_range_lvl = 0;
-                            break;
-                        default:
-                            MessageBox.Show("Incorrect weapon stance mage, gl");
-                            break;
-                    }
-                    break;
-                case "cast":
-                case "cast longrange":
-                    temp_effective_attack_lvl = 0;
-                    temp_effective_strength_lvl = 0;
-                    //temp_effective_defence_lvl = 3;
-                    temp_effective_mage_lvl = 0;
-                    temp_effective_range_lvl = 0;
-                    break;
-                case "cast accurate":
-                    temp_effective_attack_lvl = 0;
-                    temp_effective_strength_lvl = 0;
-                    //temp_effective_defence_lvl = 0;
-                    temp_effective_mage_lvl = 2;
-                    temp_effective_range_lvl = 0;
-                    break;
-                case "slash":
-                case "stab":
-                case "crush":
-                    switch (temp_weapon_stance)
-                    {
-                        case "accurate":
-                            temp_effective_attack_lvl = 3;
-                            temp_effective_strength_lvl = 0;
-                            //temp_effective_defence_lvl = 0;
-                            temp_effective_mage_lvl = 0;
-                            temp_effective_range_lvl = 0;
-                            break;
-                        case "aggressive":
-                            temp_effective_attack_lvl = 0;
-                            temp_effective_strength_lvl = 3;
-                            //temp_effective_defence_lvl = 0;
-                            temp_effective_mage_lvl = 0;
-                            temp_effective_range_lvl = 0;
-                            break;
-                        case "defensive":
-                            temp_effective_attack_lvl = 0;
-                            temp_effective_strength_lvl = 0;
-                            //temp_effective_defence_lvl = 3;
-                            temp_effective_mage_lvl = 0;
-                            temp_effective_range_lvl = 0;
-                            break;
-                        case "controlled":
-                            temp_effective_attack_lvl = 1;
-                            temp_effective_strength_lvl = 1;
-                            //temp_effective_defence_lvl = 1;
-                            temp_effective_mage_lvl = 0;
-                            temp_effective_range_lvl = 0;
-                            break;
-                        default:
-                            MessageBox.Show("Incorrect weapon stance melee, gl");
-                            break;
-                    }
-                    break;
-                case "none":
-                    temp_effective_attack_lvl = 0;
-                    temp_effective_strength_lvl = 0;
-                    //temp_effective_defence_lvl = 0;
-                    temp_effective_mage_lvl = 0;
-                    temp_effective_range_lvl = 0;
-                    break;
-                default:
-                    MessageBox.Show("Incorrect weapon type, gl");
-                    break;
-            }
-        }
-        private void overkill()
-        {
-            // some odd magic happens here, dont ask. Copied over from Bitterkoekje Dps calcs.
-            // where overkill was made by math/code wizard called Inevitably
-            // https://docs.google.com/spreadsheets/d/1wBXIlvAmqoQpu5u9XBfD4B0PW7D8owyO_CnRDiTHBKQ/edit#gid=158500257
-            // also has some minor problems, like verzik p1 dmg cap messes overkill calcs.
-            // and some big problem if max hit needs to be rounded. Mainly from bolt proc special dmg calcs
-
-            int x = 0;
-            if (gear_set_2 == true)
-            {
-                x = 1;
-            }
-
-
-            if (temp_avg_dmg_per_attack != temp_max_hit)
-            {
-                double accuracy_var = temp_hit_chance * (1 - (1 / (temp_max_hit + 1)));
-                int temp_temp_max_hit = Convert.ToInt32(temp_max_hit);
-                if (thrall_dps_checkbox.IsChecked == true && thrall_name != "None")
-                {
-                    temp_temp_max_hit = Convert.ToInt32(temp_temp_max_hit + (thrall_max_hit * 4 / temp_weapon_attack_speed));
-                }
-                int max_hit_var = Convert.ToInt32(temp_temp_max_hit);
-                int monster_hp_var = Convert.ToInt32(monster_reduced_hp_lvl);
-                int scythe_1 = Convert.ToInt32(scythe_hitsplat_1);
-                int scythe_2 = Convert.ToInt32(scythe_hitsplat_2);
-                int scythe_3 = Convert.ToInt32(scythe_hitsplat_3);
-
-                if (monster_reduced_hp_lvl > 0 || monster_name != "None")
-                {
-                    if (temp_weapon_stance != "spell")
-                    {
-                        switch (weapon_name_array[x])
-                        {
-                            case "Scythe of vitur":
-                                if (thrall_dps_checkbox.IsChecked == true && thrall_name != "None")
-                                {
-                                    scythe_1 = scythe_1 + Convert.ToInt32((thrall_max_hit * 4 / temp_weapon_attack_speed));
-                                }
-                                double acc = temp_hit_chance;
-                                int array_size;
-                                if (monster_size == 1)
-                                {
-                                    array_size = scythe_1 + 1;
-                                }
-                                else if (monster_size == 2)
-                                {
-                                    array_size = scythe_1 + scythe_2 + 1;
-                                }
-                                else
-                                {
-                                    array_size = scythe_1 + scythe_2 + scythe_3 + 1;
-                                }
-
-
-                                double[] dist = new double[array_size];
-                                int[] maxdist = { scythe_1 + 1, scythe_2 + 1, scythe_3 + 1 };
-
-                                // monster size 3
-                                if (monster_size >= 3)
-                                {
-                                    int denom = 0;
-                                    for (int i = 0; i < maxdist[0]; i++)
-                                    {
-                                        for (int j = 0; j < maxdist[1]; j++)
-                                        {
-                                            for (int k = 0; k < maxdist[2]; k++)
-                                            {
-                                                int hit = i + j + k;
-                                                double numer = Math.Pow(acc, 3);
-                                                denom = (scythe_1 + 1) * (scythe_2 + 1) * (scythe_3 + 1);
-                                                dist[hit] += (numer / denom);
-                                            }
-                                        }
-                                    }
-                                    int[][] combs = new int[][]
-                                    {
-                                    new int[] { maxdist[0], maxdist[1] },
-                                    new int[] { maxdist[0], maxdist[2] },
-                                    new int[] { maxdist[1], maxdist[2] }
-                                    };
-                                    for (int i = 0; i < combs.Length; i++)
-                                    {
-                                        for (int j = 0; j < combs[i][0]; j++)
-                                        {
-                                            for (int k = 0; k < combs[i][1]; k++)
-                                            {
-                                                dist[j + k] += Math.Pow(acc, 2) * (1 - acc) / (combs[i][0] * combs[i][1]);
-                                            }
-                                        }
-                                    }
-
-                                    for (int i = 0; i < maxdist.Length; i++)
-                                    {
-                                        for (int j = 0; j < maxdist[i]; j++)
-                                        {
-                                            dist[j] += acc * Math.Pow(1 - acc, 2) / maxdist[i];
-                                        }
-                                    }
-                                    dist[0] += Math.Pow(1 - acc, 3);
-                                }
-
-                                // monster size 2
-                                if (monster_size == 2)
-                                {
-                                    for (int i = 0; i < maxdist[0]; i++)
-                                    {
-                                        for (int j = 0; j < maxdist[1]; j++)
-                                        {
-                                            dist[i + j] += Math.Pow(acc, 2) / (maxdist[0] * maxdist[1]);
-                                        }
-                                    }
-
-                                    for (int i = 0; i < (maxdist.Length - 1); i++)
-                                    {
-                                        for (int j = 0; j < maxdist[i]; j++)
-                                        {
-                                            dist[j] += acc * (1 - acc) / maxdist[i];
-                                        }
-                                    }
-                                    dist[0] += Math.Pow(1 - acc, 2);
-                                }
-
-                                // monster size 1
-                                if (monster_size == 1)
-                                {
-                                    for (int i = 0; i < maxdist[0]; i++)
-                                    {
-                                        dist[i] = acc / maxdist[0];
-                                    }
-                                    dist[0] += (1 - acc);
-                                }
-
-                                List<double> expectation = new List<double> { 0 };
-                                double sum = dist.Sum();
-
-                                for (int i = 1; i < (monster_reduced_hp_lvl + 1); i++)
-                                {
-                                    double temp = 0;
-                                    for (int j = 0; j < dist.Length; j++)
-                                    {
-                                        if (j != 0)
-                                        {
-                                            temp += dist[j] * expectation[Math.Max(expectation.Count - j, 0)];
-                                        }
-                                    }
-                                    temp /= sum;
-                                    expectation.Add((1 + temp) / (1 - dist[0]));
-                                }
-
-                                temp_avg_hits_to_kill = expectation.Last();
-                                break;
-                            case "Osmumten's fang":
-                                if (osmumtens_fang_min_hit > 0)
-                                {
-                                    int fang_max = Convert.ToInt32(osmumtens_fang_max_hit);
-                                    int fang_min = Convert.ToInt32(osmumtens_fang_min_hit);
-                                    if (thrall_dps_checkbox.IsChecked == true && thrall_name != "None")
-                                    {
-                                        fang_max = fang_max + Convert.ToInt32((thrall_max_hit * 4 / temp_weapon_attack_speed));
-                                    }
-                                    double[] dist_fang = new double[fang_max + 1];
-                                    double acc_fang = temp_hit_chance;
-                                    dist_fang[0] = 1 - temp_hit_chance;
-                                    for (int i = 1; i <= fang_max; i++)
-                                    {
-                                        if (i < fang_min)
-                                        {
-                                            dist_fang[i] = 0;
-                                        }
-                                        else
-                                        {
-                                            dist_fang[i] = acc_fang / (fang_max - fang_min + 1);
-                                        }
-                                    }
-
-                                    List<double> expectation_fang = new List<double> { 0 };
-                                    double sum_fang = dist_fang.Sum();
-
-                                    for (int i = 1; i < (monster_reduced_hp_lvl + 1); i++)
-                                    {
-                                        double temp = 0;
-                                        for (int j = 0; j < dist_fang.Length; j++)
-                                        {
-                                            if (j != 0)
-                                            {
-                                                temp += dist_fang[j] * expectation_fang[Math.Max(expectation_fang.Count - j, 0)];
-                                            }
-                                        }
-                                        temp /= sum_fang;
-                                        expectation_fang.Add((1 + temp) / (1 - dist_fang[0]));
-                                    }
-
-                                    temp_avg_hits_to_kill = expectation_fang.Last();
-                                }
-                                else
-                                {
-                                    double[] expected_hits_fang = new double[monster_hp_var + 1];
-                                    double sum_var_fang = 0;
-                                    int fang_max = Convert.ToInt32(osmumtens_fang_max_hit);
-                                    if (thrall_dps_checkbox.IsChecked == true && thrall_name != "None")
-                                    {
-                                        fang_max = fang_max + Convert.ToInt32((thrall_max_hit * 4 / temp_weapon_attack_speed));
-                                    }
-                                    for (int i = 1; i < (monster_reduced_hp_lvl + 1); i++)
-                                    {
-                                        if (i - fang_max - 1 >= 0)
-                                        {
-                                            sum_var_fang -= expected_hits_fang[i - fang_max - 1];
-                                        }
-                                        sum_var_fang += expected_hits_fang[i - 1];
-                                        expected_hits_fang[i] = 1 / accuracy_var + sum_var_fang / fang_max;
-                                    }
-
-                                    temp_avg_hits_to_kill = expected_hits_fang[monster_hp_var];
-                                }
-                                break;
-                            default:
-                                double[] expected_hits = new double[monster_hp_var + 1];
-                                double sum_var = 0;
-                                for (int i = 1; i < (monster_reduced_hp_lvl + 1); i++)
-                                {
-                                    if (i - temp_temp_max_hit - 1 >= 0)
-                                    {
-                                        sum_var -= expected_hits[i - max_hit_var - 1];
-                                    }
-                                    sum_var += expected_hits[i - 1];
-                                    expected_hits[i] = 1 / accuracy_var + sum_var / temp_temp_max_hit;
-                                }
-
-                                temp_avg_hits_to_kill = expected_hits[monster_hp_var];
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        double[] expected_hits = new double[monster_hp_var + 1];
-                        double sum_var = 0;
-                        for (int i = 1; i < (monster_reduced_hp_lvl + 1); i++)
-                        {
-                            if (i - temp_temp_max_hit - 1 >= 0)
-                            {
-                                sum_var -= expected_hits[i - max_hit_var - 1];
-                            }
-                            sum_var += expected_hits[i - 1];
-                            expected_hits[i] = 1 / accuracy_var + sum_var / temp_temp_max_hit;
-                        }
-
-                        temp_avg_hits_to_kill = expected_hits[monster_hp_var];
-                    }
-
-                }
-                else
-                {
-                    temp_avg_hits_to_kill = 0;
-                }
-            }
-            else
-            {
-                temp_avg_hits_to_kill = Math.Ceiling(monster_reduced_hp_lvl / (temp_avg_dmg_per_attack * temp_hit_chance));
-            }
         }
         // multiple dps calcs
         private void multiple_monster_names()
@@ -9282,445 +9198,134 @@ namespace Osrs_dps_calculator
                 j = 1;
             }
 
+            stab_atk_array[i + 3] = 0;
+            slash_atk_array[i + 3] = 0;
+            crush_atk_array[i + 3] = 0;
+            magic_atk_array[i + 3] = 0;
+            stab_def_array[i + 3] = 0;
+            slash_def_array[i + 3] = 0;
+            crush_def_array[i + 3] = 0;
+            magic_def_array[i + 3] = 0;
+            range_def_array[i + 3] = 0;
+            melee_str_array[i + 3] = 0;
+            magic_dmg_array[i + 3] = 0;
+            prayer_bonus_array[i + 3] = 0;
+
             switch (ammo_name_array[j])
             {
                 default:
                     MessageBox.Show("Ammo not found", "Gear name error");
                     break;
                 case "None":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 0;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                     // arrows
                 case "Dragon arrows":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 60;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Amethyst arrows":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 55;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Rune arrows":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 49;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Adamant arrows":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 31;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Broad arrows":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 28;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Mithril arrows":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 22;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Steel arrows":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 16;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Iron arrows":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 10;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Bronze arrows":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 7;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 // darts
                 case "Dragon darts":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 35;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Amethyst darts":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 28;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Rune darts":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 26;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Adamant darts":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 17;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Mithril darts":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 9;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Black darts":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 6;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Steel darts":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 3;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Iron darts":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 2;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Bronze darts":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 1;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 // javelins
                 case "Dragon javelins":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 150;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Amethyst javelins":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 135;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Rune javelins":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 124;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Adamant javelins":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 107;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Mithril javelins":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 85;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Steel javelins":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 64;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Iron javelins":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 42;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Bronze javelins":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 25;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 // bolts
                 case "Dragon bolts":
@@ -9730,230 +9335,62 @@ namespace Osrs_dps_calculator
                 case "Onyx dragon bolts (e)":
                 case "Opal dragon bolts (e)":
                 case "Pearl dragon bolts (e)":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 122;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Dragonstone bolts (e)":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 117;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Onyx bolts (e)":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 120;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Ruby bolts (e)":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 103;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Diamond bolts (e)":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 105;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Pearl bolts (e)":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 48;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Opal bolts (e)":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 14;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Amethyst broad bolts":
                 case "Runite bolts":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 115;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Broad bolts":
                 case "Adamant bolts":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 100;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Mithril bolts":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 82;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Steel bolts":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 64;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Iron bolts":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 46;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Silver bolts":
-                    stab_atk_array[i + 3] = 0;
-                    slash_atk_array[i + 3] = 0;
-                    crush_atk_array[i + 3] = 0;
-                    magic_atk_array[i + 3] = 0;
                     range_atk_array[i + 3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i + 3] = 0;
                     range_str_array[i + 3] = 36;
-                    magic_dmg_array[i + 3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
                 case "Bronze bolts":
-                    stab_atk_array[i+3] = 0;
-                    slash_atk_array[i+3] = 0;
-                    crush_atk_array[i+3] = 0;
-                    magic_atk_array[i+3] = 0;
                     range_atk_array[i+3] = 0;
-                    stab_def_array[i + 3] = 0;
-                    slash_def_array[i + 3] = 0;
-                    crush_def_array[i + 3] = 0;
-                    magic_def_array[i + 3] = 0;
-                    range_def_array[i + 3] = 0;
-                    melee_str_array[i+3] = 0;
                     range_str_array[i+3] = 10;
-                    magic_dmg_array[i+3] = 0;
-                    prayer_bonus_array[i + 3] = 0;
                     break;
 
             }
@@ -11207,6 +10644,7 @@ namespace Osrs_dps_calculator
                     weapon_type_array[k+3] = "none";
                     weapon_stance_array[k+3] = "none";
                     break;
+                case "Harmonised nightmare staff":
                 case "Nightmare staff":
                     stab_atk_array[i+4] = 0;
                     slash_atk_array[i+4] = 0;
@@ -11235,7 +10673,6 @@ namespace Osrs_dps_calculator
                     weapon_type_array[k+3] = "none";
                     weapon_stance_array[k+3] = "none";
                     break;
-                case "Harmonised nightmare staff":
                 case "Volatile nightmare staff":
                 case "Eldritch nightmare staff":
                     stab_atk_array[i+4] = 0;
@@ -15783,12 +15220,14 @@ namespace Osrs_dps_calculator
                 change_shown_set_button_Copy.Content = "Click to change shown set (Currently showing set 2)";
             }
 
-            Dispatcher.Invoke(display_data);
+            Dispatcher.Invoke(monster_hit_chance_and_avg_dmg);
+            Dispatcher.Invoke(UpdateUI);
             Dispatcher.Invoke(coloring_menu);
         }
         private void compare_data_selection_changed(object sender, SelectionChangedEventArgs e)
         {
             Dispatcher.Invoke(compare_data);
+            Dispatcher.Invoke(monster_hit_chance_and_avg_dmg);
         }
         // multiple calcs
         // addind monsters
