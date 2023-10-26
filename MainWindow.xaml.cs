@@ -5851,6 +5851,7 @@ namespace Osrs_dps_calculator
 
 
             // player defence roll and justiciar armour set dmg reduction 
+            double[] temp_monster_max_hit_array = new double[10];
 
             int j = 0;
             for (int i = k; i < 5 + k; i++)
@@ -5859,7 +5860,7 @@ namespace Osrs_dps_calculator
                 {
                     j = 1;
                 }
-
+                temp_monster_max_hit_array[i] = monster_max_hit_array[i];
                 switch (i)
                 {
                     case 0:
@@ -5867,45 +5868,45 @@ namespace Osrs_dps_calculator
                         player_def_roll_array[i] = (true_defence_lvl + style_bonus_def_array[style_bonus] + 8) * (total_stab_def_array[j] + 64);
                         if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
                         {
-                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_stab_def_array[j] / 3000.0, 0));
+                            temp_monster_max_hit_array[i] = temp_monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_stab_def_array[j] / 3000.0, 0));
                         }
-                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
+                        temp_monster_max_hit_array[i] = temp_monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
                         break;
                     case 1:
                     case 6:
                         player_def_roll_array[i] = (true_defence_lvl + style_bonus_def_array[style_bonus] + 8 ) * (total_slash_def_array[j] + 64);
                         if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
                         {
-                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_slash_def_array[j] / 3000.0, 0));
+                            temp_monster_max_hit_array[i] = temp_monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_slash_def_array[j] / 3000.0, 0));
                         }
-                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
+                        temp_monster_max_hit_array[i] = temp_monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
                         break;
                     case 2:
                     case 7:
                         player_def_roll_array[i] = (true_defence_lvl + style_bonus_def_array[style_bonus] + 8) * (total_crush_def_array[j] + 64);
                         if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
                         {
-                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_crush_def_array[j] / 3000.0, 0));
+                            temp_monster_max_hit_array[i] = temp_monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_crush_def_array[j] / 3000.0, 0));
                         }
-                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
+                        temp_monster_max_hit_array[i] = temp_monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * melee_prayer_effectiviness / 100.0);
                         break;
                     case 3:
                     case 8:
                         player_def_roll_array[i] = Math.Floor(true_defence_lvl * 0.30 + true_mage_lvl * 0.70 + style_bonus_def_array[style_bonus] + 8) * (total_magic_def_array[j] + 64);
                         if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
                         {
-                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_magic_def_array[j] / 3000.0, 0));
+                            temp_monster_max_hit_array[i] = temp_monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_magic_def_array[j] / 3000.0, 0));
                         }
-                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * mage_prayer_effectiviness / 100.0);
+                        temp_monster_max_hit_array[i] = temp_monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * mage_prayer_effectiviness / 100.0);
                         break;
                     case 4:
                     case 9:
                         player_def_roll_array[i] = (true_defence_lvl + style_bonus_def_array[style_bonus] + 8) * (total_range_def_array[j] + 64);
                         if (helmet_name_array[j] == "Justiciar faceguard" && body_name_array[j] == "Justiciar chestguard" && legs_name_array[j] == "Justiciar legguards")
                         {
-                            monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_range_def_array[j] / 3000.0, 0));
+                            temp_monster_max_hit_array[i] = temp_monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * Math.Max(total_range_def_array[j] / 3000.0, 0));
                         }
-                        monster_max_hit_array[i] = monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * range_prayer_effectiviness / 100.0);
+                        temp_monster_max_hit_array[i] = temp_monster_max_hit_array[i] - Math.Floor(monster_max_hit_array[i] * range_prayer_effectiviness / 100.0);
                         break;
                 }
             }
@@ -5932,7 +5933,7 @@ namespace Osrs_dps_calculator
             for (int i = k; i < 5 + k; i++)
             {
                 TextBox textBox = (TextBox)FindName($"monster_max_hit_{i - k + 1}_textbox");
-                textBox.Text = "" + monster_max_hit_array[i];
+                textBox.Text = "" + temp_monster_max_hit_array[i];
                 textBox = (TextBox)FindName($"monster_attack_roll_{i - k + 1}_textbox");
                 textBox.Text = "" + monster_attack_roll_array[i] + " || " + player_def_roll_array[i];
                 textBox = (TextBox)FindName($"monster_hit_chance_{i - k + 1}_textbox");
@@ -6726,6 +6727,7 @@ namespace Osrs_dps_calculator
                     textBox = (TextBox)FindName($"extra_info_style_{i + 1}_special_textbox");
                     textBox.Text = temp_extra_info_textbox_list[i + 4 + j];
                 }
+
 
                 Dispatcher.Invoke(compare_data);
             }
@@ -14899,7 +14901,7 @@ namespace Osrs_dps_calculator
                     case "soulreaper_axe_stack_textbox":
                         if (user_input >= 0 && user_input <= 5)
                         {
-                            team_size = user_input;
+                            soulreaper_axe_stack = user_input;
                         }
                         else
                         {
