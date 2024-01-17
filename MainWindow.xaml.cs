@@ -589,74 +589,84 @@ namespace Osrs_dps_calculator
                 "Abyssal dagger",
                 "Abyssal tentacle",
                 "Abyssal whip",
-                "Accursed sceptre",
-                "Adamant darts",
-                "Amethyst darts",
-                "Ancient sceptre",
-                "Arclight",
-                "Armadyl crossbow",
-                "Black chinchompa",
-                "Black darts",
-                "Blade of saeldor",
-                "Bow of faerdhinen",
-                "Craw's bow",
-                "Crystal halberd",
-                "Dark bow",
-                "Dawnbringer",
-                "Dragon crossbow",
-                "Dragon dagger",
-                "Dragon darts",
-                "Dragon halberd",
-                "Dragon hasta",
-                "Dragon hunter crossbow",
-                "Dragon hunter lance",
-                "Dragon knife",
-                "Dragon Pickaxe",
-                "Dragon spear",
-                "Dragon warhammer",
-                "Dragon thrownaxe",
-                "Eldritch nightmare staff",
-                "Ghrazi rapier",
-                "Granite hammer",
-                "Granite maul",
-                "Harmonised nightmare staff",
-                "Ham joint",
-                "Heavy ballista",
-                "Ice ancient sceptre",
-                "Inquisitor's mace",
                 "Keris partisan",
                 "Keris partisan of breaching",
                 "Keris partisan of corruption",
                 "Keris partisan of the sun",
+                "Scythe of vitur",
+                "Soulreaper axe",
+                "Voidwaker",
+                "Zamorakian hasta",
+                "Zamorakian spear",
+                "Blade of saeldor",
+                "Inquisitor's mace",
+                "Osmumten's fang",
+                "Ghrazi rapier",
+                "Arclight",
+                "Crystal halberd",
+                "Dragon dagger",
+                "Dragon halberd",
+                "Dragon hasta",
+                "Dragon hunter lance",
+                "Dragon spear",
+                "Dragon warhammer",
+                "Granite hammer",
+                "Granite maul",
+                "Ursine chainmace",
+                "Viggora's chainmace",
+                "Saradomin sword",
+                "Saradomin's blessed sword",
+                "Swift blade",
+                "Ham joint",
+                "Dragon Pickaxe",
+                "Rune Pickaxe",
+                "Iron pickaxe",
+
+
+                "Tumeken's shadow",
+                "Sanguinesti staff",
+                "Trident of the swamp",
+                "Trident of the seas",
+                "Accursed sceptre",
+                "Thammaron's sceptre",
+                "Dawnbringer",
+                "Ancient sceptre",
+                "Ice ancient sceptre",
+                "Nightmare staff",
+                "Eldritch nightmare staff",
+                "Harmonised nightmare staff",
+                "Volatile nightmare staff",
+
+                "Twisted bow",
+                "Zaryte crossbow",
+                "Toxic blowpipe",
+                "Venator bow",
+                "Armadyl crossbow",
+                "Black chinchompa",
+                "Red chinchompa",
+                "Grey chinchompa",
+                "Bow of faerdhinen",
+                "Craw's bow",
+                "Dark bow",
+                "Dragon crossbow",
+                "Dragon hunter crossbow",
+                "Heavy ballista",
                 "Light ballista",
                 "Magic longbow",
                 "Magic shortbow",
                 "Magic shortbow (i)",
-                "Mithril darts",
-                "Nightmare staff",
-                "Osmumten's fang",
-                "Rune Pickaxe",
                 "Rune crossbow",
-                "Sanguinesti staff",
-                "Saradomin sword",
-                "Saradomin's blessed sword",
-                "Scythe of vitur",
-                "Soulreaper axe",
-                "Steel darts",
-                "Swift blade",
-                "Thammaron's sceptre",
-                "Toxic blowpipe",
-                "Trident of the seas",
-                "Trident of the swamp",
-                "Twisted bow",
-                "Ursine chainmace",
-                "Venator bow",
-                "Viggora's chainmace",
-                "Voidwaker",
                 "Webweaver bow",
-                "Zamorakian hasta",
-                "Zamorakian spear",
-                "Zaryte crossbow",
+                "Dragon darts",
+                "Amethyst darts",
+                "Rune darts",
+                "Adamant darts",
+                "Mithril darts",
+                "Black darts",
+                "Steel darts",
+                "Dragon knife",
+                "Dragon thrownaxe",
+
             };
             items.Sort();
 
@@ -3317,44 +3327,43 @@ namespace Osrs_dps_calculator
                     }
                     if (spell_name_array[i] != "none")
                     {
-                        switch (weapon_name_array[i])
+                        if (weapon_name_array[i] == "Osmumten's fang" && temp_weapon_type == "stab")
                         {
-                            case "Osmumten's fang":
-                                if (monster_is_in_toa == true)
-                                {
-                                    if (temp_max_attack_roll > temp_monster_max_defensive_roll)
-                                    {
-                                        temp_hit_chance = 1 - (temp_monster_max_defensive_roll + 2) / (2 * (temp_max_attack_roll + 1));
-                                        temp_hit_chance = temp_hit_chance + (1 - temp_hit_chance) * temp_hit_chance;
-                                    }
-                                    else
-                                    {
-                                        temp_hit_chance = temp_max_attack_roll / (2 * (temp_monster_max_defensive_roll + 1));
-                                        temp_hit_chance = temp_hit_chance + (1 - temp_hit_chance) * temp_hit_chance;
-                                    }
-                                }
-                                else
-                                {
-                                    if (temp_max_attack_roll > temp_monster_max_defensive_roll)
-                                    {
-                                        temp_hit_chance = (1 - (((temp_monster_max_defensive_roll + 2) * (2 * temp_monster_max_defensive_roll + 3)) / (6 * Math.Pow(temp_max_attack_roll + 1, 2))));
-                                    }
-                                    else
-                                    {
-                                        temp_hit_chance = (temp_max_attack_roll * (4 * temp_max_attack_roll + 5)) / (6 * (temp_max_attack_roll + 1) * (temp_monster_max_defensive_roll + 1));
-                                    }
-                                }
-                                break;
-                            default:
+                            if (monster_is_in_toa == true)
+                            {
                                 if (temp_max_attack_roll > temp_monster_max_defensive_roll)
                                 {
                                     temp_hit_chance = 1 - (temp_monster_max_defensive_roll + 2) / (2 * (temp_max_attack_roll + 1));
+                                    temp_hit_chance = temp_hit_chance + (1 - temp_hit_chance) * temp_hit_chance;
                                 }
                                 else
                                 {
                                     temp_hit_chance = temp_max_attack_roll / (2 * (temp_monster_max_defensive_roll + 1));
+                                    temp_hit_chance = temp_hit_chance + (1 - temp_hit_chance) * temp_hit_chance;
                                 }
-                                break;
+                            }
+                            else
+                            {
+                                if (temp_max_attack_roll > temp_monster_max_defensive_roll)
+                                {
+                                    temp_hit_chance = (1 - (((temp_monster_max_defensive_roll + 2) * (2 * temp_monster_max_defensive_roll + 3)) / (6 * Math.Pow(temp_max_attack_roll + 1, 2))));
+                                }
+                                else
+                                {
+                                    temp_hit_chance = (temp_max_attack_roll * (4 * temp_max_attack_roll + 5)) / (6 * (temp_max_attack_roll + 1) * (temp_monster_max_defensive_roll + 1));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (temp_max_attack_roll > temp_monster_max_defensive_roll)
+                            {
+                                temp_hit_chance = 1 - (temp_monster_max_defensive_roll + 2) / (2 * (temp_max_attack_roll + 1));
+                            }
+                            else
+                            {
+                                temp_hit_chance = temp_max_attack_roll / (2 * (temp_monster_max_defensive_roll + 1));
+                            }
                         }
                     }
                     else
@@ -9492,7 +9501,7 @@ namespace Osrs_dps_calculator
                     break;
                 case "Scythe of vitur":
                     stab_atk_array[i+4] = 70;
-                    slash_atk_array[i+4] = 110;
+                    slash_atk_array[i+4] = 125;
                     crush_atk_array[i+4] = 30;
                     magic_atk_array[i+4] = -6;
                     range_atk_array[i+4] = 0;
