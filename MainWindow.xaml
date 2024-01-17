@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Osrs_dps_calculator"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="Osrs_dps_calculator.MainWindow"
         mc:Ignorable="d"
-        Title="Osrs dps calculator V1.1.0 made by Student tort" 
+        Title="Osrs dps calculator V1.1.0" 
     
         
         Height="Auto" 
