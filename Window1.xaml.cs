@@ -25,6 +25,9 @@ namespace Osrs_dps_calculator
         List<string> monster_stats = new List<string>();
         CollectionViewSource collectionViewSource = new CollectionViewSource();
         DataTable dataTable = new DataTable();
+        DataTable bis_style_Table = new DataTable();
+        private DataTable originalDataTable;
+        string selected_monster;
 
         public Window1(List<List<string>> giga_data_list_transfer)
         {
@@ -54,6 +57,7 @@ namespace Osrs_dps_calculator
             for (int i = 0; i < columnNames.Count; i++)
             {
                 dataTable.Columns.Add(columnNames[i], columnDataTypes[i]);
+                bis_style_Table.Columns.Add(columnNames[i], columnDataTypes[i]);
             }
 
             for (int i = 0; i < giga_data_list[0].Count; i++)
@@ -80,6 +84,7 @@ namespace Osrs_dps_calculator
 
             CollectionViewSource collectionViewSource = FindResource("CollectionViewSource") as CollectionViewSource;
             collectionViewSource.Source = dataTable.DefaultView;
+            originalDataTable = dataTable.Copy();
 
             // monster stats
 
@@ -88,7 +93,7 @@ namespace Osrs_dps_calculator
                 monster_stats.Add(giga_data_list[13][i]);
             }
 
-            double monster_count = (Convert.ToInt32(giga_data_list[14][0]));
+            double monster_count = Convert.ToInt32(giga_data_list[14][0]);
 
             for (int i = 0; i < monster_count; i++)
             {
@@ -97,11 +102,21 @@ namespace Osrs_dps_calculator
 
         }
 
-        private void FilterDataGridBasedOnSelection(string selectedValue)
+        private void FilterDataGridBasedOnSelection()
         {
+            dataTable.Clear();
+            dataTable.Merge(originalDataTable);
+            data_grid.ItemsSource = dataTable.DefaultView;
+
             DataView dataView = new DataView(dataTable);
 
-            string monster_filter = selectedValue.Replace("'", "''");
+            if(selected_monster == null)
+            {
+                selected_monster = monsters_combobox.Items[0].ToString();
+                monsters_combobox.Text = selected_monster;
+            }
+
+            string monster_filter = selected_monster.Replace("'", "''");
 
             string monster_filter_column = $"[Monster name] = '{monster_filter}'";
             string empty_style_filter_column = "[Max hit] <> '0'";
@@ -110,8 +125,9 @@ namespace Osrs_dps_calculator
 
             dataView.RowFilter = combined_filter;
 
-            CollectionViewSource collectionViewSource = FindResource("CollectionViewSource") as CollectionViewSource;
-            collectionViewSource.Source = dataView;
+            data_grid.ItemsSource = dataView;
+
+            data_grid.Items.Refresh();
         }
 
         private void monster_name_combobox_selection_changed(object sender, SelectionChangedEventArgs e)
@@ -119,10 +135,10 @@ namespace Osrs_dps_calculator
             string temp_string = Convert.ToString(monsters_combobox.SelectedItem);
             if (temp_string != "")
             {
-                string selectedValue = Convert.ToString(temp_string);
+                selected_monster = Convert.ToString(temp_string);
                 int selected_index = monsters_combobox.SelectedIndex;
 
-                FilterDataGridBasedOnSelection(selectedValue);
+                Dispatcher.Invoke(FilterDataGridBasedOnSelection);
 
                 monster_atk_lvl_textbox.Text = monster_stats[0 + selected_index * 38];
                 monster_str_lvl_textbox.Text = monster_stats[1 + selected_index * 38];
@@ -170,5 +186,72 @@ namespace Osrs_dps_calculator
 
             }
         }
+
+        private void data_grid_sorting(object sender, DataGridSortingEventArgs e)
+        {
+            Dispatcher.Invoke(FilterDataGridBasedOnSelection);
+
+            // Get the current DataView
+            var dataView = CollectionViewSource.GetDefaultView(data_grid.ItemsSource) as BindingListCollectionView;
+
+            // Get the current sorting column
+            string sortingColumn = e.Column.Header.ToString();
+
+            if (show_only_best_style_checkbox.IsChecked == true)
+            {
+                // Sort the DataView
+                dataView.SortDescriptions.Clear();
+                dataView.SortDescriptions.Add(new SortDescription(sortingColumn, ListSortDirection.Ascending));
+
+                // Remove non bis styles from each loadout
+                RemoveDuplicateLoadoutNames(dataView);
+
+                // Set the sorted and filtered data back to the DataGrid
+                data_grid.ItemsSource = dataView;
+
+            }
+
+            // Sort the DataView
+            dataView.SortDescriptions.Clear();
+            dataView.SortDescriptions.Add(new SortDescription(sortingColumn, ListSortDirection.Descending));
+
+            // Mark the event as handled to prevent the default sorting behavior
+            e.Handled = true;
+        }
+
+        private void RemoveDuplicateLoadoutNames(BindingListCollectionView dataView)
+        {
+            // Create a HashSet to keep track of whether a "Loadout name" has already been added
+            HashSet<string> addedLoadoutNames = new HashSet<string>();
+
+            // Iterate through the DataView and remove rows if the "Loadout name" has already been added
+            for (int i = dataView.Count - 1; i >= 0; i--)
+            {
+                var item = dataView.GetItemAt(i);
+
+                // Ensure the item is a DataRowView before proceeding
+                if (item is DataRowView rowView)
+                {
+                    DataRow row = rowView.Row;
+
+                    string loadoutName = row.Field<string>("Loadout name");
+
+                    if (loadoutName != null && addedLoadoutNames.Contains(loadoutName))
+                    {
+                        // Remove the row from the DataTable
+                        row.Delete();
+                    }
+                    else
+                    {
+                        // Mark this "Loadout name" as added
+                        addedLoadoutNames.Add(loadoutName);
+                    }
+                }
+            }
+
+            // Accept changes to apply the deletions
+            dataTable.AcceptChanges();
+        }
+
     }
 }

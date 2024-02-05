@@ -919,7 +919,7 @@
             <ImageBrush ImageSource="{DynamicResource background}" AlignmentX="Left" AlignmentY="Top" TileMode="FlipY" Stretch="Uniform" Viewport="0,0,480,270" ViewportUnits="Absolute" />
         </Grid.Background>
 
-        <DataGrid ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" Margin="0,240,0,0" Language="en-US" Style="{DynamicResource DataGridStyle1}" Foreground="#FFFB951D" Background="{x:Null}" AlternationCount="2">
+        <DataGrid x:Name="data_grid" ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" Margin="0,240,0,0" Language="en-US" Style="{DynamicResource DataGridStyle1}" Foreground="#FFFB951D" Background="{x:Null}" AlternationCount="2" Sorting="data_grid_sorting">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Setter Property="Background" Value="#FF594D39" />
@@ -970,7 +970,7 @@
             </DataGrid.ColumnHeaderStyle>
         </DataGrid>
 
-
+        <TextBox HorizontalAlignment="Left" Height="36" Margin="15,39,0,0" TextWrapping="Wrap" Text="Only show best style of each loadout" VerticalAlignment="Top" Width="126" Style="{DynamicResource TextBoxStyle1}" Foreground="#FFFF8A00" IsEnabled="False"/>
         <TextBox x:Name="monster_atk_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="448,71,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
         <TextBox x:Name="monster_str_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="448,96,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
         <TextBox x:Name="monster_def_lvl_textbox" HorizontalAlignment="Left" Height="24" Margin="448,121,0,0" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Top" Width="84" IsEnabled="False" Style="{DynamicResource TextBoxStyle1}"/>
@@ -1204,5 +1204,6 @@
                 <ToolTip Template="{StaticResource CustomTooltipTemplate}" Content="Filter data list by selecting monster from drop down menu. Monster stat variables are only visual for selected monster, you can't change the stats here. &#xA;You can sort the data by clicking the column hearders."/>
             </Button.ToolTip>
         </Button>
+        <CheckBox x:Name="show_only_best_style_checkbox" Content="" HorizontalAlignment="Left" Margin="150,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="24" Style="{DynamicResource CheckBoxStyle1}" Height="24"/>
     </Grid>
 </Window>
