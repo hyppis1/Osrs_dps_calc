@@ -255,6 +255,7 @@ namespace Osrs_dps_calculator
         bool monster_is_dragon;
         bool monster_is_demon;
         bool monster_is_kaplhite;
+        bool monster_is_rat;
         bool monster_is_in_cox;
         bool monster_is_in_tob;
         bool monster_is_in_toa;
@@ -326,6 +327,13 @@ namespace Osrs_dps_calculator
         double monster_reduced_def_lvl;
         double monster_reduced_magic_lvl;
         double monster_reduced_range_lvl;
+
+        double monster_modifier_hp_lvl = 0;
+        double monster_modifier_atk_lvl = 0;
+        double monster_modifier_str_lvl = 0;
+        double monster_modifier_def_lvl = 0;
+        double monster_modifier_magic_lvl = 0;
+        double monster_modifier_range_lvl = 0;
 
 
         double[] scythe_hitsplat_1_array = new double[8];
@@ -459,18 +467,18 @@ namespace Osrs_dps_calculator
             gear_set_2 = true;
             Dispatcher.Invoke(spell_gear);
 
-            atk_pot_name = "None";
-            str_pot_name = "None";
-            def_pot_name = "None";
-            magic_pot_name = "None";
-            range_pot_name = "None";
+            atk_pot_name = "Super attack";
+            str_pot_name = "Super strength";
+            def_pot_name = "Super defence";
+            magic_pot_name = "Saturated heart";
+            range_pot_name = "Ranging";
             Dispatcher.Invoke(potions);
 
-            atk_prayer_name = "None";
-            str_prayer_name = "None";
-            def_prayer_name = "None";
-            magic_prayer_name = "None";
-            range_prayer_name = "None";
+            atk_prayer_name = "Piety";
+            str_prayer_name = "Piety";
+            def_prayer_name = "Piety";
+            magic_prayer_name = "Augury";
+            range_prayer_name = "Rigour";
             Dispatcher.Invoke(prayers);
 
             monster_name = "None";
@@ -621,6 +629,7 @@ namespace Osrs_dps_calculator
                 "Dragon Pickaxe",
                 "Rune Pickaxe",
                 "Iron pickaxe",
+                "Bone mace",
 
 
                 "Tumeken's shadow",
@@ -629,6 +638,7 @@ namespace Osrs_dps_calculator
                 "Trident of the seas",
                 "Accursed sceptre",
                 "Thammaron's sceptre",
+                "Warped sceptre",
                 "Dawnbringer",
                 "Ancient sceptre",
                 "Ice ancient sceptre",
@@ -636,6 +646,8 @@ namespace Osrs_dps_calculator
                 "Eldritch nightmare staff",
                 "Harmonised nightmare staff",
                 "Volatile nightmare staff",
+                "Bone staff",
+
 
                 "Twisted bow",
                 "Zaryte crossbow",
@@ -666,6 +678,7 @@ namespace Osrs_dps_calculator
                 "Steel darts",
                 "Dragon knife",
                 "Dragon thrownaxe",
+                "Bone shortbow",
 
             };
             items.Sort();
@@ -1406,6 +1419,7 @@ namespace Osrs_dps_calculator
                 "Kalphite Queen P1",
                 "Kalphite Queen P2",
                 "Corporeal Beast",
+                "Scurrius",
                 "Obor",
                 "Bryophyta",
                 "The Mimic",
@@ -2104,6 +2118,17 @@ namespace Osrs_dps_calculator
                 }
             }
 
+            // custom monster stat modifiers
+            monster_reduced_atk_lvl += monster_modifier_atk_lvl;
+            monster_reduced_str_lvl += monster_modifier_str_lvl;
+            monster_reduced_def_lvl += monster_modifier_def_lvl;
+            monster_reduced_magic_lvl += monster_modifier_magic_lvl;
+            monster_reduced_range_lvl += monster_modifier_range_lvl;
+            monster_reduced_hp_lvl += monster_modifier_hp_lvl;
+            if (monster_reduced_hp_lvl < 0)
+            {
+                monster_reduced_hp_lvl = 0;
+            }
         }
         private void monster_max_defence_roll()
         {
@@ -2163,87 +2188,75 @@ namespace Osrs_dps_calculator
             {
                 Dispatcher.Invoke(max_hit_and_attack_roll);
                 Dispatcher.Invoke(hit_chance);
-                if (temp_max_hit > -1)
+
+                if (weapon_name_array[i].Contains("crossbow") == true && ammo_name_array[i].Contains("bolts (e)") == true)
                 {
-                    if (weapon_name_array[i].Contains("crossbow") == true && ammo_name_array[i].Contains("bolts (e)") == true)
+                    Dispatcher.Invoke(bolt_proc_effects);
+                    switch (ammo_name_array[i])
                     {
-                        Dispatcher.Invoke(bolt_proc_effects);
-                        switch (ammo_name_array[i])
-                        {
-                            case "Dragonstone dragon bolts (e)":
-                            case "Dragonstone bolts (e)":
-                            case "Onyx dragon bolts (e)":
-                            case "Onyx bolts (e)": // bolt needs to hit to get bolt proc effect
-                                Dispatcher.Invoke(immunities_and_resistances);
-                                is_immune_array[i] = temp_immune;
-                                Dispatcher.Invoke(average_dmg);
-                                double temp_temp_max_hit = temp_max_hit;
-                                double temp_temp_avg_dmg = temp_avg_dmg_per_attack;
-                                temp_max_hit = bolt_proc_dmg;
-                                Dispatcher.Invoke(immunities_and_resistances);
-                                Dispatcher.Invoke(average_dmg);
+                        // bolt needs to hit to get bolt proc effect
+                        case "Dragonstone dragon bolts (e)":
+                        case "Dragonstone bolts (e)":
+                        case "Onyx dragon bolts (e)":
+                        case "Onyx bolts (e)": 
+                            Dispatcher.Invoke(immunities_and_resistances);
+                            is_immune_array[i] = temp_immune;
+                            Dispatcher.Invoke(average_dmg);
+                            double temp_temp_max_hit = temp_max_hit;
+                            double temp_temp_avg_dmg = temp_avg_dmg_per_attack;
+                            temp_max_hit = bolt_proc_dmg;
+                            Dispatcher.Invoke(immunities_and_resistances);
+                            Dispatcher.Invoke(average_dmg);
 
-                                bolt_normal_dmg_array[dps_calc_fix] = temp_temp_max_hit;
-                                bolt_proc_dmg_array[dps_calc_fix] = temp_max_hit;
-                                bolt_proc_chance_array[dps_calc_fix] = bolt_proc_chance;
-                                temp_max_hit = ((100 - bolt_proc_chance) / 100 * temp_temp_max_hit) + (bolt_proc_chance / 100 * temp_max_hit);
-                                temp_avg_dmg_per_attack = ((100 - bolt_proc_chance) / 100 * temp_temp_avg_dmg) + (bolt_proc_chance / 100 * temp_avg_dmg_per_attack);
+                            bolt_normal_dmg_array[dps_calc_fix] = temp_temp_max_hit;
+                            bolt_proc_dmg_array[dps_calc_fix] = temp_max_hit;
+                            bolt_proc_chance_array[dps_calc_fix] = bolt_proc_chance;
+                            temp_max_hit = ((100 - bolt_proc_chance) / 100 * temp_temp_max_hit) + (bolt_proc_chance / 100 * temp_max_hit);
+                            temp_avg_dmg_per_attack = ((100 - bolt_proc_chance) / 100 * temp_temp_avg_dmg) + (bolt_proc_chance / 100 * temp_avg_dmg_per_attack);
 
-                                break;
-                            default: // bypasses accuracy check
-                                Dispatcher.Invoke(immunities_and_resistances);
-                                is_immune_array[i] = temp_immune;
-                                Dispatcher.Invoke(average_dmg);
-                                temp_temp_max_hit = temp_max_hit;
-                                temp_temp_avg_dmg = temp_avg_dmg_per_attack;
-                                double temp_temp_hit_chance = temp_hit_chance;
-                                if (ammo_name_array[i] == "Ruby dragon bolts (e)" || ammo_name_array[i] == "Ruby bolts (e)")
-                                {
-                                    temp_temp_avg_dmg = temp_temp_avg_dmg / 2;
-                                }
-                                temp_max_hit = bolt_proc_dmg;
-                                temp_hit_chance = 1;
-                                Dispatcher.Invoke(immunities_and_resistances);
-                                Dispatcher.Invoke(average_dmg);
+                            break;
+                        default: // bypasses accuracy check
+                            Dispatcher.Invoke(immunities_and_resistances);
+                            is_immune_array[i] = temp_immune;
+                            Dispatcher.Invoke(average_dmg);
+                            temp_temp_max_hit = temp_max_hit;
+                            temp_temp_avg_dmg = temp_avg_dmg_per_attack;
+                            double temp_temp_hit_chance = temp_hit_chance;
+                            if (ammo_name_array[i] == "Ruby dragon bolts (e)" || ammo_name_array[i] == "Ruby bolts (e)")
+                            {
+                                temp_temp_avg_dmg = temp_temp_avg_dmg / 2;
+                            }
+                            temp_max_hit = bolt_proc_dmg;
+                            temp_hit_chance = 1;
+                            Dispatcher.Invoke(immunities_and_resistances);
+                            Dispatcher.Invoke(average_dmg);
 
-                                bolt_normal_dmg_array[dps_calc_fix] = temp_temp_max_hit;
-                                bolt_proc_dmg_array[dps_calc_fix] = temp_max_hit;
-                                bolt_proc_chance_array[dps_calc_fix] = bolt_proc_chance;
+                            bolt_normal_dmg_array[dps_calc_fix] = temp_temp_max_hit;
+                            bolt_proc_dmg_array[dps_calc_fix] = temp_max_hit;
+                            bolt_proc_chance_array[dps_calc_fix] = bolt_proc_chance;
 
-                                temp_hit_chance = temp_temp_hit_chance;
-                                temp_max_hit = ((100 - bolt_proc_chance) / 100 * temp_temp_max_hit) + (bolt_proc_chance / 100 * temp_max_hit);
-                                temp_avg_dmg_per_attack = ((100 - bolt_proc_chance) / 100 * temp_temp_avg_dmg) + (bolt_proc_chance / 100 * temp_avg_dmg_per_attack);
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        Dispatcher.Invoke(immunities_and_resistances);
-                        is_immune_array[i] = temp_immune;
-                        Dispatcher.Invoke(average_dmg);
-                    }
-
-                    if (overkill_checkbox.IsChecked == true && temp_max_hit > -1)
-                    {
-                        Dispatcher.Invoke(overkill);
-                    }
-                    else
-                    {
-                        temp_avg_hits_to_kill = 0;
+                            temp_hit_chance = temp_temp_hit_chance;
+                            temp_max_hit = ((100 - bolt_proc_chance) / 100 * temp_temp_max_hit) + (bolt_proc_chance / 100 * temp_max_hit);
+                            temp_avg_dmg_per_attack = ((100 - bolt_proc_chance) / 100 * temp_temp_avg_dmg) + (bolt_proc_chance / 100 * temp_avg_dmg_per_attack);
+                            break;
                     }
                 }
                 else
                 {
-                    temp_avg_dmg_per_attack = 0;
-                    temp_avg_hits_to_kill = 0;
-
-                    scythe_hitsplat_1 = 0;
-                    scythe_hitsplat_2 = 0;
-                    scythe_hitsplat_3 = 0;
-
-                    osmumtens_fang_max_hit = 0;
-                    osmumtens_fang_min_hit = 0;
+                    Dispatcher.Invoke(immunities_and_resistances);
+                    is_immune_array[i] = temp_immune;
+                    Dispatcher.Invoke(average_dmg);
                 }
+
+                if (overkill_checkbox.IsChecked == true && temp_max_hit > -1)
+                {
+                    Dispatcher.Invoke(overkill);
+                }
+                else
+                {
+                    temp_avg_hits_to_kill = 0;
+                }
+
 
                 if (temp_hit_chance > 0)
                 {
@@ -2986,15 +2999,24 @@ namespace Osrs_dps_calculator
                     break;
             }
 
+            // dmg modifiers
             if (red_keris_spec_checkbox.IsChecked == true && monster_is_in_toa == true)
             {
                 temp_max_hit = Math.Floor(temp_max_hit * 1.25);
             }
 
-            if (monster_is_in_wilderness == true && (weapon_name_array[i] == "Craw's bow" || weapon_name_array[i] == "Webweaver bow" || weapon_name_array[i] == "Thammaron's sceptre" || weapon_name_array[i] == "Accursed sceptre" || weapon_name_array[i] == "Viggora's chainmace" || weapon_name_array[i] == "Ursine chainmace"))
+            if (monster_is_in_wilderness == true)
             {
-                temp_max_hit = Math.Floor(temp_max_hit * 1.5);
-                temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.5);
+                if (temp_weapon_stance != "spell" && (weapon_name_array[i] == "Craw's bow" || weapon_name_array[i] == "Webweaver bow" || weapon_name_array[i] == "Viggora's chainmace" || weapon_name_array[i] == "Ursine chainmace"))
+                {
+                    temp_max_hit = Math.Floor(temp_max_hit * 1.5);
+                    temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.5);
+                }
+                else if(weapon_name_array[i] == "Thammaron's sceptre" || weapon_name_array[i] == "Accursed sceptre")
+                {
+                    temp_max_hit = Math.Floor(temp_max_hit * 1.5);
+                    temp_max_attack_roll = Math.Floor(temp_max_attack_roll * 1.5);
+                }
             }
 
             if ((monster_name == "Totem" || monster_name == "Phosani's Totem") && (temp_weapon_type == "magic" || temp_weapon_stance == "spell"))
@@ -3005,6 +3027,11 @@ namespace Osrs_dps_calculator
             if (monster_name == "Wardens Core")
             {
                 temp_max_hit = temp_max_hit * 5;
+            }
+
+            if (monster_is_rat == true && (weapon_name_array[i] == "Bone mace" || weapon_name_array[i] == "Bone shortbow" || weapon_name_array[i] == "Bone staff") && temp_weapon_stance != "spell")
+            {
+                temp_max_hit += 10;
             }
 
             if (temp_max_hit < 0)
@@ -3022,53 +3049,64 @@ namespace Osrs_dps_calculator
             switch (weapon_name_array[i])
             {
                 case "Tumeken's shadow":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 + 1;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    staff_base_max_hit = Math.Floor(magic_lvl_and_pot / 3 + 1);
                     if (staff_base_max_hit < 1)
                     {
                         staff_base_max_hit = 1;
                     }
                     break;
                 case "Sanguinesti staff":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 - 1;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    staff_base_max_hit = Math.Floor(magic_lvl_and_pot / 3 - 1);
                     if (staff_base_max_hit < 5)
                     {
                         staff_base_max_hit = 5;
                     }
                     break;
                 case "Trident of the swamp":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 - 2;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    staff_base_max_hit = Math.Floor(magic_lvl_and_pot / 3) - 2;
                     if (staff_base_max_hit < 4)
                     {
                         staff_base_max_hit = 4;
                     }
                     break;
                 case "Trident of the seas":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 - 5;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    staff_base_max_hit = Math.Floor(magic_lvl_and_pot / 3) - 5;
                     if (staff_base_max_hit < 1)
                     {
                         staff_base_max_hit = 1;
                     }
                     break;
                 case "Accursed sceptre":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 - 6;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    staff_base_max_hit = Math.Floor(magic_lvl_and_pot / 3 - 6);
                     if (staff_base_max_hit < 0)
                     {
                         staff_base_max_hit = 0;
                     }
                     break;
                 case "Thammaron's sceptre":
-                    staff_base_max_hit = magic_lvl_and_pot / 3 - 8;
-                    staff_base_max_hit = Math.Floor(staff_base_max_hit);
+                    staff_base_max_hit = Math.Floor(magic_lvl_and_pot / 3) - 8;
                     if (staff_base_max_hit < 0)
                     {
                         staff_base_max_hit = 0;
                     }
                     break;
+                case "Warped sceptre":
+                    staff_base_max_hit = Math.Floor((8 * magic_lvl_and_pot + 96) / 37);
+                    if (staff_base_max_hit < 0)
+                    {
+                        staff_base_max_hit = 0;
+                    }
+                    break;
+                case "Bone staff":
+                    staff_base_max_hit = Math.Floor(magic_lvl_and_pot / 3) - 5;
+                    if (staff_base_max_hit < 1)
+                    {
+                        staff_base_max_hit = 1;
+                    }
+                    break;
+                default:
+                    MessageBox.Show("No powered staff stats, fix plox");
+                break;
                     // dawnbringer is calced in max_hits_and_attack_rolls method
             }
 
@@ -3799,7 +3837,7 @@ namespace Osrs_dps_calculator
                         scythe_hitsplat_3 = Math.Floor(temp_max_hit * 0.25);
                         temp_max_hit = scythe_hitsplat_1 + scythe_hitsplat_2 + scythe_hitsplat_3;
                     }
-                    temp_avg_dmg_per_attack = (temp_max_hit * temp_hit_chance) / 2;
+                    temp_avg_dmg_per_attack = temp_max_hit * temp_hit_chance / 2;
                 }
                 else if (weapon_name_array[x] == "Osmumten's fang" && spell_name_array[x] == "None")
                 {
@@ -3812,15 +3850,11 @@ namespace Osrs_dps_calculator
                     {
                         osmumtens_fang_max_hit = temp_max_hit - osmumtens_fang_min_hit;
                     }
-                    if (monster_name == "Wardens Core")
-                    {
-                        temp_max_hit = osmumtens_fang_max_hit;
-                    }
                     temp_avg_dmg_per_attack = ((osmumtens_fang_min_hit + osmumtens_fang_max_hit) * temp_hit_chance) / 2;
                 }
                 else if (weapon_name_array[x] == "Venator bow")
                 {
-                    temp_avg_dmg_per_attack = (temp_max_hit * temp_hit_chance) / 2;
+                    temp_avg_dmg_per_attack = temp_max_hit * temp_hit_chance / 2;
                     double temp_max_def_roll;
                     double temp_temp_hit_chance;
                     if (venator_1st_bounce_checkbox.IsChecked == true)
@@ -3855,11 +3889,11 @@ namespace Osrs_dps_calculator
                 }
                 else if (weapon_name_array[x].Contains("Keris") == true && monster_is_kaplhite == true && spell_name_array[x] == "None")
                 {
-                    temp_avg_dmg_per_attack = ((temp_max_hit + (temp_max_hit * 3 * (1.0 / 51.0))) * temp_hit_chance) / 2;
+                    temp_avg_dmg_per_attack = (temp_max_hit + (temp_max_hit * 3 * (1.0 / 51.0))) * temp_hit_chance / 2;
                 }
                 else
                 {
-                    temp_avg_dmg_per_attack = (temp_max_hit * temp_hit_chance) / 2;
+                    temp_avg_dmg_per_attack = temp_max_hit * temp_hit_chance / 2;
                 }
 
             }
@@ -3884,11 +3918,13 @@ namespace Osrs_dps_calculator
                 temp_avg_dmg_per_attack = (zulrah_dmg_dist.Sum() / zulrah_dmg_dist.Length);
             }
 
+            // scuffed bolt proc avg dmg calc
             if (weapon_name_array[x].Contains("crossbow") == true && (ammo_name_array[x] == "Ruby dragon bolts (e)" || ammo_name_array[x] == "Ruby bolts (e)"))
             {
                 temp_avg_dmg_per_attack = temp_max_hit * temp_hit_chance;
             }
 
+            // where avg dmg is max hit
             if (monster_name == "Sleepwalker")
             {
                 temp_avg_dmg_per_attack = temp_max_hit;
@@ -3906,7 +3942,6 @@ namespace Osrs_dps_calculator
 
             if (monster_name == "Zombified Spawn" && spell_name_array[x] == "Crumble Undead" && total_magic_atk_array[x] > -64)
             {
-                temp_max_hit = monster_reduced_hp_lvl;
                 temp_avg_dmg_per_attack = temp_max_hit;
             }
         }
@@ -5789,8 +5824,8 @@ namespace Osrs_dps_calculator
             monster_attack_roll_array[0] = (monster_reduced_atk_lvl + 9) * (monster_aggressive_atk + 64);
             monster_attack_roll_array[1] = monster_attack_roll_array[0];
             monster_attack_roll_array[2] = monster_attack_roll_array[0];
-            monster_attack_roll_array[4] = (monster_reduced_magic_lvl + 9) * (monster_aggressive_magic + 64);
-            monster_attack_roll_array[3] = (monster_reduced_range_lvl + 9) * (monster_aggressive_range + 64);
+            monster_attack_roll_array[3] = (monster_reduced_magic_lvl + 9) * (monster_aggressive_magic + 64);
+            monster_attack_roll_array[4] = (monster_reduced_range_lvl + 9) * (monster_aggressive_range + 64);
 
             // set 2
             monster_max_hit_array[5] = monster_max_hit_array[0];
@@ -10429,6 +10464,35 @@ namespace Osrs_dps_calculator
                     weapon_type_array[k + 3] = "none";
                     weapon_stance_array[k + 3] = "none";
                     break;
+                case "Bone mace":
+                    stab_atk_array[i + 4] = 40;
+                    slash_atk_array[i + 4] = -2;
+                    crush_atk_array[i + 4] = 60;
+                    magic_atk_array[i + 4] = 0;
+                    range_atk_array[i + 4] = 0;
+                    stab_def_array[i + 4] = 0;
+                    slash_def_array[i + 4] = 0;
+                    crush_def_array[i + 4] = 0;
+                    magic_def_array[i + 4] = 0;
+                    range_def_array[i + 4] = 0;
+                    melee_str_array[i + 4] = 55;
+                    range_str_array[i + 4] = 0;
+                    magic_dmg_array[i + 4] = 0;
+                    prayer_bonus_array[i + 4] = 0;
+
+                    has_special_attack_array[j] = false;
+                    is_weapon_2h_array[j] = false;
+                    weapon_atk_speed_array[j] = 4;
+                    weapon_type_array[k + 0] = "crush";
+                    weapon_stance_array[k + 0] = "accurate";
+                    weapon_type_array[k + 1] = "crush";
+                    weapon_stance_array[k + 1] = "aggressive";
+                    weapon_type_array[k + 2] = "crush";
+                    weapon_stance_array[k + 2] = "controlled";
+                    weapon_type_array[k + 3] = "crush";
+                    weapon_stance_array[k + 3] = "defensive";
+                    break;
+
                 // mage gear
                 case "Tumeken's shadow":
                     stab_atk_array[i+4] = 0;
@@ -10597,6 +10661,62 @@ namespace Osrs_dps_calculator
                     weapon_stance_array[k+2] = "none";
                     weapon_type_array[k+3] = "none";
                     weapon_stance_array[k+3] = "none";
+                    break;
+                case "Warped sceptre":
+                    stab_atk_array[i + 4] = 0;
+                    slash_atk_array[i + 4] = 0;
+                    crush_atk_array[i + 4] = 0;
+                    magic_atk_array[i + 4] = 12;
+                    range_atk_array[i + 4] = 0;
+                    stab_def_array[i + 4] = 2;
+                    slash_def_array[i + 4] = 3;
+                    crush_def_array[i + 4] = 1;
+                    magic_def_array[i + 4] = 12;
+                    range_def_array[i + 4] = 0;
+                    melee_str_array[i + 4] = 0;
+                    range_str_array[i + 4] = 0;
+                    magic_dmg_array[i + 4] = 0;
+                    prayer_bonus_array[i + 4] = 0;
+
+                    has_special_attack_array[j] = false;
+                    is_weapon_2h_array[j] = false;
+                    weapon_atk_speed_array[j] = 4;
+                    weapon_type_array[k + 0] = "magic";
+                    weapon_stance_array[k + 0] = "accurate";
+                    weapon_type_array[k + 1] = "magic";
+                    weapon_stance_array[k + 1] = "longrange";
+                    weapon_type_array[k + 2] = "none";
+                    weapon_stance_array[k + 2] = "none";
+                    weapon_type_array[k + 3] = "none";
+                    weapon_stance_array[k + 3] = "none";
+                    break;
+                case "Bone staff":
+                    stab_atk_array[i + 4] = 0;
+                    slash_atk_array[i + 4] = 0;
+                    crush_atk_array[i + 4] = 0;
+                    magic_atk_array[i + 4] = 14;
+                    range_atk_array[i + 4] = 0;
+                    stab_def_array[i + 4] = 0;
+                    slash_def_array[i + 4] = 0;
+                    crush_def_array[i + 4] = 0;
+                    magic_def_array[i + 4] = 0;
+                    range_def_array[i + 4] = 0;
+                    melee_str_array[i + 4] = 0;
+                    range_str_array[i + 4] = 0;
+                    magic_dmg_array[i + 4] = 0;
+                    prayer_bonus_array[i + 4] = 0;
+
+                    has_special_attack_array[j] = false;
+                    is_weapon_2h_array[j] = false;
+                    weapon_atk_speed_array[j] = 4;
+                    weapon_type_array[k + 0] = "magic";
+                    weapon_stance_array[k + 0] = "accurate";
+                    weapon_type_array[k + 1] = "magic";
+                    weapon_stance_array[k + 1] = "longrange";
+                    weapon_type_array[k + 2] = "none";
+                    weapon_stance_array[k + 2] = "none";
+                    weapon_type_array[k + 3] = "none";
+                    weapon_stance_array[k + 3] = "none";
                     break;
                 case "Dawnbringer":
                     stab_atk_array[i+4] = 0;
@@ -10940,6 +11060,34 @@ namespace Osrs_dps_calculator
                     weapon_stance_array[k+2] = "longrange";
                     weapon_type_array[k+3] = "none";
                     weapon_stance_array[k+3] = "none";
+                    break;
+                case "Bone shortbow":
+                    stab_atk_array[i + 4] = 0;
+                    slash_atk_array[i + 4] = 0;
+                    crush_atk_array[i + 4] = 0;
+                    magic_atk_array[i + 4] = 0;
+                    range_atk_array[i + 4] = 69;
+                    stab_def_array[i + 4] = 0;
+                    slash_def_array[i + 4] = 0;
+                    crush_def_array[i + 4] = 0;
+                    magic_def_array[i + 4] = 0;
+                    range_def_array[i + 4] = 0;
+                    melee_str_array[i + 4] = 0;
+                    range_str_array[i + 4] = 0;
+                    magic_dmg_array[i + 4] = 0;
+                    prayer_bonus_array[i + 4] = 0;
+
+                    has_special_attack_array[j] = false;
+                    is_weapon_2h_array[j] = true;
+                    weapon_atk_speed_array[j] = 4;
+                    weapon_type_array[k + 0] = "ranged";
+                    weapon_stance_array[k + 0] = "accurate";
+                    weapon_type_array[k + 1] = "ranged";
+                    weapon_stance_array[k + 1] = "rapid";
+                    weapon_type_array[k + 2] = "ranged";
+                    weapon_stance_array[k + 2] = "longrange";
+                    weapon_type_array[k + 3] = "none";
+                    weapon_stance_array[k + 3] = "none";
                     break;
                 case "Webweaver bow":
                     stab_atk_array[i+4] = 0;
@@ -15868,11 +16016,12 @@ namespace Osrs_dps_calculator
             monster_is_in_tob = false;
             monster_is_in_toa = false;
             monster_is_in_wilderness = false;
-
+ 
             monster_is_demon = false;
             monster_is_dragon = false;
             monster_is_undead = false;
             monster_is_kaplhite = false;
+            monster_is_rat = false;
 
             immune_to_melee = false;
             immune_to_mage = false;
@@ -19470,6 +19619,30 @@ namespace Osrs_dps_calculator
 
                     Dispatcher.Invoke(Stats);
                     break;
+                case "Scurrius":
+                    monster_is_rat = true;
+
+                    monster_size = 3;
+                    monster_combat_hp_lvl = 500;
+                    monster_combat_atk_lvl = 300;
+                    monster_combat_str_lvl = 100;
+                    monster_combat_def_lvl = 60;
+                    monster_combat_magic_lvl = 50;
+                    monster_combat_range_lvl = 50;
+                    monster_aggressive_atk = 150;
+                    monster_aggressive_str = 10;
+                    monster_aggressive_magic = 150;
+                    monster_aggressive_magic_dmg = 20;
+                    monster_aggressive_range = 150;
+                    monster_aggressive_range_str = 10;
+                    monster_defensive_stab = 20;
+                    monster_defensive_slash = 20;
+                    monster_defensive_crush = 20;
+                    monster_defensive_magic = 10;
+                    monster_defensive_range = 20;
+
+                    Dispatcher.Invoke(Stats);
+                    break;
                 case "Sarachnis":
                     monster_size = 5;
                     monster_combat_hp_lvl = 400;
@@ -20046,7 +20219,6 @@ namespace Osrs_dps_calculator
                 Dispatcher.Invoke(monsters);
             }
         }
-
 
     }
 }
